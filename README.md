@@ -1,74 +1,145 @@
+<div align="center">
+
 # ISABEL
 
-Ecommerce editorial de moda construido con **Next.js 16 (App Router)**, **React 19**, **Tailwind CSS 4**, **GSAP** y **Lenis**. Una landing de una sola página con hero cinematográfico, catálogo único y pedidos directos por WhatsApp.
+**Moda femenina con estética editorial — elegancia que habla por ti.**
 
-## Características
+[🌐 Ver la página en producción](https://isabel-pi.vercel.app)
 
-- **Hero cinematográfico**: 10 imágenes que se alternan automáticamente cada 3 segundos en orden aleatorio, con tipografía editorial Playfair Display + Cormorant y acentos en bronce.
-- **Catálogo único**: todas las piezas en una sola cuadrícula responsive (5 columnas en PC, 3 en tablet, 2 en móvil), sin categorías ni subpáginas.
-- **Carrito y favoritos**: gestionados con Context API y persistidos en `localStorage`.
-- **Compra por WhatsApp**: el checkout arma automáticamente el mensaje del pedido (nombre, ciudad y notas) y abre `wa.me` con el número de la tienda.
-- **SEO**: `sitemap.xml`, `robots.txt` y metadatos estáticos por producto.
-- **Rendimiento**: imágenes optimizadas con Next Image (AVIF/WebP), lazy loading y fuentes locales.
+Sitio web oficial de **ISABEL**: una marca de moda femenina con una estética
+limpia, atemporal y editorial. Cada pieza está pensada para que la ropa sea
+la protagonista: siluetas clásicas, materiales nobles y colores en tonos
+tierra, bronce y crema.
 
-## Stack
+</div>
 
-| Capa     | Tecnología                        |
-| -------- | --------------------------------- |
-| Framework| Next.js 16 (App Router) + Turbopack|
-| UI       | React 19, Tailwind CSS 4          |
-| Anim.    | GSAP + ScrollTrigger, Lenis       |
-| Lenguaje | TypeScript 5                      |
+---
 
-## Requisitos
+## 🚀 Ver la página desplegada
 
-- Node.js **>= 20.9**
-- npm o pnpm
+La página está **desplegada en producción** en este enlace:
 
-## Puesta en marcha
+### 👉 https://isabel-pi.vercel.app
+
+Ábrelo en cualquier navegador para ver la página completa funcionando
+(hasta este código lo mantienes sincronizado con el deploy de Vercel).
+
+> Para ver la versión más reciente siempre que haya cambios, el deploy se
+> actualiza automáticamente al hacer **push** a la rama `main` de este
+> repositorio.
+
+---
+
+## 📖 ¿Qué es ISABEL?
+
+ISABEL es una marca de **moda femenina** que apuesta por un estilo **editorial y
+atemporal**: vestidos, blusas, abrigos y accesorios con siluetas clásicas,
+colores en tonos tierra y una presencia que llama la atención sin gritar.
+La página funciona como un **catálogo único** donde cada pieza se puede ver,
+añadir al carrito y comprar de forma directa.
+
+## ✨ Características de la página
+
+- 🎬 **Hero cinematográfico**: 10 imágenes que se alternan solas cada 3 segundos en orden aleatorio, con tipografía editorial y acentos en bronce.
+- 🛍️ **Catálogo único**: todas las piezas en una sola cuadrícula responsive (5 columnas en PC, 3 en tablet, 2 en móvil), sin categorías ni subpáginas.
+- 🛒 **Carrito y favoritos** con estado persistente (localStorage).
+- 📲 **Compra por WhatsApp**: el checkout arma automáticamente el pedido con nombre, ciudad y notas, y abre tu WhatsApp.
+- 🪄 **Animaciones fluidas** con GSAP + Lenis (scroll suave).
+- 🖼️ **Imágenes optimizadas** (WebP/AVIF) con Next Image y lazy loading.
+- 🔍 **SEO**: metadatos por producto, Open Graph, sitemap y `robots.txt`.
+- 📱 **Diseño responsive y moderno**: paleta blanco/crema con detalles en bronce.
+
+---
+
+## 🛠️ Tecnologías
+
+- **[Next.js 16](https://nextjs.org)** (App Router + Turbopack) — framework React.
+- **[React 19](https://react.dev)** — interfaz de usuario.
+- **[Tailwind CSS 4](https://tailwindcss.com)** — estilos.
+- **[GSAP](https://gsap.com)** + **[ScrollTrigger](https://gsap.com/scrolltrigger/)** — animaciones.
+- **[Lenis](https://lenis.darkroom.engineering/)** — scroll suave.
+- **[TypeScript](https://www.typescriptlang.org/)** — tipado seguro.
+- Desplegado en **[Vercel](https://vercel.com)**.
+
+---
+
+## 🧑‍💻 Desarrollo local
+
+Requisitos: **Node.js 20.9+** y **npm**.
 
 ```bash
+# 1. Instalar dependencias
 npm install
+
+# 2. Levantar el servidor de desarrollo
 npm run dev
 ```
 
-Abre [http://localhost:3000](http://localhost:3000).
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el
+resultado. La página se actualiza automáticamente al editar los archivos.
 
-### Scripts
+**Otros comandos:**
 
-| Comando            | Descripción                       |
-| ------------------ | --------------------------------- |
-| `npm run dev`      | Servidor de desarrollo            |
-| `npm run build`    | Build de producción               |
-| `npm run start`    | Sirve el build de producción      |
-| `npm run lint`     | ESLint                            |
+```bash
+npm run build    # Compilar versión de producción
+npm run start    # Servir la versión de producción compilada
+npm run lint     # Revisar estilo/lint del código
+```
 
-## Personalización
-
-- **Productos y textos**: `lib/data.ts` (nombre de la marca, teléfono de WhatsApp, slides del hero, productos, enlaces de navegación).
-- **Imágenes**: `public/images/` (`1.jpg` … `10.jpg` para hero y catálogo, `logo.png` para marca y favicon).
-- **Colores y tipografías**: `app/globals.css` (paleta ISABEL y fuentes).
-- **Número de WhatsApp**: `SITE.whatsapp` (con código de país) y `SITE.whatsappDisplay` en `lib/data.ts`.
-
-## Despliegue en Vercel
-
-1. Sube este repositorio a GitHub (rama `main`).
-2. En [vercel.com](https://vercel.com) pulsa **Add New → Project** e importa el repositorio `Matty-2006/ISABEL`.
-3. Vercel detecta automáticamente el framework (**Next.js**) gracias a `package.json` y `vercel.json`.
-4. Verifica que el framework preseleccionado sea **Next.js**, el comando de build `npm run build` y el Node.js 20.x o 22.x.
-5. Pulsa **Deploy**. Al terminar tendrás una URL de producción tipo `https://isabel-XXXX.vercel.app`.
-
-Cada push a `main` genera un despliegue de producción automático; cada Pull Request, un entorno de vista previa.
-
-No se requieren variables de entorno para el funcionamiento básico.
-
-## Estructura
+### 📁 Estructura
 
 ```
-app/            Rutas y páginas (layout, home, producto/[id], estáticas y SEO)
-components/     Componentes de UI (hero, catálogo, carrito, favovidos, footer…)
-context/        Estado global (carrito y favoritos)
-lib/            Datos, utilidades de WhatsApp y assets de imagen
-legacy/         Prototipo estático anterior (solo referencia)
-public/images/  Fotos del hero/catálogo y logo
+app/            # Páginas y layout de Next.js (App Router)
+  page.tsx      # Página principal (landing)
+  layout.tsx    # Layout + metadatos SEO
+  globals.css   # Estilos globales y paleta ISABEL
+  producto/     # Página de detalle de cada pieza
+components/     # Componentes React (Hero, Catálogo, Carrito, Footer...)
+context/        # Estado global (carrito y favoritos)
+lib/            # Datos, utilidades de WhatsApp y assets
+public/images/  # Fotos del hero/catálogo y logo
+legacy/         # Prototipo estático anterior (solo referencia)
 ```
+
+---
+
+## ✏️ Personalización
+
+- **Productos y textos**: edita `lib/data.ts` (marca, número de WhatsApp, slides del hero, productos, enlaces).
+- **Imágenes**: reemplaza los archivos de `public/images/` (`1.jpg` … `10.jpg` y `logo.png`).
+- **Paleta y tipografías**: `app/globals.css`.
+- **Número de WhatsApp**: `SITE.whatsapp` (con código de país, `593…`) en `lib/data.ts`.
+
+---
+
+## ☁️ Deploy en producción
+
+Esta página está desplegada en **Vercel**. Para hacer un deploy:
+
+1. Empuja los cambios a este repositorio:
+
+   ```bash
+   git add .
+   git commit -m "descripción del cambio"
+   git push origin main
+   ```
+
+2. Vercel detecta el push y genera el deploy automáticamente.
+
+3. Tu página queda disponible en **https://isabel-pi.vercel.app**.
+
+> El flujo estándar es: **cambios → push a `main` → deploy automático →**
+> **ver el resultado en producción**.
+
+---
+
+## 📞 Contacto
+
+- **Marca:** ISABEL
+- **WhatsApp:** [+593 099 376 5542](https://wa.me/593993765542)
+
+<div align="center">
+
+**ISABEL** — *Elegancia que habla por ti.*
+
+</div>
