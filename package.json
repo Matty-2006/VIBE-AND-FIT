@@ -2,6 +2,15 @@
   "name": "isabel",
   "version": "0.1.0",
   "private": true,
+  "description": "ISABEL — ecommerce editorial de moda. Next.js 16, React 19, Tailwind CSS 4, GSAP y Lenis.",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Matty-2006/ISABEL.git"
+  },
+  "homepage": "https://github.com/Matty-2006/ISABEL#readme",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
