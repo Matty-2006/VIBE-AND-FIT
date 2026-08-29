@@ -1,0 +1,65 @@
+/* ═══════════════════════════════════════════
+   VELURE — Testimonials
+   ═══════════════════════════════════════════ */
+
+.testimonials {
+    padding: var(--space-3xl) 0;
+    background: var(--cream);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+}
+
+.testi-card {
+    background: var(--white);
+    padding: var(--space-xl);
+    position: relative;
+}
+
+.testi-card::before {
+    content: '\201C';
+    font-family: var(--display);
+    font-size: 4rem;
+    color: var(--gold-light);
+    position: absolute;
+    top: .5rem; left: 1rem;
+    line-height: 1;
+    opacity: .4;
+}
+
+.testi-text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--charcoal);
+    margin-bottom: var(--space-lg);
+}
+
+.testi-stars {
+    color: var(--gold);
+    font-size: .85rem;
+    margin-bottom: var(--space-sm);
+}
+
+.testi-author {
+    font-size: .82rem;
+    font-weight: 600;
+    letter-spacing: .08em;
+}
+
+.testi-role {
+    font-size: .72rem;
+    color: var(--grey);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+}

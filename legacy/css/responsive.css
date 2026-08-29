@@ -1,0 +1,57 @@
+/* ═══════════════════════════════════════════
+   VELURE — Responsive Overrides
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 1440px) {
+    :root {
+        --space-2xl: 4rem;
+        --space-3xl: 5rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    :root {
+        --space-2xl: 3rem;
+        --space-3xl: 4rem;
+        --nav-height: 60px;
+    }
+
+    .hero { min-height: 550px; }
+    .hero-content { left: 5%; bottom: 10%; }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-xl: 2rem;
+        --space-2xl: 2.5rem;
+        --space-3xl: 3.5rem;
+    }
+
+    .hero { min-height: 480px; height: 85vh; }
+    .hero-content { max-width: 90%; }
+    .hero-title { font-size: 2rem; }
+    .hero-scroll { display: none; }
+}
+
+@media (max-width: 600px) {
+    :root {
+        --space-lg: 1.2rem;
+        --space-xl: 1.5rem;
+        --space-2xl: 2rem;
+        --space-3xl: 3rem;
+    }
+
+    .container { padding: 0 var(--space-md); }
+    .hero-title { font-size: 1.6rem; }
+    .hero-cta { padding: .7rem 1.5rem; font-size: .72rem; }
+}
+
+/* ─── Print adjustments ─── */
+@media print {
+    .nav, .announcement-bar, .cart-sidebar, .cart-overlay,
+    .hero-scroll, .mobile-menu, .mobile-overlay,
+    .product-actions, .newsletter-form button {
+        display: none !important;
+    }
+    body { color: #000; background: #fff; }
+}

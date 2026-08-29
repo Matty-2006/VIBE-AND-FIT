@@ -1,0 +1,52 @@
+/* ═══════════════════════════════════════════
+   VELURE — Announcement Bar
+   ═══════════════════════════════════════════ */
+
+.announcement-bar {
+    height: var(--bar-height);
+    background: var(--black);
+    color: var(--gold-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .8rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    overflow: hidden;
+    position: relative;
+}
+
+.announcement-bar .marquee-track {
+    display: flex;
+    gap: 4rem;
+    white-space: nowrap;
+    animation: marquee 25s linear infinite;
+}
+
+.announcement-bar .marquee-track span {
+    display: inline-flex;
+    align-items: center;
+    gap: .75rem;
+}
+
+.announcement-bar .marquee-track span::before {
+    content: '';
+    width: 4px; height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+}
+
+@keyframes marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.announcement-bar .bar-close {
+    position: absolute;
+    right: 1rem;
+    background: none;
+    color: var(--gold-light);
+    font-size: 1.1rem;
+    cursor: pointer;
+    z-index: 2;
+}

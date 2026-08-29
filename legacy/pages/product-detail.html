@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELURE — Detalle de Producto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/products.css">
+    <link rel="stylesheet" href="../css/cart.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <style>
+        .pd-wrap {
+            padding: calc(var(--nav-h) + var(--space-xl)) 0 var(--space-3xl);
+        }
+        .pd-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            align-items: start;
+        }
+        .pd-gallery {
+            position: relative;
+        }
+        .pd-main-img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+        }
+        .pd-main-img img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform .6s ease;
+        }
+        .pd-thumbs {
+            display: flex;
+            gap: var(--space-sm);
+            margin-top: var(--space-sm);
+        }
+        .pd-thumb {
+            width: 70px; height: 90px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color .2s;
+        }
+        .pd-thumb.active { border-color: var(--gold); }
+        .pd-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+        .pd-info { padding-top: var(--space-sm); }
+        .pd-breadcrumb {
+            font-size: .75rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--grey);
+            margin-bottom: var(--space-md);
+        }
+        .pd-breadcrumb a { color: var(--grey); text-decoration: none; }
+        .pd-breadcrumb a:hover { color: var(--gold); }
+        .pd-name {
+            font-family: var(--display);
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: .25rem;
+        }
+        .pd-price {
+            font-family: var(--serif);
+            font-size: 1.3rem;
+            color: var(--gold);
+            margin-bottom: var(--space-md);
+        }
+        .pd-price .pd-old-price {
+            text-decoration: line-through;
+            color: var(--grey);
+            margin-right: .5rem;
+        }
+        .pd-badge {
+            display: inline-block;
+            font-size: .65rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            padding: .25rem .75rem;
+            background: var(--gold);
+            color: var(--white);
+            margin-left: .75rem;
+            vertical-align: middle;
+        }
+        .pd-desc {
+            font-size: .95rem;
+            line-height: 1.8;
+            color: var(--grey);
+            margin-bottom: var(--space-lg);
+        }
+
+        .pd-colors {
+            margin-bottom: var(--space-lg);
+        }
+        .pd-colors-label {
+            font-size: .75rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-bottom: .5rem;
+        }
+        .pd-color-opts {
+            display: flex;
+            gap: .5rem;
+        }
+        .pd-color-swatch {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            border: 2px solid var(--grey-light);
+            cursor: pointer;
+            transition: border-color .2s;
+        }
+        .pd-color-swatch.active { border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold); }
+
+        .pd-sizes {
+            margin-bottom: var(--space-lg);
+        }
+        .pd-sizes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: .5rem;
+        }
+        .pd-sizes-header span {
+            font-size: .75rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+        .pd-sizes-header a {
+            font-size: .75rem;
+            color: var(--gold);
+            text-decoration: underline;
+        }
+        .pd-size-opts {
+            display: flex;
+            gap: .5rem;
+        }
+        .pd-size-btn {
+            padding: .45rem .9rem;
+            border: 1px solid var(--grey-light);
+            background: var(--white);
+            font-size: .85rem;
+            cursor: pointer;
+            transition: all .2s;
+        }
+        .pd-size-btn.active,
+        .pd-size-btn:hover {
+            background: var(--gold);
+            color: var(--white);
+            border-color: var(--gold);
+        }
+        .pd-size-btn.out {
+            opacity: .35;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+
+        .pd-add {
+            width: 100%;
+            padding: 1rem;
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            font-family: var(--sans);
+            font-size: .85rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background .3s;
+            margin-bottom: var(--space-md);
+        }
+        .pd-add:hover { background: var(--gold); }
+        .pd-wishlist {
+            width: 100%;
+            padding: .75rem;
+            background: transparent;
+            border: 1px solid var(--grey-light);
+            font-size: .8rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-bottom: var(--space-lg);
+        }
+        .pd-wishlist:hover { border-color: var(--gold); }
+
+        .pd-details {
+            border-top: 1px solid var(--grey-light);
+            padding-top: var(--space-lg);
+        }
+        .pd-details summary {
+            font-family: var(--serif);
+            font-size: 1rem;
+            cursor: pointer;
+            padding: .5rem 0;
+            border-bottom: 1px solid var(--grey-light);
+            list-style: none;
+        }
+        .pd-details summary::after {
+            content: '+';
+            float: right;
+        }
+        .pd-details[open] summary::after { content: '–'; }
+        .pd-details .detail-body {
+            padding: var(--space-md) 0;
+            font-size: .88rem;
+            line-height: 1.75;
+            color: var(--grey);
+        }
+
+        /* Product recommendations */
+        .pd-related {
+            margin-top: var(--space-3xl);
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--grey-light);
+        }
+        .pd-related-title {
+            font-family: var(--display);
+            font-size: 1.5rem;
+            margin-bottom: var(--space-lg);
+            text-align: center;
+        }
+        .pd-related-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+        }
+        .pd-related-card {
+            text-decoration: none;
+            color: inherit;
+        }
+        .pd-related-card img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            transition: transform .3s;
+        }
+        .pd-related-card:hover img { transform: scale(1.03); }
+        .pd-related-card .rc-name {
+            font-family: var(--serif);
+            font-size: .95rem;
+            margin-top: .5rem;
+        }
+        .pd-related-card .rc-price {
+            font-size: .85rem;
+            color: var(--gold);
+        }
+
+        @media (max-width: 768px) {
+            .pd-grid { grid-template-columns: 1fr; }
+            .pd-related-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nav">
+        <div class="nav-inner">
+            <button class="nav-mobile-btn" aria-label="Menú"><span></span><span></span><span></span></button>
+            <a href="../index.html" class="nav-logo">V<em>E</em>LURE</a>
+            <div class="nav-links">
+                <a href="../index.html#coleccion">Colección</a>
+                <a href="../index.html#productos">Tienda</a>
+                <a href="../index.html#lookbook">Lookbook</a>
+                <a href="about.html">Nosotros</a>
+            </div>
+            <div class="nav-icons">
+                <button class="search-btn" aria-label="Buscar">🔍</button>
+                <a href="#" aria-label="Favoritos">♡</a>
+                <button class="cart-badge cart-btn" aria-label="Carrito">🛍<span class="cart-count">0</span></button>
+            </div>
+        </div>
+    </header>
+
+    <section class="pd-wrap">
+        <div class="container">
+            <div class="pd-grid" id="productGrid">
+                <!-- Populated dynamically by JS -->
+            </div>
+
+            <div class="pd-related">
+                <h3 class="pd-related-title">También Te Puede Gustar</h3>
+                <div class="pd-related-grid" id="relatedGrid">
+                    <!-- Populated dynamically by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay"></div>
+    <aside class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button class="cart-close" aria-label="Cerrar">✕</button>
+        </div>
+        <div class="cart-body"></div>
+        <div class="cart-footer">
+            <div class="cart-subtotal">
+                <span class="label">Subtotal</span>
+                <span class="value cart-subtotal-value">€0.00</span>
+            </div>
+            <div class="cart-total">
+                <span>Total</span>
+                <span class="cart-total-value">€0.00</span>
+            </div>
+            <button class="cart-checkout-btn">Finalizar Compra</button>
+            <span class="cart-continue">Seguir Comprando</span>
+        </div>
+    </aside>
+
+    <!-- Full Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">V<em>E</em>LURE</div>
+                    <p>Moda de lujo artesanal para la mujer que escribe su propia historia. Diseñada en París, confeccionada con pasión en todo el mundo.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Instagram">IG</a>
+                        <a href="#" aria-label="Facebook">FB</a>
+                        <a href="#" aria-label="Pinterest">PT</a>
+                        <a href="#" aria-label="YouTube">YT</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Tienda</h4>
+                    <a href="../index.html#productos">Nuevas Llegadas</a>
+                    <a href="../index.html#productos">Más Vendidos</a>
+                    <a href="#">Vestidos</a>
+                    <a href="#">Abrigos</a>
+                    <a href="#">Accesorios</a>
+                    <a href="#">Rebajas</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Información</h4>
+                    <a href="about.html">Sobre Nosotros</a>
+                    <a href="sustainability.html">Sostenibilidad</a>
+                    <a href="size-guide.html">Guía de Tallas</a>
+                    <a href="#">Cuidado de Prendas</a>
+                    <a href="#">Prensa</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Ayuda</h4>
+                    <a href="#">Envíos</a>
+                    <a href="#">Devoluciones</a>
+                    <a href="#">Seguir Pedido</a>
+                    <a href="#">Contacto</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 VELURE. Todos los derechos reservados.</span>
+                <div class="footer-payments">💳 🏦 🍎 💰</div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { PRODUCTS } from '../js/data.js';
+        import { addToCart, renderCart, toggleCart, getCartCount } from '../js/cart.js';
+        import { initNavigation }  from '../js/navigation.js';
+        import { initScrollReveal } from '../js/scroll-reveal.js';
+
+        /* ── Product descriptions keyed by category ── */
+        const DESCRIPTIONS = {
+            'Vestidos': 'Confeccionado con los tejidos más nobles, este diseño combina la fluidez de la seda natural con una estructura impecable. Costuras invisibles, forro interior en satén y acabados hechos a mano definen una pieza que trasciende la temporada.',
+            'Abrigos': 'Lana virgen seleccionada a mano, forro de seda natural y botones de cuerno pulido. Un diseño atemporal que fusiona la tradición sastrera europea con una sensibilidad contemporánea. Cada abrigo requiere más de 40 horas de confección artesanal.',
+            'Accesorios': 'Cuero italiano de primera selección, herrajes bañados en oro y acabados hechos a mano. Cada pieza es un homenaje a la tradición artesanal europea, diseñada para acompañarte toda la vida y mejorar con el tiempo.',
+            'Calzado': 'Cuero artesanal curado durante semanas, suelas cosidas a mano y plantillas de memoria. El equilibrio perfecto entre confort y elegancia, pensado para la mujer que no sacrifica ni un ápice de estilo.',
+        };
+
+        /* ── Color names ── */
+        const COLOR_NAMES = {
+            '#1a1a2e': 'Medianoche',
+            '#c9a96e': 'Dorado',
+            '#8b2252': 'Burdeos',
+            '#f8f5f0': 'Marfil',
+            '#1a1a1a': 'Negro',
+            '#2c2c2c': 'Carbón',
+            '#4a4a4a': 'Grafito',
+            '#d4c5b2': 'Camel',
+            '#6b4c3b': 'Tabaco',
+            '#8b4513': 'Caoba',
+            '#2c3e50': 'Pizarra',
+            '#c0c0c0': 'Plata',
+            '#f5f0e8': 'Natural',
+        };
+
+        function getParam(key) {
+            return new URLSearchParams(window.location.search).get(key);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initNavigation();
+            initScrollReveal();
+
+            const productId = parseInt(getParam('id')) || 1;
+            const product = PRODUCTS.find(p => p.id === productId) || PRODUCTS[0];
+
+            document.title = `VELURE — ${product.name}`;
+
+            /* ── Build gallery (use main image + variations) ── */
+            const baseUrl = product.image.replace('w=500', 'w=900');
+            const thumbUrl = product.image.replace('w=500', 'w=200');
+            /* Generate variant URLs for thumbs */
+            const imgBase = product.image.split('?')[0];
+            const thumbs = [
+                { full: imgBase + '?w=900&q=80', thumb: imgBase + '?w=200&q=60' },
+                { full: imgBase.replace('w=900', 'w=900') + '&auto=format&q=80', thumb: imgBase + '?w=200&q=60&auto=format' },
+                { full: imgBase + '?w=900&h=1200&fit=crop&q=80', thumb: imgBase + '?w=200&h=267&fit=crop&q=60' },
+            ];
+
+            /* ── Build product HTML ── */
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = `
+                <div class="pd-gallery">
+                    <div class="pd-main-img">
+                        <img id="mainImage" src="${thumbs[0].full}" alt="${product.name}">
+                    </div>
+                    <div class="pd-thumbs">
+                        ${thumbs.map((t, i) => `
+                            <div class="pd-thumb ${i === 0 ? 'active' : ''}" data-src="${t.full}">
+                                <img src="${t.thumb}" alt="">
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="pd-info">
+                    <div class="pd-breadcrumb">
+                        <a href="../index.html#productos">Tienda</a> / <a href="#">${product.category}</a> / <span>${product.name}</span>
+                    </div>
+                    <h1 class="pd-name">${product.name}${product.badge ? `<span class="pd-badge">${product.badge === 'new' ? 'Nuevo' : product.badge === 'sale' ? 'Rebajas' : product.badge}</span>` : ''}</h1>
+                    <div class="pd-price">
+                        ${product.oldPrice ? `<span class="pd-old-price">€${product.oldPrice}</span>` : ''}
+                        €${product.price}
+                    </div>
+                    <p class="pd-desc">${DESCRIPTIONS[product.category] || DESCRIPTIONS['Vestidos']}</p>
+
+                    <div class="pd-colors">
+                        <div class="pd-colors-label">Color: <strong>${COLOR_NAMES[product.colors[0]] || 'Seleccionar'}</strong></div>
+                        <div class="pd-color-opts">
+                            ${product.colors.map((c, i) => `
+                                <div class="pd-color-swatch ${i === 0 ? 'active' : ''}" style="background:${c}" data-color="${COLOR_NAMES[c] || c}"></div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="pd-sizes">
+                        <div class="pd-sizes-header">
+                            <span>Talla</span>
+                            <a href="size-guide.html">Guía de tallas</a>
+                        </div>
+                        <div class="pd-size-opts">
+                            <button class="pd-size-btn" data-size="XS">XS</button>
+                            <button class="pd-size-btn" data-size="S">S</button>
+                            <button class="pd-size-btn active" data-size="M">M</button>
+                            <button class="pd-size-btn" data-size="L">L</button>
+                            <button class="pd-size-btn" data-size="XL">XL</button>
+                        </div>
+                    </div>
+
+                    <button class="pd-add" id="addToCartBtn">Añadir al Carrito</button>
+                    <button class="pd-wishlist">♡ Añadir a Favoritos</button>
+
+                    <div class="pd-details">
+                        <details open>
+                            <summary>Composición y Cuidados</summary>
+                            <div class="detail-body">
+                                ${product.category === 'Abrigos' ? 'Exterior: 95% lana virgen, 5% cashmere. Forro: 100% seda. Botones: cuerno natural pulido.' : product.category === 'Calzado' ? 'Upper: cuero artesanal italiano. Suela: cuero cosido a mano. Plantilla: memory foam con forro de piel.' : product.category === 'Accesorios' ? 'Cuero italiano de primera selección. Herrajes bañados en oro de 18 quilates. Forro interior en alcántara.' : 'Exterior: 100% seda natural. Forro: 100% satén de seda. Costuras invisibles acabadas a mano.'}<br>Limpieza en seco únicamente. No usar blanqueador. Plancha a baja temperatura. Almacenar en percha de madera.
+                            </div>
+                        </details>
+                        <details>
+                            <summary>Envío y Devoluciones</summary>
+                            <div class="detail-body">
+                                Envío gratuito en pedidos superiores a €200. Entrega estimada 2–4 días laborables en península, 5–7 días en Baleares e Islas Canarias. Devoluciones gratuitas dentro de los 30 días siguientes a la recepción. Las prendas deben estar en su estado original con etiquetas intactas.
+                            </div>
+                        </details>
+                        <details>
+                            <summary>Sostenibilidad</summary>
+                            <div class="detail-body">
+                                Materiales procedentes de proveedores certificados con estándares OEKO-TEX® y GOTS. Producción en talleres familiares europeos con condiciones laborales justas. Nuestro programa de reciclaje permite devolver esta prenda al final de su ciclo de vida para su transformación en nuevas fibras. Embalaje 100% reciclado de origen vegetal.
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            `;
+
+            /* ── Related products (same category, exclude current) ── */
+            const related = PRODUCTS.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
+            const relatedGrid = document.getElementById('relatedGrid');
+            relatedGrid.innerHTML = related.map(r => `
+                <a class="pd-related-card" href="product-detail.html?id=${r.id}">
+                    <img src="${r.image}" alt="${r.name}" loading="lazy">
+                    <div class="rc-name">${r.name}</div>
+                    <div class="rc-price">€${r.price}</div>
+                </a>
+            `).join('');
+
+            /* ── Event handlers ── */
+
+            /* Thumb switch */
+            document.querySelectorAll('.pd-thumb').forEach(t => {
+                t.addEventListener('click', () => {
+                    document.getElementById('mainImage').src = t.dataset.src;
+                    document.querySelectorAll('.pd-thumb').forEach(x => x.classList.remove('active'));
+                    t.classList.add('active');
+                });
+            });
+
+            /* Color swatches */
+            document.querySelectorAll('.pd-color-swatch').forEach(s => {
+                s.addEventListener('click', () => {
+                    document.querySelectorAll('.pd-color-swatch').forEach(x => x.classList.remove('active'));
+                    s.classList.add('active');
+                    document.querySelector('.pd-colors-label strong').textContent = s.dataset.color;
+                });
+            });
+
+            /* Size buttons */
+            document.querySelectorAll('.pd-size-btn').forEach(b => {
+                b.addEventListener('click', () => {
+                    document.querySelectorAll('.pd-size-btn').forEach(x => x.classList.remove('active'));
+                    b.classList.add('active');
+                });
+            });
+
+            /* Add to cart — uses proper addToCart(productId) from cart.js */
+            document.getElementById('addToCartBtn').addEventListener('click', () => {
+                addToCart(product.id);
+                toggleCart(true);
+            });
+
+            /* Cart toggle */
+            document.querySelector('.cart-btn').addEventListener('click', () => toggleCart(true));
+            document.querySelector('.cart-close').addEventListener('click', () => toggleCart(false));
+            document.querySelector('.cart-overlay').addEventListener('click', () => toggleCart(false));
+            document.querySelector('.cart-continue')?.addEventListener('click', () => toggleCart(false));
+
+            renderCart();
+            /* Update cart badge from stored cart */
+            const badge = document.querySelector('.cart-count');
+            if (badge) badge.textContent = getCartCount();
+        });
+    </script>
+</body>
+</html>

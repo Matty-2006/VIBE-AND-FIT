@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELURE — Sobre Nosotros</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/cart.css">
+    <style>
+        .about-hero {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .about-hero img {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        .about-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,.45);
+        }
+        .about-hero-text {
+            position: relative;
+            z-index: 1;
+            color: var(--white);
+            text-align: center;
+            max-width: 650px;
+            padding: 0 2rem;
+        }
+        .about-hero-text h1 {
+            font-family: var(--display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .about-hero-text p {
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 1.1rem;
+            opacity: .85;
+        }
+
+        .about-story {
+            padding: var(--space-3xl) 0;
+        }
+        .about-story .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            align-items: center;
+        }
+        .about-story-img {
+            aspect-ratio: 4/5;
+            overflow: hidden;
+        }
+        .about-story-img img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        .about-story-text h2 {
+            font-family: var(--display);
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+        }
+        .about-story-text h2 em { font-style: italic; color: var(--gold); }
+        .about-story-text p {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: var(--grey);
+            margin-bottom: var(--space-md);
+        }
+
+        .about-values {
+            padding: var(--space-3xl) 0;
+            background: var(--cream);
+        }
+        .about-values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-xl);
+            text-align: center;
+        }
+        .about-val h3 {
+            font-family: var(--serif);
+            font-size: 1.3rem;
+            margin-bottom: .5rem;
+            color: var(--gold);
+        }
+        .about-val p {
+            font-size: .9rem;
+            color: var(--grey);
+            line-height: 1.7;
+        }
+
+        /* Timeline */
+        .about-timeline {
+            padding: var(--space-3xl) 0;
+            background: var(--black);
+            color: var(--white);
+        }
+        .about-timeline .section-header h2,
+        .about-timeline .section-header p {
+            color: var(--white);
+        }
+        .about-timeline .section-header h2 em { color: var(--gold); }
+        .timeline-track {
+            position: relative;
+            max-width: 800px;
+            margin: var(--space-xl) auto 0;
+            padding-left: 2rem;
+        }
+        .timeline-track::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gold);
+        }
+        .timeline-item {
+            position: relative;
+            padding: 0 0 var(--space-xl) 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 6px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: 3px solid var(--black);
+        }
+        .timeline-year {
+            font-family: var(--serif);
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-bottom: .25rem;
+        }
+        .timeline-title {
+            font-family: var(--display);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: .25rem;
+        }
+        .timeline-desc {
+            font-size: .88rem;
+            color: rgba(255,255,255,.65);
+            line-height: 1.6;
+        }
+
+        /* Team */
+        .about-team {
+            padding: var(--space-3xl) 0;
+        }
+        .about-team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-lg);
+        }
+        .team-card {
+            text-align: center;
+        }
+        .team-card img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            margin-bottom: var(--space-md);
+        }
+        .team-card h4 {
+            font-family: var(--serif);
+            font-size: 1.1rem;
+        }
+        .team-card span {
+            font-size: .75rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--grey);
+            display: block;
+            margin-top: .25rem;
+        }
+        .team-card p {
+            font-size: .82rem;
+            color: var(--grey);
+            line-height: 1.6;
+            margin-top: .5rem;
+        }
+
+        /* Quote */
+        .about-quote {
+            padding: var(--space-3xl) 0;
+            background: var(--cream);
+            text-align: center;
+        }
+        .about-quote blockquote {
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 1.6rem;
+            line-height: 1.5;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--black);
+        }
+        .about-quote cite {
+            display: block;
+            margin-top: var(--space-md);
+            font-family: var(--sans);
+            font-style: normal;
+            font-size: .85rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        @media (max-width: 768px) {
+            .about-story .container { grid-template-columns: 1fr; }
+            .about-values-grid { grid-template-columns: 1fr; }
+            .about-team-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header class="nav">
+        <div class="nav-inner">
+            <button class="nav-mobile-btn" aria-label="Menú"><span></span><span></span><span></span></button>
+            <a href="../index.html" class="nav-logo">V<em>E</em>LURE</a>
+            <div class="nav-links">
+                <a href="../index.html#coleccion">Colección</a>
+                <a href="../index.html#productos">Tienda</a>
+                <a href="../index.html#lookbook">Lookbook</a>
+                <a href="about.html">Nosotros</a>
+            </div>
+            <div class="nav-icons">
+                <button class="search-btn" aria-label="Buscar">🔍</button>
+                <a href="#" aria-label="Favoritos">♡</a>
+                <button class="cart-badge" aria-label="Carrito">🛍<span class="cart-count">0</span></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="about-hero">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd82?w=1600&q=80" alt="Sobre VELURE">
+        <div class="about-hero-text">
+            <h1>Nuestra Historia</h1>
+            <p>Donde la artesanía europea se encuentra con la visión contemporánea</p>
+        </div>
+    </section>
+
+    <!-- Story -->
+    <section class="about-story">
+        <div class="container">
+            <div class="about-story-img">
+                <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=80" alt="Atelier VELURE">
+            </div>
+            <div class="about-story-text reveal">
+                <h2>De un <em>Sueño</em> a una Maison</h2>
+                <p>VELURE nació en 2018 de la visión de su fundadora, Elena Dubois, quien tras dos décadas en las más prestigiosas casas de moda de París y Milán — Chanel, Hermès, Prada — decidió crear una marca que celebrara la feminidad sin concesiones.</p>
+                <p>Nuestro atelier en el corazón del Marais de París es donde cada colección cobra vida. Trabajamos con los mejores tejidos de Italia y Francia, y cada prenda pasa por las manos de al menos doce artesanos especializados antes de llegar a ti.</p>
+                <p>Creemos que el lujo verdadero no es solo lo que ves, sino lo que sientes al vestirlo. La suavidad de una seda natural, la calidez de un cashmere de pastoreo extensivo, la solidez de un cuero curtido durante meses — cada textura cuenta una historia de excelencia.</p>
+                <p>Esa es la promesa VELURE: piezas que mejoran con el tiempo, diseñadas para la mujer que escribe su propia historia.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="about-values">
+        <div class="container">
+            <div class="about-values-grid reveal">
+                <div class="about-val">
+                    <h3>Integridad</h3>
+                    <p>Nunca comprometemos la calidad. Cada decisión se toma pensando en la mujer que llevará nuestra prenda, desde la selección del hilo hasta el último botón.</p>
+                </div>
+                <div class="about-val">
+                    <h3>Innovación</h3>
+                    <p>Respetamos la tradición pero no le tememos al futuro. Fusionamos técnicas centenarias con diseño de vanguardia para crear piezas que son a la vez clásicas y modernas.</p>
+                </div>
+                <div class="about-val">
+                    <h3>Sostenibilidad</h3>
+                    <p>El lujo responsable es el único lujo que perdura. Nuestro compromiso con el planeta guía cada decisión — desde proveedores certificados hasta empaques reciclados.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote -->
+    <section class="about-quote">
+        <div class="container reveal">
+            <blockquote>«No diseñamos prendas para una temporada; creames piezas para toda una vida. Cada mujer merece vestir con la confianza de saber que lleva algo excepcional.»</blockquote>
+            <cite>Elena Dubois, Fundadora de VELURE</cite>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="about-timeline">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Nuestro <em>Camino</em></h2>
+                <div class="section-line"></div>
+                <p>Los hitos que han definido nuestra maison</p>
+            </div>
+            <div class="timeline-track reveal">
+                <div class="timeline-item">
+                    <div class="timeline-year">2018</div>
+                    <div class="timeline-title">La Primera Colección</div>
+                    <div class="timeline-desc">Elena Dubois lanza VELURE con una colección cápsula de 12 piezas presentada en un atelier privado del Marais. Las 200 unidades se agotan en 72 horas.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2019</div>
+                    <div class="timeline-title">Expansión Internacional</div>
+                    <div class="timeline-desc">Apertura de nuestro primer pop-up en Milán y presencia en los principales e-commerce de lujo de Europa. Nuestra comunidad supera las 5.000 clientas.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2020</div>
+                    <div class="timeline-title">Compromiso Sostenible</div>
+                    <div class="timeline-desc">Lanzamiento de nuestro programa de sostenibilidad con certificación OEKO-TEX® y GOTS. Primera marca de lujo española en lograr la neutralidad de carbono.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2022</div>
+                    <div class="timeline-title">La Maison Digital</div>
+                    <div class="timeline-desc">Renovación completa de nuestra plataforma digital con experiencia de compra personalizada, asesoría de estilo virtual y envíos a 12 países.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2024</div>
+                    <div class="timeline-title">15.000 Clientas</div>
+                    <div class="timeline-desc">Alcanzamos la cifra de 15.000 clientas satisfechas con un índice de satisfacción del 98%. Apertura de nuestro segundo atelier en Florencia.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2026</div>
+                    <div class="timeline-title">Colección Otoño 2026</div>
+                    <div class="timeline-desc">Nuestra colección más ambiciosa hasta la fecha: 200 diseños exclusivos, nuevas categorías y colaboraciones con artesanos de cinco países europeos.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="about-team">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Nuestro <em>Equipo</em></h2>
+                <div class="section-line"></div>
+                <p>Las personas que dan vida a VELURE cada día</p>
+            </div>
+            <div class="about-team-grid">
+                <div class="team-card reveal">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80" alt="Elena Dubois">
+                    <h4>Elena Dubois</h4>
+                    <span>Fundadora & Directora Creativa</span>
+                    <p>Ex-Chanel y Hermès. Dos décadas de experiencia en las maisons más prestigiosas del mundo antes de crear VELURE.</p>
+                </div>
+                <div class="team-card reveal">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" alt="Margaux Leroy">
+                    <h4>Margaux Leroy</h4>
+                    <span>Diseño de Patrones</span>
+                    <p>Maestra sastre formada en la escuela de la Chambre Syndicale de la Haute Couture parisienne.</p>
+                </div>
+                <div class="team-card reveal">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a288e70435?w=400&q=80" alt="Sofia Marchetti">
+                    <h4>Sofia Marchetti</h4>
+                    <span>Dirección de Producción</span>
+                    <p>Supervisa nuestros talleres en París y Florencia, garantizando la excelencia artesanal en cada prenda.</p>
+                </div>
+                <div class="team-card reveal">
+                    <img src="https://images.unsplash.com/photo-1531123897727-1876ab2da7a0?w=400&q=80" alt="Clara Fontaine">
+                    <h4>Clara Fontaine</h4>
+                    <span>Marketing & Experiencia</span>
+                    <p>Arquitecta de la experiencia VELURE: desde unboxing hasta eventos exclusivos para nuestras clientas.</p>
+                </div>
+                <div class="team-card reveal">
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f78?w=400&q=80" alt="Inès Nakamura">
+                    <h4>Inès Nakamura</h4>
+                    <span>Compras & Materiales</span>
+                    <p>Viaja por Europa seleccionando los mejores tejidos — desde la seda de Como hasta el cashmere de Escocia.</p>
+                </div>
+                <div class="team-card reveal">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286e3b?w=400&q=80" alt="Lucía Vargas">
+                    <h4>Lucía Vargas</h4>
+                    <span>Sostenibilidad & Impacto</span>
+                    <p>Lidera nuestra estrategia de impacto positivo: certificaciones, programa de reciclaje y trazabilidad completa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Full Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">V<em>E</em>LURE</div>
+                    <p>Moda de lujo artesanal para la mujer que escribe su propia historia. Diseñada en París, confeccionada con pasión en todo el mundo.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Instagram">IG</a>
+                        <a href="#" aria-label="Facebook">FB</a>
+                        <a href="#" aria-label="Pinterest">PT</a>
+                        <a href="#" aria-label="YouTube">YT</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Tienda</h4>
+                    <a href="../index.html#productos">Nuevas Llegadas</a>
+                    <a href="../index.html#productos">Más Vendidos</a>
+                    <a href="#">Vestidos</a>
+                    <a href="#">Abrigos</a>
+                    <a href="#">Accesorios</a>
+                    <a href="#">Rebajas</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Información</h4>
+                    <a href="about.html">Sobre Nosotros</a>
+                    <a href="sustainability.html">Sostenibilidad</a>
+                    <a href="size-guide.html">Guía de Tallas</a>
+                    <a href="#">Cuidado de Prendas</a>
+                    <a href="#">Prensa</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Ayuda</h4>
+                    <a href="#">Envíos</a>
+                    <a href="#">Devoluciones</a>
+                    <a href="#">Seguir Pedido</a>
+                    <a href="#">Contacto</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 VELURE. Todos los derechos reservados.</span>
+                <div class="footer-payments">💳 🏦 🍎 💰</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay"></div>
+    <aside class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button class="cart-close" aria-label="Cerrar">✕</button>
+        </div>
+        <div class="cart-body"></div>
+        <div class="cart-footer">
+            <div class="cart-subtotal">
+                <span class="label">Subtotal</span>
+                <span class="value cart-subtotal-value">€0.00</span>
+            </div>
+            <div class="cart-total">
+                <span>Total</span>
+                <span class="cart-total-value">€0.00</span>
+            </div>
+            <button class="cart-checkout-btn">Finalizar Compra</button>
+            <span class="cart-continue">Seguir Comprando</span>
+        </div>
+    </aside>
+
+    <script type="module">
+        import { initScrollReveal } from '../js/scroll-reveal.js';
+        import { initNavigation }   from '../js/navigation.js';
+        import { toggleCart, renderCart, getCartCount } from '../js/cart.js';
+        document.addEventListener('DOMContentLoaded', () => {
+            initNavigation();
+            initScrollReveal();
+            renderCart();
+            const badge = document.querySelector('.cart-count');
+            if (badge) badge.textContent = getCartCount();
+            /* Cart toggle bindings */
+            document.querySelector('.cart-badge')?.addEventListener('click', () => toggleCart(true));
+            document.querySelector('.cart-close')?.addEventListener('click', () => toggleCart(false));
+            document.querySelector('.cart-overlay')?.addEventListener('click', () => toggleCart(false));
+            document.querySelector('.cart-continue')?.addEventListener('click', () => toggleCart(false));
+        });
+    </script>
+</body>
+</html>

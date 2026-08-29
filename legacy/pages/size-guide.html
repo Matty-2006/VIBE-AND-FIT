@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELURE — Guía de Tallas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/cart.css">
+    <style>
+        .sg-hero {
+            padding: var(--space-3xl) 0 var(--space-xl);
+            text-align: center;
+        }
+        .sg-hero h1 {
+            font-family: var(--display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+        }
+        .sg-hero h1 em { font-style: italic; color: var(--gold); }
+        .sg-hero p {
+            font-family: var(--serif);
+            font-style: italic;
+            color: var(--grey);
+            margin-top: .5rem;
+        }
+
+        .sg-content {
+            padding: 0 0 var(--space-3xl);
+        }
+        .sg-table-wrapper {
+            overflow-x: auto;
+            margin-bottom: var(--space-xl);
+        }
+        .sg-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+        .sg-table th,
+        .sg-table td {
+            padding: .85rem 1.2rem;
+            text-align: center;
+            font-size: .88rem;
+            border-bottom: 1px solid var(--grey-light);
+        }
+        .sg-table th {
+            font-family: var(--serif);
+            font-weight: 600;
+            background: var(--cream);
+            letter-spacing: .06em;
+        }
+        .sg-table td:first-child {
+            font-weight: 600;
+            text-align: left;
+        }
+        .sg-table tr:hover td {
+            background: rgba(201,169,110,.04);
+        }
+
+        .sg-tips {
+            background: var(--cream);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        .sg-tips h3 {
+            font-family: var(--serif);
+            font-size: 1.3rem;
+            margin-bottom: var(--space-md);
+        }
+        .sg-tips ul {
+            list-style: none;
+        }
+        .sg-tips ul li {
+            font-size: .9rem;
+            line-height: 1.8;
+            color: var(--grey);
+            padding-left: 1.2rem;
+            position: relative;
+        }
+        .sg-tips ul li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-size: .7rem;
+        }
+
+        .sg-converter {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+            margin-bottom: var(--space-xl);
+        }
+        .sg-convert-item {
+            flex: 1;
+            min-width: 200px;
+            background: var(--white);
+            border: 1px solid var(--grey-light);
+            padding: var(--space-md);
+        }
+        .sg-convert-item label {
+            display: block;
+            font-size: .75rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-bottom: .5rem;
+            color: var(--grey);
+        }
+        .sg-convert-item select {
+            width: 100%;
+            padding: .6rem;
+            border: 1px solid var(--grey-light);
+            background: var(--white);
+            font-size: .9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nav">
+        <div class="nav-inner">
+            <button class="nav-mobile-btn" aria-label="Menú"><span></span><span></span><span></span></button>
+            <a href="../index.html" class="nav-logo">V<em>E</em>LURE</a>
+            <div class="nav-links">
+                <a href="../index.html#coleccion">Colección</a>
+                <a href="../index.html#productos">Tienda</a>
+                <a href="../index.html#lookbook">Lookbook</a>
+                <a href="about.html">Nosotros</a>
+            </div>
+            <div class="nav-icons">
+                <button class="search-btn" aria-label="Buscar">🔍</button>
+                <a href="#" aria-label="Favoritos">♡</a>
+                <button class="cart-badge" aria-label="Carrito">🛍<span class="cart-count">0</span></button>
+            </div>
+        </div>
+    </header>
+
+    <section class="sg-hero">
+        <div class="container">
+            <h1>Guía de <em>Tallas</em></h1>
+            <p>Encuentra tu talla perfecta para que cada prenda VELURE te siente como un guante</p>
+        </div>
+    </section>
+
+    <section class="sg-content">
+        <div class="container">
+
+            <!-- Size table -->
+            <div class="sg-table-wrapper">
+                <table class="sg-table">
+                    <thead>
+                        <tr>
+                            <th>VELURE</th>
+                            <th>ES / IT</th>
+                            <th>FR</th>
+                            <th>UK</th>
+                            <th>US</th>
+                            <th>Pecho (cm)</th>
+                            <th>Cintura (cm)</th>
+                            <th>Cadera (cm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>XS</td><td>36</td><td>34</td><td>6</td><td>2</td><td>82–86</td><td>60–64</td><td>88–92</td></tr>
+                        <tr><td>S</td><td>38</td><td>36</td><td>8</td><td>4</td><td>86–90</td><td>64–68</td><td>92–96</td></tr>
+                        <tr><td>M</td><td>40</td><td>38</td><td>10</td><td>6</td><td>90–94</td><td>68–72</td><td>96–100</td></tr>
+                        <tr><td>L</td><td>42</td><td>40</td><td>12</td><td>8</td><td>94–98</td><td>72–76</td><td>100–104</td></tr>
+                        <tr><td>XL</td><td>44</td><td>42</td><td>14</td><td>10</td><td>98–102</td><td>76–80</td><td>104–108</td></tr>
+                        <tr><td>XXL</td><td>46</td><td>44</td><td>16</td><td>12</td><td>102–108</td><td>80–86</td><td>108–114</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tips -->
+            <div class="sg-tips">
+                <h3>Cómo Medirte</h3>
+                <ul>
+                    <li>Utiliza una cinta métrica flexible y mídete sobre ropa ligera o ropa interior.</li>
+                    <li><strong>Pecho:</strong> mide la circunferencia en la parte más prominente, con la cinta paralela al suelo.</li>
+                    <li><strong>Cintura:</strong> mide la circunferencia natural (la parte más estrecha del torso).</li>
+                    <li><strong>Cadera:</strong> mide la circunferencia en la parte más ancha de las caderas, de pie con los pies juntos.</li>
+                    <li>Si te encuentras entre dos tallas, te recomendamos elegir la talla mayor para un ajuste más cómodo.</li>
+                    <li>Para abrigos y chaquetas, considera una talla más si quieres llevar capas debajo.</li>
+                </ul>
+            </div>
+
+            <!-- Converter -->
+            <div class="sg-converter">
+                <div class="sg-convert-item">
+                    <label>Tu región</label>
+                    <select id="region">
+                        <option value="eu">Europa (ES/IT/FR)</option>
+                        <option value="uk">Reino Unido</option>
+                        <option value="us">Estados Unidos</option>
+                    </select>
+                </div>
+                <div class="sg-convert-item">
+                    <label>Tu talla</label>
+                    <select id="input-size">
+                        <option>34</option><option>36</option><option>38</option><option selected>40</option><option>42</option><option>44</option><option>46</option>
+                    </select>
+                </div>
+                <div class="sg-convert-item">
+                    <label>Talla VELURE</label>
+                    <select id="velure-size" disabled>
+                        <option>XS</option><option>S</option><option selected>M</option><option>L</option><option>XL</option><option>XXL</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Full Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">V<em>E</em>LURE</div>
+                    <p>Moda de lujo artesanal para la mujer que escribe su propia historia. Diseñada en París, confeccionada con pasión en todo el mundo.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Instagram">IG</a>
+                        <a href="#" aria-label="Facebook">FB</a>
+                        <a href="#" aria-label="Pinterest">PT</a>
+                        <a href="#" aria-label="YouTube">YT</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Tienda</h4>
+                    <a href="../index.html#productos">Nuevas Llegadas</a>
+                    <a href="../index.html#productos">Más Vendidos</a>
+                    <a href="#">Vestidos</a>
+                    <a href="#">Abrigos</a>
+                    <a href="#">Accesorios</a>
+                    <a href="#">Rebajas</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Información</h4>
+                    <a href="about.html">Sobre Nosotros</a>
+                    <a href="sustainability.html">Sostenibilidad</a>
+                    <a href="size-guide.html">Guía de Tallas</a>
+                    <a href="#">Cuidado de Prendas</a>
+                    <a href="#">Prensa</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Ayuda</h4>
+                    <a href="#">Envíos</a>
+                    <a href="#">Devoluciones</a>
+                    <a href="#">Seguir Pedido</a>
+                    <a href="#">Contacto</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 VELURE. Todos los derechos reservados.</span>
+                <div class="footer-payments">💳 🏦 🍎 💰</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay"></div>
+    <aside class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button class="cart-close" aria-label="Cerrar">✕</button>
+        </div>
+        <div class="cart-body"></div>
+        <div class="cart-footer">
+            <div class="cart-subtotal">
+                <span class="label">Subtotal</span>
+                <span class="value cart-subtotal-value">€0.00</span>
+            </div>
+            <div class="cart-total">
+                <span>Total</span>
+                <span class="cart-total-value">€0.00</span>
+            </div>
+            <button class="cart-checkout-btn">Finalizar Compra</button>
+            <span class="cart-continue">Seguir Comprando</span>
+        </div>
+    </aside>
+
+    <script type="module">
+        import { initNavigation }   from '../js/navigation.js';
+        import { toggleCart, renderCart, getCartCount } from '../js/cart.js';
+        document.addEventListener('DOMContentLoaded', () => {
+            initNavigation();
+            renderCart();
+            const badge = document.querySelector('.cart-count');
+            if (badge) badge.textContent = getCartCount();
+            /* Cart toggle bindings */
+            document.querySelector('.cart-badge')?.addEventListener('click', () => toggleCart(true));
+            document.querySelector('.cart-close')?.addEventListener('click', () => toggleCart(false));
+            document.querySelector('.cart-overlay')?.addEventListener('click', () => toggleCart(false));
+            document.querySelector('.cart-continue')?.addEventListener('click', () => toggleCart(false));
+        });
+    </script>
+</body>
+</html>

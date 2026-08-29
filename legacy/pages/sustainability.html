@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELURE — Sostenibilidad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/navigation.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/cart.css">
+    <style>
+        .sust-hero {
+            position: relative;
+            height: 50vh;
+            min-height: 350px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .sust-hero img {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        .sust-hero::after {
+            content: ''; position: absolute; inset: 0;
+            background: rgba(0,0,0,.4);
+        }
+        .sust-hero-text {
+            position: relative; z-index: 1;
+            color: var(--white);
+            text-align: center;
+            max-width: 650px;
+            padding: 0 2rem;
+        }
+        .sust-hero-text h1 {
+            font-family: var(--display);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: .5rem;
+        }
+        .sust-hero-text h1 em { font-style: italic; color: var(--gold-light); }
+        .sust-hero-text p {
+            font-family: var(--serif);
+            font-style: italic;
+            opacity: .8;
+        }
+
+        .sust-pillars {
+            padding: var(--space-3xl) 0;
+        }
+        .sust-pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-xl);
+        }
+        .sust-pillar {
+            text-align: center;
+            padding: var(--space-xl);
+        }
+        .sust-pillar-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-md);
+        }
+        .sust-pillar h3 {
+            font-family: var(--serif);
+            font-size: 1.3rem;
+            margin-bottom: .5rem;
+        }
+        .sust-pillar p {
+            font-size: .9rem;
+            color: var(--grey);
+            line-height: 1.75;
+        }
+
+        .sust-pledge {
+            padding: var(--space-3xl) 0;
+            background: var(--cream);
+        }
+        .sust-pledge-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            align-items: center;
+        }
+        .sust-pledge-img {
+            aspect-ratio: 4/5;
+            overflow: hidden;
+        }
+        .sust-pledge-img img { width: 100%; height: 100%; object-fit: cover; }
+        .sust-pledge-text h2 {
+            font-family: var(--display);
+            font-size: 2rem;
+            margin-bottom: var(--space-md);
+        }
+        .sust-pledge-text h2 em { font-style: italic; color: var(--gold); }
+        .sust-pledge-text p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--grey);
+            margin-bottom: var(--space-md);
+        }
+        .sust-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+        .sust-metric {
+            text-align: center;
+            padding: var(--space-md);
+            border: 1px solid var(--sand);
+        }
+        .sust-metric .number {
+            font-family: var(--display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .sust-metric .label {
+            font-size: .75rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--grey);
+        }
+
+        /* Certifications */
+        .sust-certs {
+            padding: var(--space-3xl) 0;
+        }
+        .sust-certs-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-lg);
+        }
+        .cert-card {
+            text-align: center;
+            padding: var(--space-lg);
+            border: 1px solid var(--sand);
+        }
+        .cert-badge {
+            font-family: var(--display);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: .5rem;
+            letter-spacing: .05em;
+        }
+        .cert-card h4 {
+            font-family: var(--serif);
+            font-size: 1rem;
+            margin-bottom: .5rem;
+        }
+        .cert-card p {
+            font-size: .82rem;
+            color: var(--grey);
+            line-height: 1.6;
+        }
+
+        /* Initiatives */
+        .sust-initiatives {
+            padding: var(--space-3xl) 0;
+            background: var(--black);
+            color: var(--white);
+        }
+        .sust-initiatives .section-header h2 { color: var(--white); }
+        .sust-initiatives .section-header h2 em { color: var(--gold); }
+        .sust-initiatives .section-header p { color: rgba(255,255,255,.6); }
+        .init-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+        }
+        .init-card {
+            padding: var(--space-lg);
+            border: 1px solid rgba(201,169,110,.3);
+        }
+        .init-card h4 {
+            font-family: var(--serif);
+            font-size: 1.15rem;
+            color: var(--gold);
+            margin-bottom: .5rem;
+        }
+        .init-card p {
+            font-size: .9rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,.7);
+        }
+
+        /* CTA */
+        .sust-cta {
+            padding: var(--space-3xl) 0;
+            background: var(--cream);
+            text-align: center;
+        }
+        .sust-cta h2 {
+            font-family: var(--display);
+            font-size: 2rem;
+            margin-bottom: var(--space-md);
+        }
+        .sust-cta h2 em { font-style: italic; color: var(--gold); }
+        .sust-cta p {
+            max-width: 550px;
+            margin: 0 auto var(--space-lg);
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--grey);
+        }
+        .sust-cta .btn {
+            display: inline-block;
+            padding: .75rem 2.5rem;
+            background: var(--black);
+            color: var(--white);
+            font-family: var(--sans);
+            font-size: .8rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: background .3s;
+        }
+        .sust-cta .btn:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        @media (max-width: 768px) {
+            .sust-pillar-grid { grid-template-columns: 1fr; }
+            .sust-pledge-grid { grid-template-columns: 1fr; }
+            .sust-metrics { grid-template-columns: 1fr; }
+            .sust-certs-grid { grid-template-columns: repeat(2, 1fr); }
+            .init-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nav">
+        <div class="nav-inner">
+            <button class="nav-mobile-btn" aria-label="Menú"><span></span><span></span><span></span></button>
+            <a href="../index.html" class="nav-logo">V<em>E</em>LURE</a>
+            <div class="nav-links">
+                <a href="../index.html#coleccion">Colección</a>
+                <a href="../index.html#productos">Tienda</a>
+                <a href="../index.html#lookbook">Lookbook</a>
+                <a href="about.html">Nosotros</a>
+            </div>
+            <div class="nav-icons">
+                <button class="search-btn" aria-label="Buscar">🔍</button>
+                <a href="#" aria-label="Favoritos">♡</a>
+                <button class="cart-badge" aria-label="Carrito">🛍<span class="cart-count">0</span></button>
+            </div>
+        </div>
+    </header>
+
+    <section class="sust-hero">
+        <img src="https://images.unsplash.com/photo-1441986300917-6cd74a31f7b2?w=1600&q=80" alt="Sostenibilidad VELURE">
+        <div class="sust-hero-text">
+            <h1>Lujo <em>Responsable</em></h1>
+            <p>Nuestro compromiso con el futuro del planeta y de quienes lo habitan</p>
+        </div>
+    </section>
+
+    <!-- Three Pillars -->
+    <section class="sust-pillars">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Tres <em>Pilares</em></h2>
+                <div class="section-line"></div>
+                <p>Los principios que guían cada decisión en VELURE</p>
+            </div>
+            <div class="sust-pillar-grid reveal">
+                <div class="sust-pillar">
+                    <div class="sust-pillar-icon">🌱</div>
+                    <h3>Materiales Orgánicos</h3>
+                    <p>El 80% de nuestros tejidos provienen de cultivos orgánicos certificados y fuentes regenerativas. Trabajamos con productores de seda, lino y algodón que respetan los ciclos naturales de la tierra y nunca utilizan pesticidas sintéticos.</p>
+                </div>
+                <div class="sust-pillar">
+                    <div class="sust-pillar-icon">♻️</div>
+                    <h3>Producción Circular</h3>
+                    <p>Nuestro programa VELURE Revive permite devolver prendas para darles una segunda vida. Los residuos textiles se transforman en nuevas fibras para minimizar desperdicio. En 2025 reciclamos más de 1.200 prendas.</p>
+                </div>
+                <div class="sust-pillar">
+                    <div class="sust-pillar-icon">🤝</div>
+                    <h3>Comercio Justo</h3>
+                    <p>Garantizamos condiciones laborales dignas y salarios justos en cada taller colaborador. Auditamos anualmente nuestros talleres en Italia, Portugal y Marruecos con estándares que superan los requisitos legales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Pledge -->
+    <section class="sust-pledge">
+        <div class="container">
+            <div class="sust-pledge-grid">
+                <div class="sust-pledge-img">
+                    <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&q=80" alt="Nuestro compromiso">
+                </div>
+                <div class="sust-pledge-text reveal">
+                    <h2>Nuestra <em>Promesa</em> 2030</h2>
+                    <p>Para 2030 nos hemos comprometido a alcanzar la neutralidad de carbono en toda nuestra cadena de valor. Esto implica invertir en energías renovables para nuestros talleres, optimizar la logística con transporte marítimo de baja emisión y compensar las emisiones restantes mediante proyectos verificados de reforestación.</p>
+                    <p>Cada empaque VELURE utiliza materiales 100% reciclados y tintas vegetales a base de soja. Nuestro papel tissue proviene de bosques gestionados de forma sostenible y es totalmente compostable en el hogar. Las bolsas de transporte son de tela orgánica reutilizable.</p>
+                    <p>Además, nos hemos fijado como objetivo que el 100% de nuestras fibras sean de origen sostenible o reciclado para 2028, y que cada prenda cuente con un código de trazabilidad que permita conocer el origen de cada material.</p>
+                    <div class="sust-metrics">
+                        <div class="sust-metric">
+                            <div class="number">72%</div>
+                            <div class="label">Materiales Sostenibles</div>
+                        </div>
+                        <div class="sust-metric">
+                            <div class="number">0</div>
+                            <div class="label">Plásticos Virgenes</div>
+                        </div>
+                        <div class="sust-metric">
+                            <div class="number">-40%</div>
+                            <div class="label">Emisiones desde 2022</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section class="sust-certs">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Certificaciones & <em>Alianzas</em></h2>
+                <div class="section-line"></div>
+                <p>El respaldo de estándares internacionales que verifican nuestro compromiso</p>
+            </div>
+            <div class="sust-certs-grid reveal">
+                <div class="cert-card">
+                    <div class="cert-badge">OEKO-TEX®</div>
+                    <h4>Standard 100</h4>
+                    <p>Garantiza que nuestros tejidos están libres de sustancias nocivas para la salud humana. Cada lote es analizado en laboratorios independientes.</p>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-badge">GOTS</div>
+                    <h4>Global Organic Textile Standard</h4>
+                    <p>Certifica que nuestros textiles orgánicos cumplen con criterios ecológicos y sociales en toda la cadena de producción.</p>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-badge">FSC®</div>
+                    <h4>Forest Stewardship Council</h4>
+                    <p>Nuestros papeles y empaques provienen de bosques gestionados de forma responsable con certificación FSC.</p>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-badge">BCorp</div>
+                    <h4>B Corporation</h4>
+                    <p>Como empresa B Corp verificada, cumplemos con los más altos estándares de rendimiento social y ambiental.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Initiatives -->
+    <section class="sust-initiatives">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Iniciativas <em>Activas</em></h2>
+                <div class="section-line"></div>
+                <p>Programas concretos que marcan la diferencia hoy</p>
+            </div>
+            <div class="init-grid reveal">
+                <div class="init-card">
+                    <h4>VELURE Revive</h4>
+                    <p>Programa de reciclaje y segunda vida. Devuelve cualquier prenda VELURE y recibe un 15% de descuento en tu próxima compra. Las prendas en buen estado se donan a programas de inserción laboral para mujeres.</p>
+                </div>
+                <div class="init-card">
+                    <h4>Trazabilidad Total</h4>
+                    <p>Cada prenda incluye un código QR que revela el origen de cada material, el taller donde fue confeccionada y la huella de carbono asociada. Transparencia radical de punta a punta.</p>
+                </div>
+                <div class="init-card">
+                    <h4>Atelier Verde</h4>
+                    <p>Nuestro taller en Florencia funciona al 100% con energía solar desde 2024. El de París ha reducido su consumo energético un 60% mediante iluminación LED y sistemas de climatización eficientes.</p>
+                </div>
+                <div class="init-card">
+                    <h4>Fondo VELURE</h4>
+                    <p>El 1% de cada venta se destina al Fondo VELURE, que financia proyectos de educación y empoderamiento para mujeres artesanas en Marruecos y la India.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="sust-cta">
+        <div class="container reveal">
+            <h2>Únete al <em>Cambio</em></h2>
+            <p>Cada compra en VELURE es un paso hacia una industria de la moda más justa y sostenible. Descubre nuestra colección más responsable hasta la fecha.</p>
+            <a href="../index.html#productos" class="btn">Explorar Colección</a>
+        </div>
+    </section>
+
+    <!-- Full Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">V<em>E</em>LURE</div>
+                    <p>Moda de lujo artesanal para la mujer que escribe su propia historia. Diseñada en París, confeccionada con pasión en todo el mundo.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Instagram">IG</a>
+                        <a href="#" aria-label="Facebook">FB</a>
+                        <a href="#" aria-label="Pinterest">PT</a>
+                        <a href="#" aria-label="YouTube">YT</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Tienda</h4>
+                    <a href="../index.html#productos">Nuevas Llegadas</a>
+                    <a href="../index.html#productos">Más Vendidos</a>
+                    <a href="#">Vestidos</a>
+                    <a href="#">Abrigos</a>
+                    <a href="#">Accesorios</a>
+                    <a href="#">Rebajas</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Información</h4>
+                    <a href="about.html">Sobre Nosotros</a>
+                    <a href="sustainability.html">Sostenibilidad</a>
+                    <a href="size-guide.html">Guía de Tallas</a>
+                    <a href="#">Cuidado de Prendas</a>
+                    <a href="#">Prensa</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Ayuda</h4>
+                    <a href="#">Envíos</a>
+                    <a href="#">Devoluciones</a>
+                    <a href="#">Seguir Pedido</a>
+                    <a href="#">Contacto</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 VELURE. Todos los derechos reservados.</span>
+                <div class="footer-payments">💳 🏦 🍎 💰</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay"></div>
+    <aside class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button class="cart-close" aria-label="Cerrar">✕</button>
+        </div>
+        <div class="cart-body"></div>
+        <div class="cart-footer">
+            <div class="cart-subtotal">
+                <span class="label">Subtotal</span>
+                <span class="value cart-subtotal-value">€0.00</span>
+            </div>
+            <div class="cart-total">
+                <span>Total</span>
+                <span class="cart-total-value">€0.00</span>
+            </div>
+            <button class="cart-checkout-btn">Finalizar Compra</button>
+            <span class="cart-continue">Seguir Comprando</span>
+        </div>
+    </aside>
+
+    <script type="module">
+        import { initScrollReveal } from '../js/scroll-reveal.js';
+        import { initNavigation }   from '../js/navigation.js';
+        import { toggleCart, renderCart, getCartCount } from '../js/cart.js';
+        document.addEventListener('DOMContentLoaded', () => {
+            initNavigation();
+            initScrollReveal();
+            renderCart();
+            const badge = document.querySelector('.cart-count');
+            if (badge) badge.textContent = getCartCount();
+            /* Cart toggle bindings */
+            document.querySelector('.cart-badge')?.addEventListener('click', () => toggleCart(true));
+            document.querySelector('.cart-close')?.addEventListener('click', () => toggleCart(false));
+            document.querySelector('.cart-overlay')?.addEventListener('click', () => toggleCart(false));
+            document.querySelector('.cart-continue')?.addEventListener('click', () => toggleCart(false));
+        });
+    </script>
+</body>
+</html>

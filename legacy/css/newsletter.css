@@ -1,0 +1,93 @@
+/* ═══════════════════════════════════════════
+   VELURE — Newsletter
+   ═══════════════════════════════════════════ */
+
+.newsletter {
+    padding: var(--space-3xl) 0;
+    text-align: center;
+}
+
+.newsletter h2 {
+    font-family: var(--display);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+}
+.newsletter h2 em {
+    font-style: italic;
+    color: var(--gold);
+}
+
+.newsletter p {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--grey);
+    max-width: 450px;
+    margin: 0 auto var(--space-xl);
+}
+
+.newsletter-form {
+    display: flex;
+    max-width: 520px;
+    margin: 0 auto;
+    border: 1px solid var(--charcoal);
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: .9rem 1.2rem;
+    border: none;
+    background: transparent;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: .95rem;
+    outline: none;
+    color: var(--charcoal);
+}
+.newsletter-form input::placeholder {
+    color: var(--grey);
+}
+
+.newsletter-form button {
+    padding: .9rem 2rem;
+    background: var(--black);
+    color: var(--white);
+    font-size: .78rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background var(--duration) var(--ease);
+}
+.newsletter-form button:hover {
+    background: var(--gold);
+}
+
+.newsletter-note {
+    margin-top: var(--space-sm);
+    font-size: .72rem;
+    color: var(--grey);
+}
+
+.newsletter-label {
+    display: inline-block;
+    font-size: .65rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+}
+
+.newsletter-perks {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-xl);
+    margin-top: var(--space-lg);
+    font-size: .78rem;
+    color: var(--charcoal);
+    letter-spacing: .06em;
+}
+
+.newsletter-perks span {
+    font-family: var(--serif);
+}

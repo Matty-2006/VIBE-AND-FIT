@@ -1,0 +1,197 @@
+/* ═══════════════════════════════════════════
+   VELURE — Navigation
+   ═══════════════════════════════════════════ */
+
+.nav {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-nav);
+    background: rgba(255,255,255,.96);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--grey-light);
+    transition: box-shadow var(--duration) var(--ease);
+}
+
+.nav.scrolled { box-shadow: var(--shadow-sm); }
+
+.nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--nav-height);
+    padding: 0 var(--space-lg);
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+/* ─── Logo ─── */
+.nav-logo {
+    font-family: var(--display);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: .35em;
+    color: var(--black);
+}
+.nav-logo em {
+    font-style: normal;
+    color: var(--gold);
+}
+
+/* ─── Main links ─── */
+.nav-links {
+    display: flex;
+    gap: var(--space-xl);
+}
+.nav-links a {
+    font-size: .78rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    font-weight: 500;
+    position: relative;
+    padding: 4px 0;
+}
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width var(--duration) var(--ease);
+}
+.nav-links a:hover::after { width: 100%; }
+
+/* ─── Icons ─── */
+.nav-icons {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+}
+.nav-icons button,
+.nav-icons a {
+    font-size: 1.2rem;
+    color: var(--charcoal);
+    transition: color var(--duration) var(--ease);
+}
+.nav-icons button:hover,
+.nav-icons a:hover { color: var(--gold); }
+
+/* ─── Cart badge ─── */
+.cart-badge {
+    position: relative;
+}
+.cart-count {
+    position: absolute;
+    top: -6px; right: -10px;
+    background: var(--gold);
+    color: var(--white);
+    font-size: .55rem;
+    font-weight: 700;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--duration) var(--bounce);
+}
+.cart-count.bump { transform: scale(1.3); }
+
+/* ─── Search ─── */
+.nav-search {
+    display: none;
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-height);
+    background: var(--white);
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    z-index: 2;
+    padding: 0 var(--space-lg);
+}
+.nav-search.active { display: flex; }
+.nav-search input {
+    flex: 1;
+    max-width: 500px;
+    border: none;
+    border-bottom: 1px solid var(--charcoal);
+    padding: .6rem 0;
+    font-size: .95rem;
+    background: transparent;
+    outline: none;
+    font-family: var(--serif);
+    letter-spacing: .04em;
+}
+.nav-search input::placeholder {
+    color: var(--grey);
+    font-style: italic;
+}
+
+/* ─── Mobile ─── */
+.nav-mobile-btn {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+.nav-mobile-btn span {
+    display: block;
+    width: 22px; height: 1.5px;
+    background: var(--charcoal);
+    transition: all var(--duration) var(--ease);
+}
+
+@media (max-width: 1024px) {
+    .nav-links { display: none; }
+    .nav-mobile-btn { display: flex; }
+}
+
+/* ─── Mobile overlay ─── */
+.mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.35);
+    z-index: var(--z-mobile);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration) var(--ease);
+}
+.mobile-overlay.active { opacity: 1; pointer-events: all; }
+
+.mobile-menu {
+    position: fixed;
+    top: 0; left: 0;
+    width: 300px; height: 100vh;
+    background: var(--white);
+    z-index: var(--z-mobile);
+    transform: translateX(-100%);
+    transition: transform var(--duration) var(--ease);
+    padding: var(--space-xl) var(--space-lg);
+}
+.mobile-menu.active { transform: translateX(0); }
+
+.mobile-menu .mm-close {
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    font-size: 1.5rem;
+    color: var(--charcoal);
+}
+
+.mobile-menu nav a {
+    display: block;
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    padding: .7rem 0;
+    border-bottom: 1px solid var(--grey-light);
+    color: var(--charcoal);
+}
+
+.mobile-menu .mm-social {
+    margin-top: auto;
+    padding-top: var(--space-lg);
+    display: flex;
+    gap: 1rem;
+}
+.mobile-menu .mm-social a {
+    font-size: 1.2rem;
+}

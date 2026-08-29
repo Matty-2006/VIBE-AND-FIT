@@ -1,0 +1,46 @@
+/* ═══════════════════════════════════════════
+   VELURE — Brand Values
+   ═══════════════════════════════════════════ */
+
+.values {
+    padding: var(--space-3xl) 0;
+    background: var(--cream);
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+    text-align: center;
+}
+
+.values-item {
+    padding: var(--space-lg);
+}
+
+.values-icon {
+    width: 56px; height: 56px;
+    margin: 0 auto var(--space-md);
+    color: var(--gold);
+}
+
+.values-title {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+    letter-spacing: .06em;
+}
+
+.values-desc {
+    font-size: .88rem;
+    color: var(--grey);
+    line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+    .values-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+}
