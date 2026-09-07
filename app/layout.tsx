@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Inter, Playfair_Display } from "next/font/google";
+import { Cormorant_Garamond, Jost, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/data";
 import CartProvider from "@/context/CartContext";
@@ -26,8 +26,8 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const jost = Jost({
+  variable: "--font-jost",
   subsets: ["latin"],
   display: "swap",
 });
@@ -35,21 +35,21 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "ISABEL | Moda femenina",
-    template: "%s | ISABEL",
+    default: "Vibe & Fit | Moda de mujer y deportiva",
+    template: "%s | Vibe & Fit",
   },
   description: SITE.description,
   openGraph: {
     type: "website",
     url: SITE.url,
     siteName: SITE.name,
-    title: "ISABEL | Moda femenina",
+    title: "Vibe & Fit | Moda de mujer y deportiva",
     description: SITE.description,
     locale: "es_ES",
   },
   twitter: {
     card: "summary_large_image",
-    title: "ISABEL | Moda femenina",
+    title: "Vibe & Fit | Moda de mujer y deportiva",
     description: SITE.description,
   },
   robots: {
@@ -57,10 +57,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: [
-      { url: "/images/logo.png" },
-      { url: "/icon.svg", type: "image/svg+xml" },
-    ],
+    icon: [{ url: "/images/logo.png", type: "image/png" }],
     apple: "/images/logo.png",
   },
 };
@@ -79,7 +76,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${playfair.variable} ${cormorant.variable} ${inter.variable} h-full antialiased`}
+      className={`${playfair.variable} ${cormorant.variable} ${jost.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <SmoothScroll>

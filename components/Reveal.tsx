@@ -19,7 +19,7 @@ export default function Reveal({ children, className = "", delay = 0, y = 48 }: 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
+      const tween = gsap.fromTo(
         el,
         { autoAlpha: 0, y },
         {
@@ -28,9 +28,20 @@ export default function Reveal({ children, className = "", delay = 0, y = 48 }: 
           duration: 1,
           delay,
           ease: "power3.out",
-          scrollTrigger: { trigger: el, start: "top 88%", once: true },
+          scrollTrigger: {
+            trigger: el,
+            start: "top 92%",
+            once: true,
+            invalidateOnRefresh: true,
+          },
         }
       );
+      const failSafe = window.setTimeout(() => {
+        if (tween.progress() === 0 && !tween.isActive()) {
+          gsap.set(el, { autoAlpha: 1, y: 0 });
+        }
+      }, 2500);
+      tween.eventCallback("onStart", () => window.clearTimeout(failSafe));
     }, el);
 
     return () => ctx.revert();

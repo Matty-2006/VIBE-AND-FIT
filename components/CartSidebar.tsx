@@ -8,7 +8,7 @@ import { SITE } from "@/lib/data";
 import { whatsappLink, whatsappOrderMessage } from "@/lib/whatsapp";
 
 export default function CartSidebar() {
-  const { lines, isOpen, closeCart, removeItem, setQty, total } = useCart();
+  const { lines, isOpen, closeCart, removeItem, setQty } = useCart();
   const [step, setStep] = useState<"cart" | "checkout">("cart");
   const [name, setName] = useState("");
   const [city, setCity] = useState("");
@@ -35,13 +35,7 @@ export default function CartSidebar() {
 
   const submitOrder = () => {
     const message = whatsappOrderMessage(
-      lines.map((l) => ({
-        name: l.name,
-        qty: l.qty,
-        price: l.price,
-        oldPrice: l.oldPrice,
-      })),
-      total,
+      lines.map((l) => ({ name: l.name, qty: l.qty })),
       { name, city, notes }
     );
     window.open(whatsappLink(message), "_blank", "noopener");
@@ -81,16 +75,15 @@ export default function CartSidebar() {
               <div className="py-16 text-center text-grey">
                 <p className="font-serif text-lg italic">Tu carrito está vacío</p>
                 <Link
-                  href="/#catalogo"
+                  href="/categoria/ropa-de-mujer"
                   onClick={handleClose}
                   className="mt-6 inline-block border-b border-bronze pb-1 text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-charcoal transition-colors hover:text-bronze"
                 >
-                  Ver Catálogo
+                  Ver Ropa de Mujer
                 </Link>
               </div>
             ) : (
               lines.map((item) => {
-                const unitPrice = item.oldPrice || item.price;
                 return (
                   <div key={item.id} className="flex gap-6 border-b border-grey-light py-6">
                     <Image
@@ -105,12 +98,8 @@ export default function CartSidebar() {
                         <div className="font-serif text-[0.95rem] font-semibold">
                           {item.name}
                         </div>
-                        <div
-                          className={`text-[0.9rem] font-semibold ${
-                            item.badge === "sale" ? "text-sale" : ""
-                          }`}
-                        >
-                          €{unitPrice}
+                        <div className="text-[0.7rem] uppercase tracking-[0.1em] text-grey">
+                          {item.category}
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
@@ -160,19 +149,12 @@ export default function CartSidebar() {
               <>
                 <div className="mb-6 space-y-3 text-[0.9rem] text-charcoal">
                   {lines.map((item) => (
-                    <div key={item.id} className="flex justify-between gap-4">
-                      <span>
+                    <div key={item.id} className="flex items-center justify-between gap-4">
+                      <span className="font-serif font-semibold">
                         {item.qty} × {item.name}
-                      </span>
-                      <span className="whitespace-nowrap font-semibold">
-                        €{((item.oldPrice || item.price) * item.qty).toFixed(2)}
                       </span>
                     </div>
                   ))}
-                  <div className="flex justify-between border-t border-grey-light pt-3 text-lg font-bold">
-                    <span>Total</span>
-                    <span>€{total.toFixed(2)}</span>
-                  </div>
                 </div>
 
                 <div className="mb-4">
@@ -226,7 +208,7 @@ export default function CartSidebar() {
 
                 <p className="mb-6 text-[0.78rem] leading-[1.6] text-grey">
                   Al confirmar, el pedido se enviará a nuestro WhatsApp
-                  ({SITE.whatsappDisplay}) para acordar el envío y el pago.
+                  ({SITE.whatsappDisplay}) para coordinar la entrega.
                 </p>
               </>
             )}
@@ -238,10 +220,6 @@ export default function CartSidebar() {
             <>
               {lines.length > 0 && (
                 <>
-                  <div className="mb-6 flex justify-between text-lg font-bold">
-                    <span>Total</span>
-                    <span>€{total.toFixed(2)}</span>
-                  </div>
                   <button
                     onClick={startCheckout}
                     className="w-full bg-charcoal py-4 text-[0.82rem] uppercase tracking-[0.18em] text-white transition-colors duration-[400ms] hover:bg-bronze"

@@ -75,7 +75,7 @@ export default function MobileMenu({
       </nav>
       <div className="mm-link flex w-full items-center justify-between text-[0.72rem] uppercase tracking-[0.2em] text-white/60">
         <span>{SITE.instagram}</span>
-        <span>Elegancia que permanece.</span>
+        <span>Estilo que se mueve contigo.</span>
       </div>
     </div>
   );

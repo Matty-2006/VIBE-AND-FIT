@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export default function Logo({
   className = "",
-  imageClass = "h-8 w-auto",
+  imageClass = "h-10 w-auto",
 }: {
   className?: string;
   imageClass?: string;
@@ -15,9 +15,10 @@ export default function Logo({
   if (failed) {
     return (
       <span
-        className={`font-display text-[1.4rem] font-semibold tracking-[0.35em] ${className}`}
+        className={`font-display text-[1.35rem] font-semibold leading-none tracking-[0.18em] ${className}`}
       >
-        ISABEL
+        Vibe{" "}
+        <span className="font-serif text-[1.15rem] italic">&#38;</span> Fit
       </span>
     );
   }
@@ -25,9 +26,9 @@ export default function Logo({
   return (
     <Image
       src="/images/logo.png"
-      alt="ISABEL"
+      alt="Vibe & Fit"
       width={220}
-      height={44}
+      height={48}
       onError={() => setFailed(true)}
       className={`${imageClass} object-contain`}
       priority

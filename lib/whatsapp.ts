@@ -5,17 +5,11 @@ export function whatsappLink(message: string): string {
 }
 
 export function whatsappOrderMessage(
-  lines: { name: string; qty: number; price: number; oldPrice?: number | null }[],
-  total: number,
+  lines: { name: string; qty: number }[],
   customer?: { name?: string; city?: string; notes?: string }
 ): string {
   const intro = `Hola, ${SITE.name}. Quiero realizar este pedido:`;
-  const items = lines
-    .map(
-      (l) => `• ${l.qty} x ${l.name} — €${((l.oldPrice || l.price) * l.qty).toFixed(2)}`
-    )
-    .join("\n");
-  const totalLine = `Total: €${total.toFixed(2)}`;
+  const items = lines.map((l) => `• ${l.qty} x ${l.name}`).join("\n");
   const customerLines = [
     customer?.name ? `Nombre: ${customer.name}` : "",
     customer?.city ? `Ciudad: ${customer.city}` : "",
@@ -24,5 +18,5 @@ export function whatsappOrderMessage(
     .filter(Boolean)
     .join("\n");
 
-  return [intro, items, "", totalLine, "", customerLines].filter(Boolean).join("\n");
+  return [intro, items, "", customerLines].filter(Boolean).join("\n");
 }

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* ─── Paleta ISABEL ─── */
+  /* ─── Paleta Vibe & Fit ─── */
   --color-black: #111111;
   --color-white: #ffffff;
   --color-cream: #f4efe9;
@@ -17,9 +17,9 @@
   --color-sale: #a53f2b;
 
   /* ─── Tipografía ─── */
-  --font-display: var(--font-playfair), Georgia, serif;
-  --font-serif: var(--font-cormorant), "Times New Roman", serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-playfair), "Times New Roman", serif;
+  --font-serif: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
 
   /* ─── Sombras ─── */
   --shadow-sm: 0 2px 8px rgb(0 0 0 / 0.05);
@@ -119,6 +119,135 @@
     font-weight: 600;
     letter-spacing: 0.28em;
     text-transform: uppercase;
+  }
+
+  /* ─── Botón de volteo (data-front / data-back) ─── */
+  .flip-btn {
+    position: relative;
+    display: inline-block;
+    perspective: 600px;
+  }
+
+  .flip-btn > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    transition:
+      transform 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+  }
+
+  .flip-btn [data-back] {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transform: rotateX(85deg) translateY(60%);
+  }
+
+  .flip-btn:hover [data-front],
+  .flip-btn:focus-visible [data-front],
+  .group:hover .flip-btn [data-front] {
+    opacity: 0;
+    transform: rotateX(-85deg) translateY(-45%);
+  }
+
+  .flip-btn:hover [data-back],
+  .flip-btn:focus-visible [data-back],
+  .group:hover .flip-btn [data-back] {
+    opacity: 1;
+    transform: rotateX(0) translateY(0);
+  }
+
+  /* ─── Hover: elevación con sombra ─── */
+  .btn-glow {
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  .btn-glow:hover,
+  .btn-glow:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px -10px rgb(0 0 0 / 0.4);
+  }
+
+  /* ─── Hover: fondo que sube ─── */
+  .btn-sweep {
+    background-image: linear-gradient(
+      180deg,
+      var(--color-bronze) 0,
+      var(--color-bronze) 100%
+    );
+    background-size: 100% 0;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-sweep:hover,
+  .btn-sweep:focus-visible {
+    background-size: 100% 100%;
+  }
+
+  /* ─── Hover: anillo de borde ─── */
+  .btn-ring {
+    position: relative;
+    transition: color 0.35s ease, border-color 0.35s ease;
+  }
+
+  .btn-ring::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid var(--color-bronze-light);
+    opacity: 0;
+    transform: scale(0.96);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    pointer-events: none;
+  }
+
+  .btn-ring:hover::after,
+  .btn-ring:focus-visible::after {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* ─── Hover: intercambio de texto ─── */
+  .btn-swap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .btn-swap > span {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-swap::after {
+    content: attr(data-hover);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(110%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-swap:hover > span,
+  .btn-swap:focus-visible > span {
+    transform: translateY(-110%);
+  }
+
+  .btn-swap:hover::after,
+  .btn-swap:focus-visible::after {
+    transform: translateY(0);
   }
 }
 

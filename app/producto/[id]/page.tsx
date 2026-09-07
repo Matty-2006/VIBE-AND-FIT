@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!product) return { title: "Producto no encontrado" };
   return {
     title: `${product.name}`,
-    description: `${product.name} — ${product.category}. €${product.price}.`,
+    description: `${product.name} — ${product.category}. Vibe & Fit.`,
   };
 }
 

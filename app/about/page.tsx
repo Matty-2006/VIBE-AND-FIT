@@ -7,7 +7,7 @@ import { siteAsset } from "@/lib/siteAssets";
 export const metadata: Metadata = {
   title: "Nosotras",
   description:
-    "Conoce la historia y el espíritu de ISABEL: una marca de moda femenina que prioriza la elegancia, lo esencial y lo atemporal.",
+    "Conoce la historia y el espíritu de Vibe & Fit: una marca de moda de mujer y deportiva con estilo contemporáneo, esencial y atemporal.",
 };
 
 const VALUES = [
@@ -29,7 +29,7 @@ const PILLARS = [
   {
     number: "01",
     title: "El origen",
-    desc: "ISABEL nace del deseo de vestir a la mujer contemporánea con una propuesta limpia: formas sencillas, tejidos nobles y una paleta serena que lo combina todo.",
+    desc: "Vibe & Fit nace del deseo de vestir a la mujer contemporánea con una propuesta limpia: formas sencillas, tejidos nobles y una paleta serena que lo combina todo.",
   },
   {
     number: "02",
@@ -49,7 +49,7 @@ export default function AboutPage() {
       <section className="relative flex h-[60vh] min-h-[420px] items-center justify-center overflow-hidden">
         <Image
           src={siteAsset(3)}
-          alt="ISABEL"
+          alt="Vibe & Fit"
           fill
           priority
           sizes="100vw"
@@ -64,7 +64,7 @@ export default function AboutPage() {
             Nuestra Historia
           </h1>
           <p className="font-serif text-lg italic text-white/85">
-            Elegancia que permanece.
+            Estilo que se mueve contigo.
           </p>
         </div>
       </section>
@@ -75,7 +75,7 @@ export default function AboutPage() {
             <div className="aspect-[4/5] overflow-hidden">
               <Image
                 src={siteAsset(1)}
-                alt="La esencia ISABEL"
+                alt="La esencia Vibe & Fit"
                 width={800}
                 height={1000}
                 className="h-full w-full object-cover"
@@ -89,8 +89,8 @@ export default function AboutPage() {
                 Una idea <em className="italic text-bronze">sencilla</em>
               </h2>
               <p className="mb-6 leading-[1.85] text-grey">
-                ISABEL nace de una convicción: la elegancia no se impone, se
-                habita. Una colección pensada para la mujer que define su
+                Vibe & Fit nace de una convicción: la elegancia no se impone,
+                se habita. Una colección pensada para la mujer que define su
                 propio estilo y prefiere pocas piezas, pero excelentes.
               </p>
               <p className="mb-6 leading-[1.85] text-grey">

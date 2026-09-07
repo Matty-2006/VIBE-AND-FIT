@@ -16,8 +16,6 @@ const REGIONS: Record<
       ["38", "S"],
       ["40", "M"],
       ["42", "L"],
-      ["44", "XL"],
-      ["46", "XXL"],
     ],
   },
   uk: {
@@ -27,8 +25,6 @@ const REGIONS: Record<
       ["8", "S"],
       ["10", "M"],
       ["12", "L"],
-      ["14", "XL"],
-      ["16", "XXL"],
     ],
   },
   us: {
@@ -38,8 +34,6 @@ const REGIONS: Record<
       ["4", "S"],
       ["6", "M"],
       ["8", "L"],
-      ["10", "XL"],
-      ["12", "XXL"],
     ],
   },
 };
@@ -49,7 +43,7 @@ export default function SizeConverter() {
   const [size, setSize] = useState("40");
 
   const options = REGIONS[region].sizes;
-  const isabelSize =
+  const vibeSize =
     options.find(([value]) => value === size)?.[1] ?? options[0]?.[1] ?? "—";
 
   return (
@@ -94,14 +88,14 @@ export default function SizeConverter() {
 
       <div className="min-w-[200px] flex-1 border border-grey-light bg-white p-6">
         <label className="mb-2 block text-[0.75rem] uppercase tracking-[0.1em] text-grey">
-          Talla ISABEL
+          Talla Vibe & Fit
         </label>
         <select
-          value={isabelSize}
+          value={vibeSize}
           disabled
           className="w-full cursor-pointer border border-grey-light bg-white p-3 text-sm outline-none disabled:opacity-100"
         >
-          <option>{isabelSize}</option>
+          <option>{vibeSize}</option>
         </select>
       </div>
     </div>

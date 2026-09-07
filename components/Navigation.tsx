@@ -114,15 +114,16 @@ export default function Navigation() {
 
           <Link
             href="/"
-            aria-label="Inicio ISABEL"
+            aria-label="Inicio Vibe & Fit"
             className="transition-all duration-[400ms]"
           >
             {solid ? (
-              <Logo className="text-charcoal" imageClass="h-10 w-auto" />
+              <Logo imageClass="h-11 w-auto" />
             ) : (
-              <span className="font-display text-[1.6rem] font-semibold tracking-[0.32em] text-white">
-                ISABEL
-              </span>
+              <Logo
+                className="drop-shadow-[0_1px_12px_rgba(0,0,0,0.45)]"
+                imageClass="h-14 w-auto"
+              />
             )}
           </Link>
 
@@ -209,7 +210,7 @@ export default function Navigation() {
                   type="search"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Buscar en ISABEL…"
+                  placeholder="Buscar en Vibe & Fit…"
                   aria-label="Buscar productos"
                   className="flex-1 bg-transparent font-serif text-[1.05rem] italic outline-none placeholder:text-grey"
                 />
@@ -235,7 +236,7 @@ export default function Navigation() {
                     >
                       <span className="font-serif">{p.name}</span>
                       <span className="text-[0.85rem] text-grey">
-                        {p.category} · €{p.price}
+                        {p.category}
                       </span>
                     </Link>
                   ))}

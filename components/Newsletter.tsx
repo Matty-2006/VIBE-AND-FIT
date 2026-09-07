@@ -26,7 +26,7 @@ export default function Newsletter() {
         <Reveal>
           <span className="eyebrow mb-6 block text-bronze">Newsletter</span>
           <h2 className="font-display text-[clamp(2rem,4vw,3.2rem)] font-bold">
-            Sé parte de ISABEL
+            Sé parte de Vibe & Fit
           </h2>
           <p className="mx-auto mt-4 mb-10 max-w-[460px] font-serif italic text-grey">
             Recibe nuevas colecciones, novedades y contenido exclusivo.
@@ -54,7 +54,7 @@ export default function Newsletter() {
                 />
                 <button
                   type="submit"
-                  className="bg-charcoal px-8 py-4 text-[0.76rem] font-semibold uppercase tracking-[0.18em] text-white transition-colors duration-[400ms] hover:bg-bronze"
+                  className="btn-sweep bg-charcoal px-8 py-4 text-[0.76rem] font-semibold uppercase tracking-[0.18em] text-white"
                 >
                   Suscribirme
                 </button>

@@ -14,11 +14,11 @@ export default function Footer() {
         <div className="grid grid-cols-4 gap-10 max-[1024px]:grid-cols-2">
           <div className="max-[1024px]:col-span-2">
             <p className="font-display text-2xl font-semibold tracking-[0.32em]">
-              ISABEL
+              VIBE&nbsp;&amp;&nbsp;FIT
             </p>
             <p className="mt-6 max-w-[320px] text-[0.85rem] leading-[1.8] text-white/60">
-              Moda femenina de esencia atemporal. Elegancia que permanece,
-              pieza a pieza, a tu lado.
+              Ropa de mujer y deportiva con estilo propio. Viste bien en cada
+              momento, sin perder tu esencia.
             </p>
           </div>
 
@@ -50,23 +50,23 @@ export default function Footer() {
                   href="/#catalogo"
                   className="transition-colors duration-[400ms] hover:text-bronze-light"
                 >
-                  Catálogo
+                  Categorías
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/#catalogo"
+                  href="/categoria/ropa-de-mujer"
                   className="transition-colors duration-[400ms] hover:text-bronze-light"
                 >
-                  Todas las piezas
+                  Ropa de Mujer
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/#lookbook"
+                  href="/categoria/deportiva"
                   className="transition-colors duration-[400ms] hover:text-bronze-light"
                 >
-                  Lookbook
+                  Deportiva
                 </Link>
               </li>
               <li>
@@ -142,10 +142,10 @@ export default function Footer() {
 
       <div className="container flex flex-wrap items-center justify-between gap-3 py-7 text-[0.75rem] text-white/40">
         <span>
-          © {new Date().getFullYear()} ISABEL. Todos los derechos reservados.
+          © {new Date().getFullYear()} Vibe & Fit. Todos los derechos reservados.
         </span>
         <span className="font-serif italic text-white/60">
-          Elegancia que permanece.
+          Estilo que se mueve contigo.
         </span>
       </div>
     </footer>

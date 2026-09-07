@@ -7,7 +7,7 @@ import { siteAsset } from "@/lib/siteAssets";
 export const metadata: Metadata = {
   title: "Sostenibilidad",
   description:
-    "El enfoque responsable de ISABEL: materiales cuidados, pequeñas producciones y un diseño pensado para durar.",
+    "El enfoque responsable de Vibe & Fit: materiales cuidados, pequeñas producciones y un diseño pensado para durar.",
 };
 
 const PILLARS = [
@@ -57,7 +57,7 @@ export default function SostenibilidadPage() {
       <section className="relative flex h-[55vh] min-h-[400px] items-center justify-center overflow-hidden">
         <Image
           src={siteAsset(6)}
-          alt="Sostenibilidad ISABEL"
+          alt="Sostenibilidad Vibe & Fit"
           fill
           priority
           sizes="100vw"
@@ -84,7 +84,7 @@ export default function SostenibilidadPage() {
               eyebrow="Filosofía"
               titleBefore="Nuestra"
               titleEm="manera"
-              description="En ISABEL, la sostenibilidad no es una promesa aislada: es la consecuencia natural de diseñar con calma y con criterio."
+              description="En Vibe & Fit, la sostenibilidad no es una promesa aislada: es la consecuencia natural de diseñar con calma y con criterio."
             />
           </Reveal>
           <div className="mt-12 space-y-16">

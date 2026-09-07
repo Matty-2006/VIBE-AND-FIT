@@ -29,8 +29,6 @@ export default function ProductView({
   const [colorIdx, setColorIdx] = useState(0);
   const [size, setSize] = useState("M");
 
-  const isNew = product.badge === "new";
-  const isSale = product.badge === "sale";
   const fav = isFavorite(product.id);
 
   const details = [
@@ -38,10 +36,10 @@ export default function ProductView({
       title: "Composición y Cuidados",
       body: `${PRODUCT_COMPOSITION[product.category]}<br />Recomendamos seguir las instrucciones de la etiqueta de la prenda. Guardar en un lugar seco y fresco para conservar el tejido.`,
     },
-    {
-      title: "Envío y Devoluciones",
-      body: "En ISABEL cuidamos cada detalle. Las condiciones de envío y el plazo de devolución se detallan durante el proceso de compra, sin sorpresas.",
-    },
+{
+    title: "Envío y Devoluciones",
+    body: "En Vibe & Fit cuidamos cada detalle. Las condiciones de envío y el plazo de devolución se detallan durante el proceso de compra, sin sorpresas.",
+  },
     {
       title: "Sostenibilidad",
       body: "Trabajamos con materiales seleccionados y una producción responsable. Cada pieza busca reducir el impacto y durar más tiempo en tu armario.",
@@ -88,34 +86,25 @@ export default function ProductView({
           <div className="pt-2">
             <div className="mb-4 text-[0.75rem] uppercase tracking-[0.08em] text-grey">
               <Link
-                href="/#catalogo"
+                href="/categoria/ropa-de-mujer"
                 className="transition-colors hover:text-bronze"
               >
-                Catálogo
+                Ropa de Mujer
               </Link>{" "}
               / <span>{product.name}</span>
             </div>
 
             <h1 className="mb-1 font-display text-4xl font-semibold">
               {product.name}
-              {product.badge && (
-                <span
-                  className={`ms-3 inline-block px-3 py-1 align-middle text-[0.65rem] uppercase tracking-[0.12em] text-white ${
-                    isSale ? "bg-sale" : "bg-charcoal"
-                  }`}
-                >
-                  {isNew ? "Nuevo" : isSale ? "Rebajas" : product.badge}
+              {product.badge === "new" && (
+                <span className="ms-3 inline-block bg-charcoal px-3 py-1 align-middle text-[0.65rem] uppercase tracking-[0.12em] text-white">
+                  Nuevo
                 </span>
               )}
             </h1>
 
-            <div className="mb-6 font-serif text-[1.3rem] text-bronze">
-              {product.oldPrice && (
-                <span className="mr-2 text-grey line-through">
-                  €{product.oldPrice}
-                </span>
-              )}
-              €{product.price}
+            <div className="mb-6 text-[0.75rem] uppercase tracking-[0.18em] text-bronze">
+              {product.category}
             </div>
 
             <p className="mb-8 text-[0.95rem] leading-[1.8] text-grey">

@@ -21,6 +21,10 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
     gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
+    const refresh = () => ScrollTrigger.refresh();
+    window.addEventListener("load", refresh);
+    const refreshTimer = window.setTimeout(refresh, 800);
+
     const onClick = (e: MouseEvent) => {
       const target = (e.target as HTMLElement).closest(
         'a[href^="#"]'
@@ -37,6 +41,8 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
 
     return () => {
       document.removeEventListener("click", onClick);
+      window.removeEventListener("load", refresh);
+      window.clearTimeout(refreshTimer);
       gsap.ticker.remove(raf);
       lenis.destroy();
       lenisRef.current = null;

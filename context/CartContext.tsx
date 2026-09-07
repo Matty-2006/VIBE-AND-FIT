@@ -25,7 +25,7 @@ type CartContextValue = {
   closeCart: () => void;
 };
 
-const STORAGE_KEY = "isabel_cart";
+const STORAGE_KEY = "vibefit_cart";
 
 const CartContext = createContext<CartContextValue | null>(null);
 

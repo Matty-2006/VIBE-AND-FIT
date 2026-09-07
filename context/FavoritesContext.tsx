@@ -21,7 +21,7 @@ type FavoritesContextValue = {
   closeFav: () => void;
 };
 
-const STORAGE_KEY = "isabel_favorites";
+const STORAGE_KEY = "vibefit_favorites";
 
 const FavoritesContext = createContext<FavoritesContextValue | null>(null);
 

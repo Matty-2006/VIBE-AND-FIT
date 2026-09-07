@@ -54,11 +54,11 @@ export default function FavoritesSidebar() {
                 Aún no tienes favoritos
               </p>
               <Link
-                href="/#catalogo"
+                href="/categoria/ropa-de-mujer"
                 onClick={closeFav}
                 className="mt-6 inline-block border-b border-bronze pb-1 text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-charcoal transition-colors hover:text-bronze"
               >
-                Ver catálogo
+                Ver Ropa de Mujer
               </Link>
             </div>
           ) : (
@@ -81,13 +81,6 @@ export default function FavoritesSidebar() {
                     </div>
                     <div className="text-[0.7rem] uppercase tracking-[0.1em] text-grey">
                       {item.category}
-                    </div>
-                    <div
-                      className={`text-[0.9rem] font-semibold ${
-                        item.badge === "sale" ? "text-sale" : ""
-                      }`}
-                    >
-                      €{item.oldPrice || item.price}
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
@@ -118,11 +111,11 @@ export default function FavoritesSidebar() {
         {lines.length > 0 && (
           <div className="border-t border-grey-light px-8 py-8">
             <Link
-              href="/#catalogo"
+              href="/categoria/ropa-de-mujer"
               onClick={closeFav}
               className="block w-full border border-charcoal py-4 text-center text-[0.82rem] uppercase tracking-[0.18em] text-charcoal transition-colors duration-[400ms] hover:bg-charcoal hover:text-white"
             >
-              Ver catálogo
+              Ver Ropa de Mujer
             </Link>
           </div>
         )}

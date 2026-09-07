@@ -8,14 +8,14 @@ import { siteAsset } from "@/lib/siteAssets";
 export const metadata: Metadata = {
   title: "Guía de Tallas",
   description:
-    "Encuentra tu talla ISABEL: tabla de medidas en centímetros y consejos para acertar con la elección.",
+    "Encuentra tu talla en Vibe & Fit: tabla de medidas en centímetros y consejos para acertar con la elección.",
 };
 
 const ROWS = [
-  { name: "Contorno de Pecho", small: "80–84 cm", medium: "84–90 cm", large: "90–96 cm" },
-  { name: "Contorno de Cintura", small: "62–66 cm", medium: "66–72 cm", large: "72–78 cm" },
-  { name: "Contorno de Cadera", small: "88–92 cm", medium: "92–98 cm", large: "98–104 cm" },
-  { name: "Largo de Brazo", small: "59–61 cm", medium: "61–63 cm", large: "63–65 cm" },
+  { name: "Contorno de Pecho", xs: "78–82 cm", s: "82–86 cm", m: "86–92 cm", l: "92–98 cm" },
+  { name: "Contorno de Cintura", xs: "60–64 cm", s: "64–68 cm", m: "68–74 cm", l: "74–80 cm" },
+  { name: "Contorno de Cadera", xs: "86–90 cm", s: "90–94 cm", m: "94–100 cm", l: "100–106 cm" },
+  { name: "Largo de Brazo", xs: "58–60 cm", s: "60–62 cm", m: "62–64 cm", l: "64–66 cm" },
 ];
 
 const TIPS = [
@@ -32,7 +32,7 @@ export default function GuiaDeTallasPage() {
       <section className="relative flex h-[45vh] min-h-[330px] items-center justify-center overflow-hidden">
         <Image
           src={siteAsset(4)}
-          alt="Guía de tallas ISABEL"
+          alt="Guía de tallas Vibe & Fit"
           fill
           priority
           sizes="100vw"
@@ -69,18 +69,20 @@ export default function GuiaDeTallasPage() {
                 <thead>
                   <tr className="bg-black text-[0.72rem] uppercase tracking-[0.12em] text-white">
                     <th className="px-6 py-4 text-start">Medida</th>
-                    <th className="px-6 py-4">XS / S</th>
-                    <th className="px-6 py-4">M / L</th>
-                    <th className="px-6 py-4">XL</th>
+                    <th className="px-6 py-4">XS</th>
+                    <th className="px-6 py-4">S</th>
+                    <th className="px-6 py-4">M</th>
+                    <th className="px-6 py-4">L</th>
                   </tr>
                 </thead>
                 <tbody>
                   {ROWS.map((row) => (
                     <tr key={row.name} className="border-b border-grey-light">
                       <td className="px-6 py-4 text-start font-serif">{row.name}</td>
-                      <td className="px-6 py-4 text-grey">{row.small}</td>
-                      <td className="px-6 py-4 text-grey">{row.medium}</td>
-                      <td className="px-6 py-4 text-grey">{row.large}</td>
+                      <td className="px-6 py-4 text-grey">{row.xs}</td>
+                      <td className="px-6 py-4 text-grey">{row.s}</td>
+                      <td className="px-6 py-4 text-grey">{row.m}</td>
+                      <td className="px-6 py-4 text-grey">{row.l}</td>
                     </tr>
                   ))}
                 </tbody>

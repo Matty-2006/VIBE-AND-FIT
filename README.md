@@ -1,15 +1,16 @@
 <div align="center">
 
-# ISABEL
+# Vibe & Fit 🌿
 
-**Moda femenina con estética editorial — elegancia que habla por ti.**
+**Moda de mujer y deportiva con estilo propio — viste bien en cada momento.**
 
-[🌐 Ver la página en producción](https://isabel-pi.vercel.app)
+[🌐 Ver la página en producción](https://vibe-and-fit.vercel.app)
 
-Sitio web oficial de **ISABEL**: una marca de moda femenina con una estética
-limpia, atemporal y editorial. Cada pieza está pensada para que la ropa sea
-la protagonista: siluetas clásicas, materiales nobles y colores en tonos
-tierra, bronce y crema.
+Sitio web oficial de **Vibe & Fit**: una marca de ropa **de mujer y deportiva**
+con una estética limpia, contemporánea y editorial. Desde vestidos y blusas
+hasta la línea deportiva, cada pieza está pensada para que la ropa sea la
+protagonista: siluetas atemporales, tejidos nobles y colores en tonos tierra,
+bronce y crema.
 
 </div>
 
@@ -19,10 +20,10 @@ tierra, bronce y crema.
 
 La página está **desplegada en producción** en este enlace:
 
-### 👉 https://isabel-pi.vercel.app
+### 👉 https://vibe-and-fit.vercel.app
 
 Ábrelo en cualquier navegador para ver la página completa funcionando
-(hasta este código lo mantienes sincronizado con el deploy de Vercel).
+(mientras mantengas este código sincronizado con el deploy de Vercel).
 
 > Para ver la versión más reciente siempre que haya cambios, el deploy se
 > actualiza automáticamente al hacer **push** a la rama `main` de este
@@ -30,24 +31,25 @@ La página está **desplegada en producción** en este enlace:
 
 ---
 
-## 📖 ¿Qué es ISABEL?
+## 📖 ¿Qué es Vibe & Fit?
 
-ISABEL es una marca de **moda femenina** que apuesta por un estilo **editorial y
-atemporal**: vestidos, blusas, abrigos y accesorios con siluetas clásicas,
-colores en tonos tierra y una presencia que llama la atención sin gritar.
-La página funciona como un **catálogo único** donde cada pieza se puede ver,
-añadir al carrito y comprar de forma directa.
+Vibe & Fit es una marca de **ropa de mujer y deportiva** que apuesta por un
+estilo **contemporáneo y con actitud**: siluetas clásicas, comodidad real y
+una presencia que llama la atención sin gritar. La web funciona como un
+**catálogo en la landing** donde cada pieza se puede ver, añadir al carrito y
+pedir de forma directa por WhatsApp, sin precios en pantalla.
 
 ## ✨ Características de la página
 
-- 🎬 **Hero cinematográfico**: 10 imágenes que se alternan solas cada 3 segundos en orden aleatorio, con tipografía editorial y acentos en bronce.
-- 🛍️ **Catálogo único**: todas las piezas en una sola cuadrícula responsive (5 columnas en PC, 3 en tablet, 2 en móvil), sin categorías ni subpáginas.
+- 🎬 **Hero cinematográfico**: imágenes de campaña que se alternan cada 3 segundos con tipografía editorial y acentos en bronce.
+- 🧭 **Categorías en la landing**: «Ropa de Mujer» (todas las piezas) y «Deportiva», bien ordenadas y responsive.
+- 🛍️ **Catálogo único**: cuadrícula responsive (5 columnas en PC, 3 en tablet, 2 en móvil) con tarjetas alineadas.
 - 🛒 **Carrito y favoritos** con estado persistente (localStorage).
-- 📲 **Compra por WhatsApp**: el checkout arma automáticamente el pedido con nombre, ciudad y notas, y abre tu WhatsApp.
+- 📲 **Pedido por WhatsApp**: el checkout arma automáticamente el pedido (nombre, ciudad y notas) y abre tu WhatsApp al número de la tienda.
 - 🪄 **Animaciones fluidas** con GSAP + Lenis (scroll suave).
 - 🖼️ **Imágenes optimizadas** (WebP/AVIF) con Next Image y lazy loading.
 - 🔍 **SEO**: metadatos por producto, Open Graph, sitemap y `robots.txt`.
-- 📱 **Diseño responsive y moderno**: paleta blanco/crema con detalles en bronce.
+- 📱 **Diseño responsive y optimizado**: paleta crema/claro con detalles en bronce, sin precios y sin distracciones.
 
 ---
 
@@ -92,9 +94,9 @@ npm run lint     # Revisar estilo/lint del código
 app/            # Páginas y layout de Next.js (App Router)
   page.tsx      # Página principal (landing)
   layout.tsx    # Layout + metadatos SEO
-  globals.css   # Estilos globales y paleta ISABEL
+  globals.css   # Estilos globales y paleta Vibe & Fit
   producto/     # Página de detalle de cada pieza
-components/     # Componentes React (Hero, Catálogo, Carrito, Footer...)
+components/     # Componentes React (Hero, Categorías, Catálogo, Carrito, Footer...)
 context/        # Estado global (carrito y favoritos)
 lib/            # Datos, utilidades de WhatsApp y assets
 public/images/  # Fotos del hero/catálogo y logo
@@ -105,10 +107,10 @@ legacy/         # Prototipo estático anterior (solo referencia)
 
 ## ✏️ Personalización
 
-- **Productos y textos**: edita `lib/data.ts` (marca, número de WhatsApp, slides del hero, productos, enlaces).
+- **Productos, textos y teléfono**: edita `lib/data.ts` (marca, número de WhatsApp, slides del hero, productos, enlaces y categorías).
 - **Imágenes**: reemplaza los archivos de `public/images/` (`1.jpg` … `10.jpg` y `logo.png`).
 - **Paleta y tipografías**: `app/globals.css`.
-- **Número de WhatsApp**: `SITE.whatsapp` (con código de país, `593…`) en `lib/data.ts`.
+- **Número de WhatsApp**: `SITE.whatsapp` (con código de país, `593…`) en `lib/data.ts`; se usa en el botón flotante, el carrito y el footer.
 
 ---
 
@@ -126,7 +128,7 @@ Esta página está desplegada en **Vercel**. Para hacer un deploy:
 
 2. Vercel detecta el push y genera el deploy automáticamente.
 
-3. Tu página queda disponible en **https://isabel-pi.vercel.app**.
+3. Tu página queda disponible en **https://vibe-and-fit.vercel.app**.
 
 > El flujo estándar es: **cambios → push a `main` → deploy automático →**
 > **ver el resultado en producción**.
@@ -135,11 +137,11 @@ Esta página está desplegada en **Vercel**. Para hacer un deploy:
 
 ## 📞 Contacto
 
-- **Marca:** ISABEL
-- **WhatsApp:** [+593 099 376 5542](https://wa.me/593993765542)
+- **Marca:** Vibe & Fit
+- **WhatsApp:** [+593 098 533 5586](https://wa.me/593985335586)
 
 <div align="center">
 
-**ISABEL** — *Elegancia que habla por ti.*
+**Vibe & Fit** — *Estilo que se mueve contigo.*
 
 </div>

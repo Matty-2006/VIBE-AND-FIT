@@ -6,7 +6,7 @@ import { whatsappLink } from "@/lib/whatsapp";
 export default function WhatsAppFloat() {
   return (
     <a
-      href={whatsappLink("Hola, estoy escribiendo a ISABEL desde la web.")}
+      href={whatsappLink("Hola, estoy escribiendo a Vibe & Fit desde la web.")}
       target="_blank"
       rel="noreferrer"
       aria-label={`Escríbenos por WhatsApp: ${SITE.whatsappDisplay}`}

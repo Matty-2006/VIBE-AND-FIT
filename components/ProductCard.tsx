@@ -67,13 +67,9 @@ export default function ProductCard({ product }: { product: Product }) {
           sizes="(max-width:520px) 50vw, (max-width:1024px) 33vw, 20vw"
           className="object-contain p-2"
         />
-        {product.badge && (
-          <span
-            className={`absolute left-3 top-3 z-[1] px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-white ${
-              product.badge === "sale" ? "bg-sale" : "bg-charcoal"
-            }`}
-          >
-            {product.badge === "sale" ? "Rebajas" : "Nuevo"}
+        {product.badge === "new" && (
+          <span className="absolute left-3 top-3 z-[1] bg-charcoal px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-white">
+            Nuevo
           </span>
         )}
         <span className="absolute right-3 top-3 z-[2]">
@@ -81,22 +77,16 @@ export default function ProductCard({ product }: { product: Product }) {
         </span>
       </div>
 
-      <div className="flex flex-col pt-4">
-        <div className="flex items-baseline justify-between gap-3">
-          <h3 className="min-h-[2.7em] font-serif text-[1.02rem] font-semibold leading-snug text-charcoal">
-            {product.name}
-          </h3>
-          <div className="whitespace-nowrap text-[0.95rem] font-semibold text-charcoal">
-            €{product.price}
-            {product.oldPrice && (
-              <span className="ms-2 text-[0.8rem] text-grey line-through">
-                €{product.oldPrice}
-              </span>
-            )}
-          </div>
+      <div className="flex flex-col items-center pt-4 text-center">
+        <div className="text-[0.62rem] uppercase tracking-[0.2em] text-bronze-dark">
+          {product.category}
         </div>
+        <div className="my-2 h-px w-6 bg-bronze/50" aria-hidden="true" />
+        <h3 className="line-clamp-2 min-h-[2.6em] font-serif text-[1.05rem] font-medium leading-[1.3] text-charcoal">
+          {product.name}
+        </h3>
 
-        <div className="mt-auto flex gap-2 pt-4">
+        <div className="mt-3 flex w-full gap-2">
           <button
             onClick={(e) => handleAdd(e, false)}
             aria-label={`Añadir ${product.name} al carrito`}
@@ -111,7 +101,7 @@ export default function ProductCard({ product }: { product: Product }) {
           <button
             onClick={(e) => handleAdd(e, true)}
             aria-label={`Comprar ${product.name} ahora`}
-            className="flex-1 bg-charcoal py-3 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-white transition-colors duration-[300ms] hover:bg-bronze"
+            className="btn-sweep flex-1 bg-charcoal py-3 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-white"
           >
             Comprar
           </button>

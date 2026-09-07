@@ -112,7 +112,7 @@ export default function HeroSlideshow({ slides }: { slides: HeroSlide[] }) {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       className="relative h-[100svh] min-h-[560px] w-full overflow-hidden bg-black"
-      aria-label="Presentación ISABEL"
+      aria-label="Presentación Vibe & Fit"
     >
       {slides.map((s, idx) => (
         <div
@@ -157,13 +157,14 @@ export default function HeroSlideshow({ slides }: { slides: HeroSlide[] }) {
             <div className="mt-9 flex flex-wrap items-center gap-4">
               <Link
                 href="/#catalogo"
-                className="inline-flex items-center justify-center rounded-full bg-black/50 px-8 py-3.5 text-[0.78rem] font-semibold uppercase tracking-[0.22em] text-white backdrop-blur-sm transition-all duration-300 hover:bg-black"
+                data-hover="Explorar"
+                className="btn-swap rounded-full bg-black/50 px-8 py-3.5 text-[0.78rem] font-semibold uppercase tracking-[0.22em] text-white backdrop-blur-sm"
               >
-                Ver Catálogo
+                <span>Ver Catálogo</span>
               </Link>
               <Link
-                href="/#catalogo"
-                className="inline-flex items-center justify-center rounded-full border border-white/60 px-8 py-3.5 text-[0.78rem] font-semibold uppercase tracking-[0.22em] text-white transition-all duration-300 hover:border-bronze-light hover:text-bronze-light"
+                href="/categoria/ropa-de-mujer"
+                className="btn-ring rounded-full border border-white/60 px-8 py-3.5 text-[0.78rem] font-semibold uppercase tracking-[0.22em] text-white"
               >
                 Comprar
               </Link>
