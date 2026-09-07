@@ -32,6 +32,7 @@
   --animate-fade-in-up: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
   --animate-pulse-badge: pulseBadge 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   --animate-hero-scale: heroScale 12s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  --animate-wa-ring: waRing 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 
   @keyframes marquee {
     0% { transform: translateX(0); }
@@ -57,6 +58,11 @@
   @keyframes heroScale {
     from { transform: scale(1.06); }
     to { transform: scale(1); }
+  }
+
+  @keyframes waRing {
+    0% { transform: scale(1); opacity: 0.6; }
+    70%, 100% { transform: scale(1.55); opacity: 0; }
   }
 }
 

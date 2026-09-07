@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment, useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import { siteAsset } from "@/lib/siteAssets";
 
@@ -13,12 +13,14 @@ const PARAGRAPHS = [
 ];
 
 function splitWords(text: string) {
-  const words = text.split(" ");
-  return words.map((word, i) => (
-    <Fragment key={`${word}-${i}`}>
-      <span className="bs-word inline-block will-change-transform">{word}</span>
-      {i < words.length - 1 ? " " : null}
-    </Fragment>
+  return text.split(" ").map((word, i) => (
+    <span
+      key={`${word}-${i}`}
+      className="bs-word inline-block will-change-transform"
+    >
+      {word}
+      {"\u00A0"}
+    </span>
   ));
 }
 
