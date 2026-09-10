@@ -41,6 +41,16 @@ export default function ProductCard({ product }: { product: Product }) {
   const { addItem, openCart } = useCart();
   const [added, setAdded] = useState(false);
 
+  const TINTS = [
+    "linear-gradient(180deg, #ffffff 0%, #f7f1e7 100%)",
+    "linear-gradient(180deg, #ffffff 0%, #eef2f6 100%)",
+    "linear-gradient(180deg, #ffffff 0%, #f4eef0 100%)",
+    "linear-gradient(180deg, #ffffff 0%, #eef0ec 100%)",
+  ];
+  const PADS = ["p-1.5", "p-2", "p-2.5", "p-1"];
+  const tint = TINTS[(product.id - 1) % TINTS.length];
+  const pad = PADS[(product.id - 1) % PADS.length];
+
   const handleAdd = (e: React.MouseEvent, quick: boolean) => {
     e.preventDefault();
     e.stopPropagation();
@@ -59,13 +69,16 @@ export default function ProductCard({ product }: { product: Product }) {
       data-cursor
       className="group flex h-full flex-col bg-white"
     >
-      <div className="relative aspect-[3/4] overflow-hidden bg-white">
+      <div
+        className="relative aspect-[3/4] overflow-hidden bg-white"
+        style={{ backgroundImage: tint }}
+      >
         <Image
           src={product.image}
           alt={product.name}
           fill
           sizes="(max-width:520px) 50vw, (max-width:1024px) 33vw, 20vw"
-          className="object-contain p-2"
+          className={`object-contain ${pad}`}
         />
         {product.badge === "new" && (
           <span className="absolute left-3 top-3 z-[1] bg-charcoal px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-white">

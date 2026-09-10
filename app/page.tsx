@@ -1,6 +1,7 @@
 import BrandStory from "@/components/BrandStory";
 import Catalog from "@/components/Catalog";
 import EditorialSplit from "@/components/EditorialSplit";
+import GallerySlider from "@/components/GallerySlider";
 import HeroSlideshow from "@/components/HeroSlideshow";
 import InstagramGallery from "@/components/InstagramGallery";
 import Lookbook from "@/components/Lookbook";
@@ -25,6 +26,7 @@ export default function HomePage() {
     <>
       <HeroSlideshow slides={slides} />
       <Catalog />
+      <GallerySlider />
       <EditorialSplit />
       <Lookbook />
       <BrandStory />
