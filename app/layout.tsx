@@ -60,20 +60,11 @@ export const metadata: Metadata = {
     title: "Vibe & Fit | Moda de mujer y deportiva",
     description: SITE.description,
     locale: "es_ES",
-    images: [
-      {
-        url: `${SITE.url}/images/1.jpg`,
-        width: 1600,
-        height: 1000,
-        alt: SITE.name,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Vibe & Fit | Moda de mujer y deportiva",
     description: SITE.description,
-    images: [`${SITE.url}/images/1.jpg`],
   },
   robots: {
     index: true,
