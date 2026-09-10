@@ -142,7 +142,7 @@ export default function Footer() {
 
       <div className="container flex flex-wrap items-center justify-between gap-3 py-7 text-[0.75rem] text-white/40">
         <span>
-          © {new Date().getFullYear()} Vibe & Fit. Todos los derechos reservados.
+          © {new Date().getFullYear()} Isabel la niña más linda de todas tiene todos los derechos reservados.
         </span>
         <span className="font-serif italic text-white/60">
           Estilo que se mueve contigo.

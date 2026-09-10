@@ -267,6 +267,29 @@
   }
 }
 
+/* ─── Modo oscuro ─── */
+.dark {
+  color-scheme: dark;
+  background: #131110;
+}
+
+.dark body {
+  background: #131110;
+  color: #ece5d9;
+}
+
+.dark .bg-cream { background-color: #171512; }
+.dark .bg-cream\/90 { background-color: rgba(23, 21, 18, 0.92); }
+.dark .bg-cream\/95 { background-color: rgba(23, 21, 18, 0.96); }
+.dark .bg-white { background-color: #1e1b17; }
+.dark .bg-white\/80 { background-color: rgba(30, 27, 23, 0.85); }
+.dark .bg-sand { background-color: #221e19; }
+.dark .text-charcoal { color: #ece5d9; }
+.dark .text-grey { color: #b3a797; }
+.dark .text-bronze-dark { color: #cfbfa4; }
+.dark .border-grey-light { border-color: #2f2a24; }
+.dark .bg-bronze-light { color: #2b2825; }
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

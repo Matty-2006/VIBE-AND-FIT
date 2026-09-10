@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { gsap } from "gsap";
 import type { HeroSlide } from "@/lib/data";
+import Magnetic from "@/components/Magnetic";
 
 const AUTO_MS = 3000;
 
@@ -155,13 +156,15 @@ export default function HeroSlideshow({ slides }: { slides: HeroSlide[] }) {
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-4">
-              <Link
-                href="/#catalogo"
-                data-hover="Explorar"
-                className="btn-swap rounded-full bg-black/50 px-8 py-3.5 text-[0.78rem] font-semibold uppercase tracking-[0.22em] text-white backdrop-blur-sm"
-              >
-                <span>Ver Catálogo</span>
-              </Link>
+              <Magnetic>
+                <Link
+                  href="/#catalogo"
+                  data-hover="Explorar"
+                  className="btn-swap rounded-full bg-black/50 px-8 py-3.5 text-[0.78rem] font-semibold uppercase tracking-[0.22em] text-white backdrop-blur-sm"
+                >
+                  <span>Ver Catálogo</span>
+                </Link>
+              </Magnetic>
               <Link
                 href="/categoria/ropa-de-mujer"
                 className="btn-ring rounded-full border border-white/60 px-8 py-3.5 text-[0.78rem] font-semibold uppercase tracking-[0.22em] text-white"

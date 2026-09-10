@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import { NAV_LINKS, SITE } from "@/lib/data";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function MobileMenu({
   open,
@@ -55,12 +56,42 @@ export default function MobileMenu({
     <div
       ref={panelRef}
       style={{ display: "none" }}
-      className="fixed inset-0 z-[9999] flex-col items-start justify-between bg-black px-8 pb-10 pt-28 text-white"
+      className="fixed inset-0 z-[9999] flex-col items-start justify-between bg-black px-8 pb-10 pt-6 text-white"
       role="dialog"
       aria-modal="true"
       aria-label="Menú"
     >
-      <nav className="w-full">
+      <div className="flex w-full items-center justify-between">
+        <Link
+          href="/"
+          onClick={onClose}
+          className="font-display text-lg font-semibold uppercase tracking-[0.3em]"
+        >
+          Vibe&nbsp;&amp;&nbsp;Fit
+        </Link>
+        <div className="flex items-center gap-1">
+          <span className="text-white">
+            <ThemeToggle />
+          </span>
+          <button
+            onClick={onClose}
+            aria-label="Cerrar menú"
+            className="flex h-10 w-10 items-center justify-center text-white transition-transform duration-[400ms] hover:rotate-90"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              className="h-[22px] w-[22px]"
+            >
+              <path d="M6 6l12 12M18 6 6 18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <nav className="w-full pt-10">
         {NAV_LINKS.map((link, i) => (
           <Link
             key={link.href}

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Logo from "@/components/Logo";
 import MobileMenu from "@/components/MobileMenu";
+import ThemeToggle from "@/components/ThemeToggle";
 import { useCart } from "@/context/CartContext";
 import { useFavorites } from "@/context/FavoritesContext";
 import { NAV_LINKS, PRODUCTS } from "@/lib/data";
@@ -155,6 +156,7 @@ export default function Navigation() {
               light ? "text-white" : "text-charcoal"
             }`}
           >
+            <ThemeToggle />
             <button
               onClick={() => setSearchOpen((v) => !v)}
               aria-label="Buscar"
@@ -217,11 +219,31 @@ export default function Navigation() {
                 <button
                   onClick={() => setSearchOpen(false)}
                   aria-label="Cerrar búsqueda"
-                  className="text-lg text-charcoal"
+                  className="flex h-8 w-8 items-center justify-center text-charcoal transition-colors hover:text-bronze"
                 >
-                  ✕
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-[18px] w-[18px]">
+                    <path d="M6 6l12 12M18 6 6 18" />
+                  </svg>
                 </button>
               </div>
+              {query.trim().length > 0 && results.length === 0 && (
+                <div className="container py-6 text-center">
+                  <p className="font-serif text-[1.05rem] italic text-grey">
+                    Sin resultados para «{query.trim()}». Prueba con otra
+                    palabra o explora nuestra colección.
+                  </p>
+                  <Link
+                    href="/categoria/ropa-de-mujer"
+                    onClick={() => {
+                      setSearchOpen(false);
+                      setQuery("");
+                    }}
+                    className="btn-sweep mt-4 inline-block rounded-full border border-charcoal px-7 py-3 text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-charcoal"
+                  >
+                    <span>Ver colección</span>
+                  </Link>
+                </div>
+              )}
               {results.length > 0 && (
                 <div className="container pb-4">
                   {results.map((p) => (

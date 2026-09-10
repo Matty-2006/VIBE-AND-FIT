@@ -5,6 +5,7 @@ import HeroSlideshow from "@/components/HeroSlideshow";
 import InstagramGallery from "@/components/InstagramGallery";
 import Lookbook from "@/components/Lookbook";
 import Newsletter from "@/components/Newsletter";
+import Testimonials from "@/components/Testimonials";
 import { HERO_SLIDE_COPY, type HeroSlide } from "@/lib/data";
 import { numericImageFiles } from "@/lib/images";
 
@@ -27,6 +28,7 @@ export default function HomePage() {
       <EditorialSplit />
       <Lookbook />
       <BrandStory />
+      <Testimonials />
       <Newsletter />
       <InstagramGallery />
     </>
