@@ -1,10 +1,49 @@
 import Link from "next/link";
 import { NAV_LINKS, SITE } from "@/lib/data";
 
+function InstagramIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-[17px] w-[17px]">
+      <rect x="2.5" y="2.5" width="19" height="19" rx="5" />
+      <circle cx="12" cy="12" r="4.2" />
+      <circle cx="17.6" cy="6.4" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function FacebookIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="h-[17px] w-[17px]">
+      <path d="M14.5 22v-8.4h2.8l.4-3.3h-3.2V8.1c0-.95.26-1.6 1.63-1.6H18V3.55A21 21 0 0 0 15.5 3.4c-2.47 0-4.16 1.51-4.16 4.29v2.6H8.5v3.3h2.84V22h3.16Z" />
+    </svg>
+  );
+}
+
+function PinterestIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="h-[17px] w-[17px]">
+      <path d="M12 2.2c-5.4 0-9.8 4.4-9.8 9.8 0 4.14 2.56 7.68 6.18 9.13-.09-.78-.16-1.97.03-2.82.18-.77 1.16-4.9 1.16-4.9s-.3-.6-.3-1.47c0-1.38.8-2.4 1.8-2.4.85 0 1.26.64 1.26 1.4 0 .85-.55 2.13-.83 3.32-.24 1 .5 1.81 1.48 1.81 1.78 0 3.15-1.88 3.15-4.58 0-2.4-1.72-4.07-4.18-4.07-2.85 0-4.52 2.13-4.52 4.34 0 .86.33 1.78.75 2.28a.3.3 0 0 1 .07.29c-.08.33-.25 1-.29 1.15-.05.19-.15.24-.35.14-1.32-.61-2.14-2.54-2.14-4.09 0-3.33 2.42-6.38 6.98-6.38 3.66 0 6.51 2.61 6.51 6.1 0 3.64-2.29 6.57-5.48 6.57-1.07 0-2.07-.56-2.42-1.21l-.66 2.5c-.24.92-.88 2.08-1.31 2.78.99.3 2.03.47 3.12.47 5.4 0 9.8-4.4 9.8-9.8s-4.4-9.8-9.8-9.8Z" />
+    </svg>
+  );
+}
+
+function TikTokIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="h-[17px] w-[17px]">
+      <path d="M16.6 2h-3.2v13.9c0 1.5-1.2 2.7-2.7 2.7a2.7 2.7 0 0 1-2.7-2.7 2.7 2.7 0 0 1 2.7-2.7c.3 0 .6.05.86.13V10c-.28-.04-.57-.06-.86-.06A5.9 5.9 0 0 0 5 15.85 5.9 5.9 0 0 0 10.7 21.7a5.9 5.9 0 0 0 5.9-5.85V8.4a8.2 8.2 0 0 0 4.8 1.55V6.7a4.9 4.9 0 0 1-4.8-4.7Z" />
+    </svg>
+  );
+}
+
 const SOCIAL = [
-  { label: "Instagram", href: "https://instagram.com" },
-  { label: "Pinterest", href: "https://pinterest.com" },
-  { label: "Facebook", href: "https://facebook.com" },
+  {
+    label: "Instagram",
+    href: `https://instagram.com/${SITE.instagram.replace("@", "")}`,
+    Icon: InstagramIcon,
+  },
+  { label: "TikTok", href: "https://tiktok.com", Icon: TikTokIcon },
+  { label: "Pinterest", href: "https://pinterest.com", Icon: PinterestIcon },
+  { label: "Facebook", href: "https://facebook.com", Icon: FacebookIcon },
 ];
 
 export default function Footer() {
@@ -120,29 +159,32 @@ export default function Footer() {
                   href="/#contacto"
                   className="transition-colors duration-[400ms] hover:text-bronze-light"
                 >
-                  Newsletter
+                  Contacto y Newsletter
                 </Link>
               </li>
-              {SOCIAL.map((s) => (
-                <li key={s.label}>
-                  <a
-                    href={s.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="transition-colors duration-[400ms] hover:text-bronze-light"
-                  >
-                    {s.label}
-                  </a>
-                </li>
-              ))}
             </ul>
+
+            <div className="mt-6 flex items-center gap-2.5">
+              {SOCIAL.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${SITE.name} en ${s.label}`}
+                  className="btn-glow flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors duration-[300ms] hover:border-bronze-light hover:text-bronze-light"
+                >
+                  <s.Icon />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
       <div className="container flex flex-wrap items-center justify-between gap-3 py-7 text-[0.75rem] text-white/40">
         <span>
-          © {new Date().getFullYear()} Isabel la niña más linda de todas tiene todos los derechos reservados.
+          © {new Date().getFullYear()} {SITE.name}. Todos los derechos reservados.
         </span>
         <span className="font-serif italic text-white/60">
           Estilo que se mueve contigo.

@@ -112,7 +112,7 @@ export default function HeroSlideshow({ slides }: { slides: HeroSlide[] }) {
       ref={sectionRef}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
-      className="relative h-[100svh] min-h-[560px] w-full overflow-hidden bg-black"
+      className="grain-overlay relative h-[100svh] min-h-[560px] w-full overflow-hidden bg-black"
       aria-label="Presentación Vibe & Fit"
     >
       {slides.map((s, idx) => (
@@ -128,7 +128,7 @@ export default function HeroSlideshow({ slides }: { slides: HeroSlide[] }) {
             fill
             priority={idx === 0}
             sizes="100vw"
-            quality={92}
+            quality={80}
             className="h-full w-full object-cover object-center"
           />
         </div>

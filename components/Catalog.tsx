@@ -27,7 +27,7 @@ function DeportivaCard() {
   return (
     <Link
       href="/categoria/deportiva"
-      data-cursor
+      data-cursor-text="Explorar"
       className="group relative flex h-[480px] flex-col items-center justify-center overflow-hidden bg-charcoal px-8 text-center text-white max-[768px]:h-[400px]"
     >
       <div
@@ -97,7 +97,7 @@ export default function Catalog() {
               <Link
                 key={c.name}
                 href={card.href}
-                data-cursor
+                data-cursor-text="Ver colección"
                 className="group relative block h-[480px] overflow-hidden bg-black max-[768px]:h-[420px]"
               >
                 <Image

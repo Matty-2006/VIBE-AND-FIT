@@ -43,9 +43,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const route = ROUTES.find((r) => r.slug === slug);
   if (!route) return { title: "Categoría no encontrada" };
+  const image = route.hero ?? siteAsset(1);
   return {
     title: `${route.title}`,
     description: route.description,
+    alternates: { canonical: `/categoria/${route.slug}` },
+    openGraph: {
+      title: `${route.title} | Vibe & Fit`,
+      description: route.description,
+      images: [{ url: image, width: 1200, height: 630, alt: route.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${route.title} | Vibe & Fit`,
+      description: route.description,
+      images: [image],
+    },
   };
 }
 

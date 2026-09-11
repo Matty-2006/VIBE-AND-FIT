@@ -54,6 +54,7 @@ export default function MobileMenu({
 
   return (
     <div
+      id="mobile-menu"
       ref={panelRef}
       style={{ display: "none" }}
       className="fixed inset-0 z-[9999] flex-col items-start justify-between bg-black px-8 pb-10 pt-6 text-white"

@@ -265,6 +265,36 @@
   .will-change-transform {
     will-change: transform;
   }
+
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  /* ─── Textura de grano sutil para secciones editoriales oscuras ─── */
+  .grain-overlay {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .grain-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-repeat: repeat;
+    background-size: 180px 180px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
 }
 
 /* ─── Modo oscuro ─── */
@@ -289,6 +319,18 @@
 .dark .text-bronze-dark { color: #cfbfa4; }
 .dark .border-grey-light { border-color: #2f2a24; }
 .dark .bg-bronze-light { color: #2b2825; }
+
+/* ─── Cursor personalizado: solo oculta el cursor nativo cuando el */
+/* ─── cursor a medida está realmente activo (ver CustomCursor.tsx) ─── */
+@media (hover: hover) and (pointer: fine) {
+  html.has-custom-cursor,
+  html.has-custom-cursor a,
+  html.has-custom-cursor button,
+  html.has-custom-cursor [data-cursor],
+  html.has-custom-cursor [data-cursor-text] {
+    cursor: none;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *,

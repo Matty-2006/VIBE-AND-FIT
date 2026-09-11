@@ -67,12 +67,12 @@ export default function Testimonials() {
           titleEm="dicen"
           description="Historias reales de quienes ya visten Vibe & Fit."
         />
-        <div className="mt-2 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-2 -mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-5 px-5 pb-2 scrollbar-hide md:mx-0 md:grid md:snap-none md:gap-6 md:overflow-visible md:px-0 md:pb-0 md:grid-cols-2 lg:grid-cols-3">
           {TESTIMONIALS.map((t) => (
             <figure
               key={t.author}
               data-quote
-              className="flex flex-col justify-between rounded-md border border-grey-light bg-cream p-8 transition-colors duration-[400ms] hover:border-bronze/50"
+              className="flex w-[82%] shrink-0 snap-start flex-col justify-between rounded-md border border-grey-light bg-cream p-8 transition-colors duration-[400ms] hover:border-bronze/50 sm:w-[60%] md:w-auto md:shrink md:snap-align-none"
             >
               <div>
                 <Stars count={t.stars} />
@@ -96,6 +96,13 @@ export default function Testimonials() {
             </figure>
           ))}
         </div>
+
+        <p className="mt-5 flex items-center justify-center gap-2 text-[0.68rem] uppercase tracking-[0.18em] text-grey md:hidden">
+          Desliza para ver más
+          <span aria-hidden="true" className="inline-block animate-pulse">
+            →
+          </span>
+        </p>
       </div>
     </section>
   );

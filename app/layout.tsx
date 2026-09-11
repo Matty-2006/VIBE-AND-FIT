@@ -25,7 +25,7 @@ const playfair = Playfair_Display({
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -69,11 +69,6 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-  },
-  icons: {
-    icon: [{ url: "/images/logo.png", type: "image/png" }],
-    shortcut: "/images/logo.png",
-    apple: "/images/logo.png",
   },
 };
 

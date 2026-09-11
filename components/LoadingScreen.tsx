@@ -19,20 +19,20 @@ export default function LoadingScreen() {
       });
       tl.fromTo(
         "[data-lp-logo]",
-        { autoAlpha: 0, y: 18 },
-        { autoAlpha: 1, y: 0, duration: 0.8, ease: "power3.out" }
+        { autoAlpha: 0, y: 14 },
+        { autoAlpha: 1, y: 0, duration: 0.45, ease: "power3.out" }
       )
         .fromTo(
           "[data-lp-bar]",
           { scaleX: 0 },
-          { scaleX: 1, duration: 0.9, ease: "power2.inOut" },
-          "-=0.4"
+          { scaleX: 1, duration: 0.5, ease: "power2.inOut" },
+          "-=0.2"
         )
         .to(el, {
           autoAlpha: 0,
-          duration: 0.7,
+          duration: 0.4,
           ease: "power2.out",
-          delay: 0.25,
+          delay: 0.1,
         });
     }, el);
 

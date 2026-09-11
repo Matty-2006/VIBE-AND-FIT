@@ -4,12 +4,13 @@ import { useState, type FormEvent } from "react";
 import Reveal from "@/components/Reveal";
 import { sendRegistration } from "@/app/actions/newsletter";
 
-type FieldErrors = { telefono?: string; correo?: string };
+type FieldErrors = { telefono?: string; correo?: string; mensaje?: string };
 
 export default function Newsletter() {
   const [nombre, setNombre] = useState("");
   const [telefono, setTelefono] = useState("");
   const [correo, setCorreo] = useState("");
+  const [mensaje, setMensaje] = useState("");
   const [errors, setErrors] = useState<FieldErrors>({});
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
@@ -24,8 +25,11 @@ export default function Newsletter() {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(correo.trim())) {
       errs.correo = "Introduce un correo válido.";
     }
+    if (mensaje.trim().length > 500) {
+      errs.mensaje = "El mensaje no puede superar los 500 caracteres.";
+    }
     setErrors(errs);
-    if (errs.telefono || errs.correo) return;
+    if (errs.telefono || errs.correo || errs.mensaje) return;
 
     setSending(true);
     setError("");
@@ -33,17 +37,19 @@ export default function Newsletter() {
       nombre: nombre.trim(),
       telefono: telefono.trim(),
       correo: correo.trim(),
+      mensaje: mensaje.trim() || undefined,
     });
     setSending(false);
 
     if (!res.ok) {
-      setError(res.message ?? "No se pudo guardar. Inténtalo de nuevo.");
+      setError(res.message ?? "No se pudo enviar. Inténtalo de nuevo.");
       return;
     }
     setDone(true);
     setNombre("");
     setTelefono("");
     setCorreo("");
+    setMensaje("");
   };
 
   const inputClass =
@@ -53,18 +59,20 @@ export default function Newsletter() {
     <section id="contacto" className="border-t border-grey-light py-28 text-center">
       <div className="container px-5">
         <Reveal>
-          <span className="eyebrow mb-6 block text-bronze">Newsletter</span>
+          <span className="eyebrow mb-6 block text-bronze">Contacto &amp; Newsletter</span>
           <h2 className="font-display text-[clamp(2rem,4vw,3.2rem)] font-bold">
-            Sé parte de Vibe &amp; Fit
+            Hablemos, o sé parte de Vibe &amp; Fit
           </h2>
           <p className="mx-auto mt-4 mb-10 max-w-[440px] font-serif italic text-grey">
-            Recibe nuevas colecciones, novedades y contenido exclusivo.
-            Sin ruido, como a nosotros nos gusta.
+            Escríbenos tus dudas o déjanos tus datos para recibir nuevas
+            colecciones y contenido exclusivo. Sin ruido, como a nosotros nos
+            gusta.
           </p>
 
           {done ? (
             <div className="mx-auto max-w-[520px] border border-bronze py-6 px-6 font-serif italic text-charcoal">
-              Registro guardado. Te escribiremos por WhatsApp con novedades.
+              ¡Gracias! Hemos recibido tu mensaje y te escribiremos por
+              WhatsApp muy pronto.
             </div>
           ) : (
             <form
@@ -136,12 +144,35 @@ export default function Newsletter() {
                 )}
               </div>
 
+              <div className="text-start sm:col-span-2">
+                <label
+                  htmlFor="nl-mensaje"
+                  className="mb-1.5 block text-[0.68rem] uppercase tracking-[0.16em] text-grey"
+                >
+                  Mensaje (opcional)
+                </label>
+                <textarea
+                  id="nl-mensaje"
+                  value={mensaje}
+                  onChange={(e) => setMensaje(e.target.value)}
+                  placeholder="Cuéntanos en qué podemos ayudarte…"
+                  rows={3}
+                  maxLength={500}
+                  className={`${inputClass} resize-none`}
+                />
+                {errors.mensaje && (
+                  <p role="alert" className="mt-1.5 text-start text-[0.8rem] text-sale">
+                    {errors.mensaje}
+                  </p>
+                )}
+              </div>
+
               <button
                 type="submit"
                 disabled={sending}
                 className="btn-sweep sm:col-span-2 bg-charcoal px-8 py-4 text-[0.76rem] font-semibold uppercase tracking-[0.18em] text-white disabled:cursor-wait disabled:opacity-70"
               >
-                {sending ? "Enviando…" : "Guardar"}
+                {sending ? "Enviando…" : "Enviar"}
               </button>
 
               {error && (

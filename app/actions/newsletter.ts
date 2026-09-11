@@ -6,6 +6,7 @@ export type RegistrationInput = {
   nombre: string;
   telefono: string;
   correo: string;
+  mensaje?: string;
 };
 
 /**
@@ -28,11 +29,14 @@ export async function sendRegistration(
   }
 
   const text = [
-    "NUEVO REGISTRO · VIBE & FIT",
+    input.mensaje ? "NUEVO MENSAJE DE CONTACTO · VIBE & FIT" : "NUEVO REGISTRO · VIBE & FIT",
     `Nombre: ${input.nombre || "—"}`,
     `Teléfono: ${input.telefono}`,
     `Correo: ${input.correo}`,
-  ].join("\n");
+    input.mensaje ? `Mensaje: ${input.mensaje}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
 
   const url =
     "https://api.callmebot.com/whatsapp.php?" +

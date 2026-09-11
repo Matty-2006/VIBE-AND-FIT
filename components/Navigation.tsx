@@ -107,6 +107,9 @@ export default function Navigation() {
             }`}
             onClick={() => setMenuOpen(true)}
             aria-label="Abrir menú"
+            aria-haspopup="dialog"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
             <span className="h-[1.5px] w-[22px] bg-current" />
             <span className="h-[1.5px] w-[22px] bg-current" />

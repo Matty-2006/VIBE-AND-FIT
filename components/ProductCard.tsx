@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { useFavorites } from "@/context/FavoritesContext";
 import type { Product } from "@/lib/data";
@@ -40,6 +40,26 @@ function HeartButton({ product }: { product: Product }) {
 export default function ProductCard({ product }: { product: Product }) {
   const { addItem, openCart } = useCart();
   const [added, setAdded] = useState(false);
+  const tiltRef = useRef<HTMLDivElement>(null);
+
+  const onTiltMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (
+      window.matchMedia("(pointer: coarse)").matches ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    )
+      return;
+    const el = tiltRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width - 0.5;
+    const py = (e.clientY - r.top) / r.height - 0.5;
+    el.style.transform = `perspective(800px) rotateX(${(-py * 7).toFixed(2)}deg) rotateY(${(px * 7).toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+  };
+
+  const onTiltLeave = () => {
+    const el = tiltRef.current;
+    if (el) el.style.transform = "";
+  };
 
   const TINTS = [
     "linear-gradient(180deg, #ffffff 0%, #f7f1e7 100%)",
@@ -66,11 +86,14 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       href={`/producto/${product.id}`}
-      data-cursor
+      data-cursor-text="Ver producto"
       className="group flex h-full flex-col bg-white"
     >
       <div
-        className="relative aspect-[3/4] overflow-hidden bg-white"
+        ref={tiltRef}
+        onMouseMove={onTiltMove}
+        onMouseLeave={onTiltLeave}
+        className="relative aspect-[3/4] overflow-hidden bg-white transition-transform duration-300 ease-out will-change-transform"
         style={{ backgroundImage: tint }}
       >
         <Image

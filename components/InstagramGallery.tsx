@@ -15,7 +15,7 @@ function InstagramIcon() {
 
 export default function InstagramGallery() {
   return (
-    <section className="pb-28">
+    <section className="border-t border-grey-light pb-28 pt-4">
       <div className="container">
         <Reveal>
           <SectionHeader
@@ -32,10 +32,10 @@ export default function InstagramGallery() {
           {INSTAGRAM_IMAGES.map((src, i) => (
             <a
               key={src + i}
-              href="https://instagram.com"
+              href={`https://instagram.com/${SITE.instagram.replace("@", "")}`}
               target="_blank"
               rel="noreferrer"
-              data-cursor
+              data-cursor-text="Ver post"
               aria-label={`Ver publicación ${i + 1} en Instagram`}
               className="group relative aspect-square overflow-hidden"
             >

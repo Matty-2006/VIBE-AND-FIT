@@ -15,9 +15,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   const product = PRODUCTS.find((p) => p.id === Number(id));
   if (!product) return { title: "Producto no encontrado" };
+  const description = `${product.name} — ${product.category}. Vibe & Fit: moda de mujer y deportiva.`;
   return {
     title: `${product.name}`,
-    description: `${product.name} — ${product.category}. Vibe & Fit.`,
+    description,
+    alternates: { canonical: `/producto/${product.id}` },
+    openGraph: {
+      title: `${product.name} | Vibe & Fit`,
+      description,
+      images: [{ url: product.image, width: 1200, height: 1500, alt: product.name }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${product.name} | Vibe & Fit`,
+      description,
+      images: [product.image],
+    },
   };
 }
 

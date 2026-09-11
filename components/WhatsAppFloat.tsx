@@ -10,7 +10,7 @@ export default function WhatsAppFloat() {
       target="_blank"
       rel="noreferrer"
       aria-label={`Escríbenos por WhatsApp: ${SITE.whatsappDisplay}`}
-      data-cursor
+      data-cursor-text="Escribir"
       className="group fixed bottom-6 right-6 z-[9000] flex items-center max-[600px]:bottom-5 max-[600px]:right-5"
     >
       <span className="pointer-events-none absolute right-full mr-4 hidden whitespace-nowrap rounded-full bg-charcoal px-4 py-2 text-[0.8rem] font-semibold tracking-wide text-white opacity-0 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] transition-opacity duration-[400ms] group-hover:opacity-100 sm:block">

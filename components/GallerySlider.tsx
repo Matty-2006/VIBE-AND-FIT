@@ -13,7 +13,7 @@ export default function GallerySlider() {
   }));
 
   return (
-    <section className="bg-black py-24">
+    <section className="grain-overlay bg-black py-24">
       <div className="container">
         <SectionHeader
           dark
