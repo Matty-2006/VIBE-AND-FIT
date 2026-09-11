@@ -186,6 +186,7 @@ export default function Navigation() {
             <button
               onClick={openCart}
               aria-label="Carrito"
+              data-cart-icon
               className={`relative flex h-10 w-10 items-center justify-center transition-colors duration-[400ms] ${
                 light ? "hover:text-bronze-light" : "hover:text-bronze"
               }`}

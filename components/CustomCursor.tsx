@@ -3,6 +3,11 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 
+const BASE = 36;
+const PLAIN_SCALE = 1.7;
+const LABEL_PAD_X = 20;
+const LABEL_HEIGHT = 40;
+
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -23,6 +28,9 @@ export default function CustomCursor() {
 
     gsap.set([dot, wrap], { xPercent: -50, yPercent: -50 });
     gsap.set(ring, {
+      width: BASE,
+      height: BASE,
+      scale: 1,
       backgroundColor: "rgba(17,17,17,0)",
       borderColor: "rgba(169,143,109,0.6)",
     });
@@ -45,25 +53,35 @@ export default function CustomCursor() {
       const plainHit = target.closest("a, button, [data-cursor]");
 
       if (textEl) {
+        // Measure the label at its natural width first, then size the
+        // pill to fit it exactly — a fixed circle made the text spill
+        // outside its edges on longer labels like "Ver producto".
         label.textContent = textEl.getAttribute("data-cursor-text") ?? "";
+        const textWidth = label.getBoundingClientRect().width;
+        const pillWidth = Math.max(BASE, Math.round(textWidth) + LABEL_PAD_X * 2);
+
         gsap.to(ring, {
-          scale: 2.5,
-          backgroundColor: "rgba(17,17,17,0.9)",
-          borderColor: "rgba(17,17,17,0.9)",
+          width: pillWidth,
+          height: LABEL_HEIGHT,
+          scale: 1,
+          backgroundColor: "rgba(17,17,17,0.94)",
+          borderColor: "rgba(17,17,17,0.94)",
           duration: 0.35,
-          ease: "power2.out",
+          ease: "power3.out",
         });
-        gsap.to(label, { autoAlpha: 1, duration: 0.3 });
+        gsap.to(label, { autoAlpha: 1, duration: 0.25, delay: 0.05 });
         gsap.to(dot, { autoAlpha: 0, duration: 0.2 });
       } else {
         gsap.to(ring, {
-          scale: plainHit ? 1.7 : 1,
+          width: BASE,
+          height: BASE,
+          scale: plainHit ? PLAIN_SCALE : 1,
           backgroundColor: "rgba(17,17,17,0)",
           borderColor: "rgba(169,143,109,0.6)",
           duration: 0.35,
           ease: "power2.out",
         });
-        gsap.to(label, { autoAlpha: 0, duration: 0.2 });
+        gsap.to(label, { autoAlpha: 0, duration: 0.15 });
         gsap.to(dot, { autoAlpha: 1, duration: 0.2 });
       }
     };
@@ -87,11 +105,11 @@ export default function CustomCursor() {
       <div ref={wrapRef} className="absolute h-9 w-9">
         <div
           ref={ringRef}
-          className="absolute inset-0 rounded-full border transition-none"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border transition-none"
         />
         <span
           ref={labelRef}
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap font-display text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-white opacity-0"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap font-display text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-white opacity-0"
         />
       </div>
       <div ref={dotRef} className="absolute h-1.5 w-1.5 rounded-full bg-bronze" />

@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { useFavorites } from "@/context/FavoritesContext";
 import type { Product } from "@/lib/data";
+import { flyToCart } from "@/lib/flyToCart";
 
 function HeartButton({ product }: { product: Product }) {
   const { isFavorite, toggle } = useFavorites();
@@ -71,14 +72,16 @@ export default function ProductCard({ product }: { product: Product }) {
   const tint = TINTS[(product.id - 1) % TINTS.length];
   const pad = PADS[(product.id - 1) % PADS.length];
 
-  const handleAdd = (e: React.MouseEvent, quick: boolean) => {
+  const handleAdd = (e: React.MouseEvent<HTMLButtonElement>, quick: boolean) => {
     e.preventDefault();
     e.stopPropagation();
+    const btn = e.currentTarget;
     addItem(product.id);
     if (quick) {
-      openCart();
+      flyToCart(btn, product.image, openCart);
       return;
     }
+    flyToCart(btn, product.image);
     setAdded(true);
     window.setTimeout(() => setAdded(false), 1400);
   };

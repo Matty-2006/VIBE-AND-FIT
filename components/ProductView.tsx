@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import ProductCard from "@/components/ProductCard";
 import { useCart } from "@/context/CartContext";
 import { useFavorites } from "@/context/FavoritesContext";
@@ -13,6 +13,7 @@ import {
   SIZES,
   type Product,
 } from "@/lib/data";
+import { flyToCart } from "@/lib/flyToCart";
 
 const POSITIONS = ["object-center", "object-top", "object-bottom"];
 
@@ -28,6 +29,7 @@ export default function ProductView({
   const [main, setMain] = useState(0);
   const [colorIdx, setColorIdx] = useState(0);
   const [size, setSize] = useState("M");
+  const imageRef = useRef<HTMLDivElement>(null);
 
   const fav = isFavorite(product.id);
 
@@ -51,7 +53,10 @@ export default function ProductView({
       <div className="container">
         <div className="grid grid-cols-2 items-start gap-10 max-[768px]:grid-cols-1">
           <div>
-            <div className="relative aspect-[3/4] overflow-hidden bg-sand">
+            <div
+              ref={imageRef}
+              className="relative aspect-[3/4] overflow-hidden bg-sand"
+            >
               <Image
                 src={product.image}
                 alt={product.name}
@@ -165,9 +170,9 @@ export default function ProductView({
             </div>
 
             <button
-              onClick={() => {
+              onClick={(e) => {
                 addItem(product.id);
-                openCart();
+                flyToCart(e.currentTarget, product.image, openCart);
               }}
               className="mb-4 w-full bg-black py-4 text-[0.85rem] uppercase tracking-[0.12em] text-white transition-colors duration-[0.3s] hover:bg-bronze"
             >
