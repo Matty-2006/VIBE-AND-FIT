@@ -9,8 +9,8 @@ import { useFavorites } from "@/context/FavoritesContext";
 import {
   COLOR_NAMES,
   PRODUCT_COMPOSITION,
-  PRODUCT_DESCRIPTIONS,
   SIZES,
+  productDescription,
   type Product,
 } from "@/lib/data";
 import { flyToCart } from "@/lib/flyToCart";
@@ -32,6 +32,7 @@ export default function ProductView({
   const imageRef = useRef<HTMLDivElement>(null);
 
   const fav = isFavorite(product.id);
+  const productSizes = product.sizes.length > 0 ? product.sizes : SIZES;
 
   const details = [
     {
@@ -91,10 +92,14 @@ export default function ProductView({
           <div className="pt-2">
             <div className="mb-4 text-[0.75rem] uppercase tracking-[0.08em] text-grey">
               <Link
-                href="/categoria/ropa-de-mujer"
+                href={
+                  product.collection === "deportiva"
+                    ? "/categoria/deportiva"
+                    : "/categoria/ropa-de-mujer"
+                }
                 className="transition-colors hover:text-bronze"
               >
-                Ropa de Mujer
+                {product.collection === "deportiva" ? "Deportiva" : "Ropa de Mujer"}
               </Link>{" "}
               / <span>{product.name}</span>
             </div>
@@ -113,7 +118,7 @@ export default function ProductView({
             </div>
 
             <p className="mb-8 text-[0.95rem] leading-[1.8] text-grey">
-              {PRODUCT_DESCRIPTIONS[product.category]}
+              {productDescription(product)}
             </p>
 
             <div className="mb-8">
@@ -154,7 +159,7 @@ export default function ProductView({
                 </Link>
               </div>
               <div className="flex gap-2">
-                {SIZES.map((s) => (
+                {productSizes.map((s) => (
                   <button
                     key={s}
                     onClick={() => setSize(s)}

@@ -1,4 +1,8 @@
 import { siteAsset } from "@/lib/siteAssets";
+import catalog from "@/data/catalog.json";
+import type { Product, ProductCategory } from "@/lib/types";
+
+export type { Product, ProductCategory, Collection, CatalogData } from "@/lib/types";
 
 export const SITE = {
   name: "Vibe & Fit",
@@ -17,20 +21,6 @@ export type HeroSlide = {
   eyebrow: string;
   title: string;
   subtitle: string;
-};
-
-export type ProductCategory = "Jeans" | "Pantalones" | "Faldas" | "Shorts";
-
-export type Product = {
-  id: number;
-  name: string;
-  category: ProductCategory;
-  /** Texto para el alt: describe la foto, no repite el nombre comercial. */
-  alt: string;
-  image: string;
-  badge: "new" | "sale" | null;
-  colors: string[];
-  tags: string[];
 };
 
 export type Category = {
@@ -128,17 +118,18 @@ export const CATEGORIES: Category[] = [
 /** Cada producto está disponible en los cuatro colores de la colección. */
 export const COLORS = ["#8fb2c9", "#24405c", "#111111", "#f4efe9"];
 
-export const PRODUCTS: Product[] = [
-  { id: 1, name: "Jean Skinny Azul Medio", category: "Jeans", alt: "Modelo con jean skinny azul medio de tiro alto con cinturón y top blanco", image: "/images/1.jpg", badge: "new", colors: COLORS, tags: ["all", "new"] },
-  { id: 2, name: "Jean Oscuro Realce", category: "Jeans", alt: "Jean azul oscuro de tiro alto con botonadura frontal y bajo deshilachado", image: "/images/3.jpg", badge: null, colors: COLORS, tags: ["all", "best"] },
-  { id: 3, name: "Pantalón Recto Camel", category: "Pantalones", alt: "Pantalón camel de corte recto y tiro alto con blusa negra de encaje", image: "/images/5.jpg", badge: "new", colors: COLORS, tags: ["all", "new"] },
-  { id: 4, name: "Falda Denim Brillo", category: "Faldas", alt: "Minifalda vaquera azul con pedrería en el bajo", image: "/images/7.jpg", badge: "new", colors: COLORS, tags: ["all", "new"] },
-  { id: 5, name: "Pantalón Ancho Deshilachado", category: "Pantalones", alt: "Pantalón vaquero ancho de tiro alto con lazo en la cintura y franjas deshilachadas", image: "/images/9.jpg", badge: null, colors: COLORS, tags: ["all", "best"] },
-  { id: 6, name: "Pantalón Bota Campana Blanco", category: "Pantalones", alt: "Pantalón blanco acampanado de tiro alto con chaleco vaquero corto", image: "/images/2.jpg", badge: null, colors: COLORS, tags: ["all", "best"] },
-  { id: 7, name: "Short Denim Negro", category: "Shorts", alt: "Short vaquero negro de tiro alto con roturas y bajo doblado", image: "/images/4.jpg", badge: "new", colors: COLORS, tags: ["all", "new"] },
-  { id: 8, name: "Falda Cargo Denim", category: "Faldas", alt: "Falda vaquera corta tipo cargo con bolsillos laterales y cordones", image: "/images/6.jpg", badge: null, colors: COLORS, tags: ["all", "best"] },
-  { id: 9, name: "Falda Plisada Denim", category: "Faldas", alt: "Minifalda vaquera plisada con chaqueta vaquera", image: "/images/10.jpg", badge: "new", colors: COLORS, tags: ["all", "new"] },
-];
+/** Catálogo completo. La fuente de verdad es data/catalog.json, que se puede
+ * editar desde el panel de administración (/admin). Este módulo solo lo lee. */
+export const PRODUCTS: Product[] = catalog.products as Product[];
+
+/** Tallas por defecto del catálogo (las de la Guía de Tallas). Cada producto
+ * puede tener su propia lista en `product.sizes`. */
+export const SIZES: string[] = catalog.sizes;
+
+/** Colección de Ãºltima hora en el home. Se actualiza sola porque vive en el JSON. */
+export function latestProducts(count = 4): Product[] {
+  return PRODUCTS.slice().reverse().slice(0, count);
+}
 
 export const TESTIMONIALS: Testimonial[] = [
   {
@@ -206,7 +197,15 @@ export const PRODUCT_DESCRIPTIONS: Record<ProductCategory, string> = {
     'Largo corto con estructura: mantienen la silueta en su sitio y se combinan igual de bien con zapatilla que con tacón.',
   Shorts:
     'Denim de verano con tiro alto y bajo trabajado. Cómodos de llevar y fáciles de combinar con cualquier top.',
+  Deportiva:
+    'Tejidos ligeros que acompañan cada movimiento. Comodidad y actitud para el día a día o el entrenamiento.',
 };
+
+/** Descripción que se muestra de un producto: la propia si la escribió el
+ * admin, o la genérica del tipo de prenda si está vacía. */
+export function productDescription(product: Pick<Product, "description" | "category">): string {
+  return product.description?.trim() ? product.description.trim() : PRODUCT_DESCRIPTIONS[product.category];
+}
 
 export const PRODUCT_COMPOSITION: Record<ProductCategory, string> = {
   Jeans:
@@ -217,9 +216,9 @@ export const PRODUCT_COMPOSITION: Record<ProductCategory, string> = {
     'Mezclilla firme con forro en la cintura. Lava del revés y evita la secadora para mantener el color.',
   Shorts:
     'Mezclilla de algodón con acabado lavado. Los deshilachados del bajo son parte del diseño y se asientan con el uso.',
+  Deportiva:
+    'Tejido ligero con elasticidad para el movimiento. Lava en frío y tiende plano para conservar la prenda.',
 };
-
-export const SIZES = ["XS", "S", "M", "L"];
 
 export function imageUrl(url: string): string {
   // Las imágenes locales no deben llevar parámetros de consulta internos.

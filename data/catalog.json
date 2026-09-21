@@ -1,0 +1,244 @@
+{
+  "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Jean Skinny Azul Medio",
+      "category": "Jeans",
+      "collection": "mujer",
+      "alt": "Modelo con jean skinny azul medio de tiro alto con cinturÃ³n y top blanco",
+      "image": "/images/1.jpg",
+      "badge": "new",
+      "colors": [
+        "#8fb2c9",
+        "#24405c",
+        "#111111",
+        "#f4efe9"
+      ],
+      "tags": [
+        "all",
+        "new"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "description": ""
+    },
+    {
+      "id": 2,
+      "name": "Jean Oscuro Realce",
+      "category": "Jeans",
+      "collection": "mujer",
+      "alt": "Jean azul oscuro de tiro alto con botonadura frontal y bajo deshilachado",
+      "image": "/images/3.jpg",
+      "badge": null,
+      "colors": [
+        "#8fb2c9",
+        "#24405c",
+        "#111111",
+        "#f4efe9"
+      ],
+      "tags": [
+        "all",
+        "best"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "description": ""
+    },
+    {
+      "id": 3,
+      "name": "PantalÃ³n Recto Camel",
+      "category": "Pantalones",
+      "collection": "mujer",
+      "alt": "PantalÃ³n camel de corte recto y tiro alto con blusa negra de encaje",
+      "image": "/images/5.jpg",
+      "badge": "new",
+      "colors": [
+        "#8fb2c9",
+        "#24405c",
+        "#111111",
+        "#f4efe9"
+      ],
+      "tags": [
+        "all",
+        "new"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "description": ""
+    },
+    {
+      "id": 4,
+      "name": "Falda Denim Brillo",
+      "category": "Faldas",
+      "collection": "mujer",
+      "alt": "Minifalda vaquera azul con pedrerÃ­a en el bajo",
+      "image": "/images/7.jpg",
+      "badge": "new",
+      "colors": [
+        "#8fb2c9",
+        "#24405c",
+        "#111111",
+        "#f4efe9"
+      ],
+      "tags": [
+        "all",
+        "new"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "description": ""
+    },
+    {
+      "id": 5,
+      "name": "PantalÃ³n Ancho Deshilachado",
+      "category": "Pantalones",
+      "collection": "mujer",
+      "alt": "PantalÃ³n vaquero ancho de tiro alto con lazo en la cintura y franjas deshilachadas",
+      "image": "/images/9.jpg",
+      "badge": null,
+      "colors": [
+        "#8fb2c9",
+        "#24405c",
+        "#111111",
+        "#f4efe9"
+      ],
+      "tags": [
+        "all",
+        "best"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "description": ""
+    },
+    {
+      "id": 6,
+      "name": "PantalÃ³n Bota Campana Blanco",
+      "category": "Pantalones",
+      "collection": "mujer",
+      "alt": "PantalÃ³n blanco acampanado de tiro alto con chaleco vaquero corto",
+      "image": "/images/2.jpg",
+      "badge": null,
+      "colors": [
+        "#8fb2c9",
+        "#24405c",
+        "#111111",
+        "#f4efe9"
+      ],
+      "tags": [
+        "all",
+        "best"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "description": ""
+    },
+    {
+      "id": 7,
+      "name": "Short Denim Negro",
+      "category": "Shorts",
+      "collection": "mujer",
+      "alt": "Short vaquero negro de tiro alto con roturas y bajo doblado",
+      "image": "/images/4.jpg",
+      "badge": "new",
+      "colors": [
+        "#8fb2c9",
+        "#24405c",
+        "#111111",
+        "#f4efe9"
+      ],
+      "tags": [
+        "all",
+        "new"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "description": ""
+    },
+    {
+      "id": 8,
+      "name": "Falda Cargo Denim",
+      "category": "Faldas",
+      "collection": "mujer",
+      "alt": "Falda vaquera corta tipo cargo con bolsillos laterales y cordones",
+      "image": "/images/6.jpg",
+      "badge": null,
+      "colors": [
+        "#8fb2c9",
+        "#24405c",
+        "#111111",
+        "#f4efe9"
+      ],
+      "tags": [
+        "all",
+        "best"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "description": ""
+    },
+    {
+      "id": 9,
+      "name": "Falda Plisada Denim",
+      "category": "Faldas",
+      "collection": "mujer",
+      "alt": "Minifalda vaquera plisada con chaqueta vaquera",
+      "image": "/images/10.jpg",
+      "badge": "new",
+      "colors": [
+        "#8fb2c9",
+        "#24405c",
+        "#111111",
+        "#f4efe9"
+      ],
+      "tags": [
+        "all",
+        "new"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "description": ""
+    }
+  ]
+}

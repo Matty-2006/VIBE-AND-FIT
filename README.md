@@ -145,3 +145,14 @@ Esta página está desplegada en **Vercel**. Para hacer un deploy:
 **Vibe & Fit** — *Estilo que se mueve contigo.*
 
 </div>
+---
+
+## Configuración del panel de administración
+
+El panel está en /admin (login + CRUD del catálogo). Credenciales y publicación:
+
+- Usuario: isabel · Contraseña: isable (por defecto)
+- Se cambian con variables de entorno ADMIN_USER / ADMIN_PASS
+- ADMIN_SECRET: secreto que firma la sesión (en producción, defínela)
+- GITHUB_TOKEN: con ella, al guardar se publica el catálogo en GitHub y Vercel redeploya solo. Sin ella, los cambios se guardan solo en este equipo
+

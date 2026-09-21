@@ -256,7 +256,35 @@ export default async function CategoriaPage({ params }: Props) {
   if (!route) notFound();
 
   if (route.slug === "deportiva") {
-    return <DeportivaPage />;
+    const sporty = PRODUCTS.filter((p) => p.collection === "deportiva");
+    // Sin piezas deportivas aún: se mantiene la landing que invita a preguntar.
+    if (sporty.length === 0) return <DeportivaPage />;
+
+    return (
+      <>
+        <PageHero
+          title={route.title}
+          eyebrow={route.eyebrow}
+          styleTag={route.styleTag}
+          src={siteAsset(1)}
+          alt={route.heroAlt}
+        />
+        <section className="py-24">
+          <div className="container">
+            <div className="mb-4 text-center text-[0.75rem] uppercase tracking-[0.08em] text-grey">
+              <Link href="/#catalogo" className="transition-colors hover:text-bronze">
+                Catálogo
+              </Link>{" "}
+              / <span className="text-charcoal">{route.title}</span>
+            </div>
+            <h2 className="mb-10 text-center font-serif text-[1.6rem] text-charcoal">
+              {route.title}
+            </h2>
+            <ProductGrid products={sporty} />
+          </div>
+        </section>
+      </>
+    );
   }
 
   return (
@@ -284,9 +312,7 @@ export default async function CategoriaPage({ params }: Props) {
             {route.title}
           </h2>
           <ProductGrid
-            products={PRODUCTS.filter((p) =>
-              route.categories.includes(p.category)
-            )}
+            products={PRODUCTS.filter((p) => p.collection === "mujer")}
             emptyTitle={`La línea ${route.title} llega pronto`}
             emptyText="Todavía no hay piezas publicadas en esta categoría. Escríbenos por WhatsApp y te avisamos en cuanto estén disponibles."
           />
