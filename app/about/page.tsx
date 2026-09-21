@@ -5,6 +5,7 @@ import SectionHeader from "@/components/SectionHeader";
 import { siteAsset } from "@/lib/siteAssets";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: "Nosotras",
   description:
     "Conoce la historia y el espíritu de Vibe & Fit: una marca de moda de mujer y deportiva con estilo contemporáneo, esencial y atemporal.",

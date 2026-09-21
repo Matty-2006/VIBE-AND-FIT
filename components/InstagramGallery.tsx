@@ -34,7 +34,7 @@ export default function InstagramGallery() {
               key={src + i}
               href={`https://instagram.com/${SITE.instagram.replace("@", "")}`}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               data-cursor-text="Ver post"
               aria-label={`Ver publicación ${i + 1} en Instagram`}
               className="group relative aspect-square overflow-hidden"

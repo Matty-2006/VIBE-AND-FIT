@@ -26,11 +26,20 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
     const refreshTimer = window.setTimeout(refresh, 800);
 
     const onClick = (e: MouseEvent) => {
+      // Los enlaces del sitio son "/#catalogo", no "#catalogo": filtrar por
+      // href^="#" no casaba con ninguno y este manejador nunca se ejecutaba.
       const target = (e.target as HTMLElement).closest(
-        'a[href^="#"]'
+        'a[href*="#"]'
       ) as HTMLAnchorElement | null;
       if (!target) return;
-      const id = (target.getAttribute("href") ?? "").slice(1);
+
+      const href = target.getAttribute("href") ?? "";
+      const [path, id] = href.split("#");
+      if (!id) return;
+      // Solo intercepta si el ancla es de esta misma página.
+      if (path && path !== "/" && path !== window.location.pathname) return;
+      if (path === "/" && window.location.pathname !== "/") return;
+
       const el = document.getElementById(id);
       if (el) {
         e.preventDefault();
@@ -50,10 +59,23 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    if (lenisRef.current) {
-      lenisRef.current.scrollTo(0, { immediate: true });
+    // Al llegar con ancla desde otra página hay que ir a la sección, no al
+    // inicio: subir primero dejaba al visitante arriba de la portada.
+    const hash = window.location.hash.slice(1);
+    const destino = hash ? document.getElementById(hash) : null;
+
+    if (destino) {
+      const ir = () =>
+        lenisRef.current
+          ? lenisRef.current.scrollTo(destino, { offset: -72, duration: 1 })
+          : destino.scrollIntoView();
+      // Un frame de margen para que la nueva página haya maquetado.
+      requestAnimationFrame(() => requestAnimationFrame(ir));
+    } else {
+      window.scrollTo(0, 0);
+      lenisRef.current?.scrollTo(0, { immediate: true });
     }
+
     ScrollTrigger.refresh();
   }, [pathname]);
 

@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useCart } from "@/context/CartContext";
+import { useScrollLock } from "@/lib/useScrollLock";
 import { SITE } from "@/lib/data";
 import { whatsappLink, whatsappOrderMessage } from "@/lib/whatsapp";
 
@@ -15,18 +16,22 @@ export default function CartSidebar() {
   const [notes, setNotes] = useState("");
   const [sent, setSent] = useState(false);
 
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
+  useScrollLock(isOpen);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setStep("cart");
     setSent(false);
     closeCart();
-  };
+  }, [closeCart]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") handleClose();
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [isOpen, handleClose]);
 
   const startCheckout = () => {
     setStep("checkout");
@@ -35,7 +40,12 @@ export default function CartSidebar() {
 
   const submitOrder = () => {
     const message = whatsappOrderMessage(
-      lines.map((l) => ({ name: l.name, qty: l.qty })),
+      lines.map((l) => ({
+        name: l.name,
+        qty: l.qty,
+        size: l.size,
+        color: l.color,
+      })),
       { name, city, notes }
     );
     window.open(whatsappLink(message), "_blank", "noopener");
@@ -51,10 +61,15 @@ export default function CartSidebar() {
         onClick={handleClose}
       />
       <aside
-        className={`fixed right-0 top-0 z-[10000] flex h-full w-[440px] max-w-full flex-col bg-white transition-transform duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] ${
+        className={`fixed right-0 top-0 z-[10000] flex h-full w-[440px] max-w-full flex-col bg-white transition-transform duration-[400ms] ease-[cubic-bezier(0.32,0.72,0,1)] ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
+        role="dialog"
+        aria-modal="true"
         aria-label="Carrito de compras"
+        // Cerrado sigue en el DOM, solo desplazado: sin inert el teclado entra
+        // en un carrito invisible.
+        inert={!isOpen}
       >
         <div className="flex items-center justify-between border-b border-grey-light px-8 py-8">
           <h3 className="font-serif text-xl tracking-[0.06em]">
@@ -85,7 +100,7 @@ export default function CartSidebar() {
             ) : (
               lines.map((item) => {
                 return (
-                  <div key={item.id} className="flex gap-6 border-b border-grey-light py-6">
+                  <div key={item.key} className="flex gap-6 border-b border-grey-light py-6">
                     <Image
                       src={item.image}
                       alt={item.name}
@@ -101,11 +116,21 @@ export default function CartSidebar() {
                         <div className="text-[0.7rem] uppercase tracking-[0.1em] text-grey">
                           {item.category}
                         </div>
+                        {(item.size || item.color) && (
+                          <div className="mt-1 text-[0.72rem] text-grey">
+                            {[
+                              item.size ? `Talla ${item.size}` : "",
+                              item.color,
+                            ]
+                              .filter(Boolean)
+                              .join(" · ")}
+                          </div>
+                        )}
                       </div>
                       <div className="flex items-center gap-2">
                         <button
-                          onClick={() => setQty(item.id, -1)}
-                          aria-label="Disminuir cantidad"
+                          onClick={() => setQty(item.key, -1)}
+                          aria-label={`Disminuir cantidad de ${item.name}`}
                           className="flex h-7 w-7 items-center justify-center border border-grey-light text-[0.85rem] transition-colors hover:border-charcoal"
                         >
                           −
@@ -114,18 +139,20 @@ export default function CartSidebar() {
                           {item.qty}
                         </span>
                         <button
-                          onClick={() => setQty(item.id, 1)}
-                          aria-label="Aumentar cantidad"
+                          onClick={() => setQty(item.key, 1)}
+                          aria-label={`Aumentar cantidad de ${item.name}`}
                           className="flex h-7 w-7 items-center justify-center border border-grey-light text-[0.85rem] transition-colors hover:border-charcoal"
                         >
                           +
                         </button>
-                        <span
-                          onClick={() => removeItem(item.id)}
-                          className="ms-1 cursor-pointer text-[0.75rem] text-grey underline transition-colors hover:text-sale"
+                        <button
+                          type="button"
+                          onClick={() => removeItem(item.key)}
+                          aria-label={`Eliminar ${item.name} del carrito`}
+                          className="ms-1 cursor-pointer text-[0.75rem] text-grey underline transition-colors hover:text-sale focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze"
                         >
                           Eliminar
-                        </span>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -149,10 +176,17 @@ export default function CartSidebar() {
               <>
                 <div className="mb-6 space-y-3 text-[0.9rem] text-charcoal">
                   {lines.map((item) => (
-                    <div key={item.id} className="flex items-center justify-between gap-4">
+                    <div key={item.key} className="flex items-center justify-between gap-4">
                       <span className="font-serif font-semibold">
                         {item.qty} × {item.name}
                       </span>
+                      {(item.size || item.color) && (
+                        <span className="shrink-0 text-[0.75rem] text-grey">
+                          {[item.size ? `Talla ${item.size}` : "", item.color]
+                            .filter(Boolean)
+                            .join(" · ")}
+                        </span>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -215,7 +249,7 @@ export default function CartSidebar() {
           </div>
         )}
 
-        <div className="border-t border-grey-light px-8 py-7">
+        <div className="border-t border-grey-light px-8 pt-7 pb-[calc(1.75rem+env(safe-area-inset-bottom,0px))]">
           {step === "cart" ? (
             <>
               {lines.length > 0 && (

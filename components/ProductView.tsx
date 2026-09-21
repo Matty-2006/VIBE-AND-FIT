@@ -59,7 +59,7 @@ export default function ProductView({
             >
               <Image
                 src={product.image}
-                alt={product.name}
+                alt={product.alt}
                 fill
                 priority
                 sizes="(max-width:768px) 100vw, 50vw"
@@ -128,7 +128,8 @@ export default function ProductView({
                   <button
                     key={c}
                     onClick={() => setColorIdx(i)}
-                    aria-label={`Color ${i + 1}`}
+                    aria-label={`Color ${COLOR_NAMES[c] ?? i + 1}`}
+                    aria-pressed={i === colorIdx}
                     className={`h-7 w-7 cursor-pointer rounded-full border-2 transition-all ${
                       i === colorIdx
                         ? "border-bronze shadow-[0_0_0_2px_var(--color-bronze)]"
@@ -171,7 +172,10 @@ export default function ProductView({
 
             <button
               onClick={(e) => {
-                addItem(product.id);
+                addItem(product.id, {
+                  size,
+                  color: COLOR_NAMES[product.colors[colorIdx]],
+                });
                 flyToCart(e.currentTarget, product.image, openCart);
               }}
               className="mb-4 w-full bg-black py-4 text-[0.85rem] uppercase tracking-[0.12em] text-white transition-colors duration-[0.3s] hover:bg-bronze"
@@ -224,9 +228,9 @@ export default function ProductView({
 
         {related.length > 0 && (
           <div className="mt-24 border-t border-grey-light pt-14">
-            <h3 className="mb-8 text-center font-display text-2xl">
+            <h2 className="mb-8 text-center font-display text-2xl">
               También Te Puede Gustar
-            </h3>
+            </h2>
             <div className="grid grid-cols-4 gap-x-5 gap-y-10 max-[768px]:grid-cols-2">
               {related.map((p) => (
                 <ProductCard key={p.id} product={p} />

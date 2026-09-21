@@ -13,9 +13,16 @@ export default function LoadingScreen() {
       return;
     }
 
+    // Este overlay tapa toda la tienda, así que nunca puede quedarse colgado:
+    // si la línea de tiempo no llega a completarse, esto lo retira igual.
+    const failsafe = window.setTimeout(() => el.remove(), 3000);
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
-        onComplete: () => el.remove(),
+        onComplete: () => {
+          window.clearTimeout(failsafe);
+          el.remove();
+        },
       });
       tl.fromTo(
         "[data-lp-logo]",
@@ -36,12 +43,20 @@ export default function LoadingScreen() {
         });
     }, el);
 
-    return () => ctx.revert();
+    return () => {
+      window.clearTimeout(failsafe);
+      ctx.revert();
+    };
   }, []);
 
   return (
-    <div
-      id="vibe-loader"
+    <>
+      {/* Sin JavaScript nadie retiraría el overlay y la tienda quedaría en negro. */}
+      <noscript>
+        <style>{`#vibe-loader{display:none!important}`}</style>
+      </noscript>
+      <div
+        id="vibe-loader"
       className="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-black text-white"
       aria-hidden="true"
     >
@@ -63,6 +78,7 @@ export default function LoadingScreen() {
       >
         Estilo que se mueve contigo.
       </p>
-    </div>
+      </div>
+    </>
   );
 }

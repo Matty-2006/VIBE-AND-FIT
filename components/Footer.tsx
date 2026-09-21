@@ -62,9 +62,9 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-5 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-bronze-light">
+            <h2 className="mb-5 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-bronze-light">
               Colección
-            </h4>
+            </h2>
             <ul className="space-y-3 text-[0.85rem] text-white/70">
               {NAV_LINKS.map((link) => (
                 <li key={`${link.href}-${link.label}`}>
@@ -80,9 +80,9 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-5 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-bronze-light">
+            <h2 className="mb-5 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-bronze-light">
               Catálogo
-            </h4>
+            </h2>
             <ul className="space-y-3 text-[0.85rem] text-white/70">
               <li>
                 <Link
@@ -128,9 +128,9 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-5 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-bronze-light">
+            <h2 className="mb-5 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-bronze-light">
               Contacto
-            </h4>
+            </h2>
             <ul className="space-y-3 text-[0.85rem] text-white/70">
               <li>
                 <a
@@ -144,7 +144,7 @@ export default function Footer() {
                 <a
                   href={`https://wa.me/${SITE.whatsapp}`}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-2 transition-colors duration-[400ms] hover:text-bronze-light"
                   aria-label={`WhatsApp de ${SITE.name}: ${SITE.whatsappDisplay}`}
                 >
@@ -170,7 +170,7 @@ export default function Footer() {
                   key={s.label}
                   href={s.href}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   aria-label={`${SITE.name} en ${s.label}`}
                   className="btn-glow flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors duration-[300ms] hover:border-bronze-light hover:text-bronze-light"
                 >

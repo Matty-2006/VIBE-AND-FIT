@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ProductGrid from "@/components/ProductGrid";
 import SectionHeader from "@/components/SectionHeader";
-import { SITE } from "@/lib/data";
+import { PRODUCTS, SITE, type ProductCategory } from "@/lib/data";
 import { whatsappLink } from "@/lib/whatsapp";
 import { siteAsset } from "@/lib/siteAssets";
 
@@ -12,7 +12,18 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-const ROUTES = [
+type CategoryRoute = {
+  slug: string;
+  title: string;
+  eyebrow: string;
+  styleTag: string;
+  hero: string | null;
+  heroAlt: string;
+  description: string;
+  categories: ProductCategory[];
+};
+
+const ROUTES: CategoryRoute[] = [
   {
     slug: "ropa-de-mujer",
     title: "Ropa de Mujer",
@@ -21,7 +32,9 @@ const ROUTES = [
     hero: siteAsset(1),
     heroAlt: "Ropa de mujer Vibe & Fit",
     description:
-      "Descubre toda la colección Ropa de Mujer de Vibe & Fit: vestidos, blusas, abrigos y complementos para cada momento.",
+      "Descubre toda la colección de Vibe & Fit: jeans, pantalones, faldas y shorts en denim para cada momento.",
+    // Todo el catálogo actual es ropa de mujer.
+    categories: ["Jeans", "Pantalones", "Faldas", "Shorts"],
   },
   {
     slug: "deportiva",
@@ -32,6 +45,10 @@ const ROUTES = [
     heroAlt: "",
     description:
       "La línea deportiva de Vibe & Fit: comodidad, energía y estilo para cada entrenamiento. Pídelo por WhatsApp.",
+    // Esta ruta se renderiza con DeportivaPage, que es una landing sin listado
+    // de producto, así que no consume este campo. Se deja vacío porque el
+    // catálogo todavía no tiene ninguna pieza deportiva.
+    categories: [],
   },
 ];
 
@@ -67,7 +84,7 @@ function WhatsAppCta({ text, label }: { text: string; label: string }) {
     <a
       href={whatsappLink(text)}
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
       data-cursor
       className="btn-glow inline-flex items-center gap-3 rounded-full bg-[#25D366] px-9 py-4 text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-white transition-colors duration-[300ms] hover:bg-[#1fb857]"
     >
@@ -263,7 +280,16 @@ export default async function CategoriaPage({ params }: Props) {
             </Link>{" "}
             / <span className="text-charcoal">{route.title}</span>
           </div>
-          <ProductGrid />
+          <h2 className="mb-10 text-center font-serif text-[1.6rem] text-charcoal">
+            {route.title}
+          </h2>
+          <ProductGrid
+            products={PRODUCTS.filter((p) =>
+              route.categories.includes(p.category)
+            )}
+            emptyTitle={`La línea ${route.title} llega pronto`}
+            emptyText="Todavía no hay piezas publicadas en esta categoría. Escríbenos por WhatsApp y te avisamos en cuanto estén disponibles."
+          />
 
           <div className="mt-20 flex flex-col items-center gap-6 border-t border-grey-light pt-14 text-center">
             <p className="max-w-[480px] font-serif text-lg italic leading-relaxed text-charcoal">
@@ -271,7 +297,7 @@ export default async function CategoriaPage({ params }: Props) {
               te ayudamos a elegir la pieza perfecta.
             </p>
             <WhatsAppCta
-              text={`Hola ${SITE.name}, quiero asesoría sobre el catálogo Ropa de Mujer.`}
+              text={`Hola ${SITE.name}, quiero asesoría sobre ${route.title}.`}
               label={SITE.whatsappDisplay}
             />
           </div>

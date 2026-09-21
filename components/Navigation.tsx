@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Logo from "@/components/Logo";
 import MobileMenu from "@/components/MobileMenu";
 import ThemeToggle from "@/components/ThemeToggle";
+import { useScrollLock } from "@/lib/useScrollLock";
 import { useCart } from "@/context/CartContext";
 import { useFavorites } from "@/context/FavoritesContext";
 import { NAV_LINKS, PRODUCTS } from "@/lib/data";
@@ -55,12 +56,7 @@ export default function Navigation() {
   const solid = scrolled || pathname !== "/" || searchOpen;
   const light = !solid;
 
-  useEffect(() => {
-    document.body.style.overflow = menuOpen || searchOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [menuOpen, searchOpen]);
+  useScrollLock(menuOpen || searchOpen);
 
   useEffect(() => {
     if (searchOpen) inputRef.current?.focus();
@@ -136,22 +132,30 @@ export default function Navigation() {
               light ? "text-white/90" : "text-charcoal"
             }`}
           >
-            {NAV_LINKS.map((link) => (
+            {NAV_LINKS.map((link) => {
+              // Sin esto no hay forma de saber en que seccion estas.
+              const activo =
+                link.href.startsWith("/categoria") && pathname === link.href
+                  ? true
+                  : link.href === "/about" && pathname === "/about";
+              return (
               <Link
                 key={link.href}
                 href={link.href}
+                aria-current={activo ? "page" : undefined}
                 className={`group relative text-[0.76rem] font-medium uppercase tracking-[0.16em] transition-colors duration-[400ms] ${
                   light ? "hover:text-bronze-light" : "hover:text-bronze"
-                }`}
+                } ${activo ? (light ? "text-bronze-light" : "text-bronze") : ""}`}
               >
                 {link.label}
                 <span
-                  className={`absolute bottom-[-4px] left-0 h-px w-0 transition-all duration-[400ms] group-hover:w-full ${
-                    light ? "bg-bronze-light" : "bg-bronze"
-                  }`}
+                  className={`absolute bottom-[-4px] left-0 h-px w-full origin-left transition-transform duration-200 ease-out group-hover:scale-x-100 ${
+                    activo ? "scale-x-100" : "scale-x-0"
+                  } ${light ? "bg-bronze-light" : "bg-bronze"}`}
                 />
               </Link>
-            ))}
+              );
+            })}
           </nav>
 
           <div

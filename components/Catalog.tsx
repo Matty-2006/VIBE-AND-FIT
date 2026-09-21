@@ -8,7 +8,7 @@ const CARDS: Record<
   { desc: string; numbers: string; cta: string; href: string; hasImage: boolean }
 > = {
   "Ropa de Mujer": {
-    desc: "Vestidos, blusas, abrigos y conjuntos para cada momento del día.",
+    desc: "Jeans, pantalones, faldas y shorts en denim, para cada momento del día.",
     numbers: "Toda la colección en un solo lugar.",
     cta: "Ver colección",
     href: "/categoria/ropa-de-mujer",

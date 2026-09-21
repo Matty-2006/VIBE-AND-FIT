@@ -74,6 +74,15 @@ export default function HeroSlideshow({ slides }: { slides: HeroSlide[] }) {
 
   const onKey = useCallback(
     (e: KeyboardEvent) => {
+      // Sin esto, mover el cursor con las flechas dentro del buscador cambia
+      // la diapositiva del hero.
+      const t = e.target;
+      if (
+        t instanceof HTMLElement &&
+        (t.closest("input, textarea, select") || t.isContentEditable)
+      ) {
+        return;
+      }
       if (e.key === "ArrowRight") go(1);
       if (e.key === "ArrowLeft") go(-1);
     },
@@ -103,6 +112,10 @@ export default function HeroSlideshow({ slides }: { slides: HeroSlide[] }) {
       el.removeEventListener("touchend", onUp);
     };
   }, [go]);
+
+  // Sin imágenes en public/images no hay diapositivas: sin esta guarda,
+  // slides[NaN] es undefined y la portada entera revienta al renderizar.
+  if (!slide) return null;
 
   const titleParts = slide.title.split(" ");
   const accent = titleParts.pop();

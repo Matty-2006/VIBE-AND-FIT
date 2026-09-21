@@ -5,17 +5,22 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useCart } from "@/context/CartContext";
 import { useFavorites } from "@/context/FavoritesContext";
+import { useScrollLock } from "@/lib/useScrollLock";
 
 export default function FavoritesSidebar() {
   const { lines, isOpen, closeFav, toggle } = useFavorites();
   const { addItem, openCart } = useCart();
 
+  useScrollLock(isOpen);
+
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
+    if (!isOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeFav();
     };
-  }, [isOpen]);
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [isOpen, closeFav]);
 
   return (
     <>
@@ -26,10 +31,13 @@ export default function FavoritesSidebar() {
         onClick={closeFav}
       />
       <aside
-        className={`fixed right-0 top-0 z-[10000] flex h-full w-[420px] max-w-full flex-col bg-white transition-transform duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] max-[600px]:w-screen ${
+        className={`fixed right-0 top-0 z-[10000] flex h-full w-[420px] max-w-full flex-col bg-white transition-transform duration-[400ms] ease-[cubic-bezier(0.32,0.72,0,1)] max-[600px]:w-screen ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
+        role="dialog"
+        aria-modal="true"
         aria-label="Tus favoritos"
+        inert={!isOpen}
       >
         <div className="flex items-center justify-between border-b border-grey-light px-8 py-8">
           <h3 className="font-serif text-xl tracking-[0.06em]">

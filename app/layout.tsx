@@ -81,6 +81,10 @@ export const viewport: Viewport = {
   ],
   width: "device-width",
   initialScale: 1,
+  // Deja pintar bajo el notch y la barra de gestos; sin esto env(safe-area-*)
+  // devuelve 0px. El teclado de Android encoge el viewport, como ya hace iOS.
+  viewportFit: "cover",
+  interactiveWidget: "resizes-content",
 };
 
 export default function RootLayout({
@@ -111,12 +115,18 @@ export default function RootLayout({
       </head>
       <body className="flex min-h-full flex-col">
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+        <a
+          href="#contenido"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[10002] focus:bg-charcoal focus:px-5 focus:py-3 focus:text-[0.8rem] focus:font-semibold focus:uppercase focus:tracking-[0.14em] focus:text-white"
+        >
+          Saltar al contenido
+        </a>
         <SmoothScroll>
           <CartProvider>
             <FavoritesProvider>
               <AnnouncementBar />
               <Navigation />
-              <main>{children}</main>
+              <main id="contenido">{children}</main>
               <Footer />
               <CartSidebar />
               <FavoritesSidebar />

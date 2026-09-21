@@ -10,20 +10,35 @@ import {
 } from "react";
 import { PRODUCTS, type Product } from "@/lib/data";
 
-export type CartItem = { id: number; qty: number };
-export type CartLine = Product & { qty: number };
+export type CartItem = {
+  id: number;
+  qty: number;
+  size?: string;
+  color?: string;
+};
+export type CartLine = Product & {
+  qty: number;
+  size?: string;
+  color?: string;
+  /** Identifica la línea: el mismo producto en dos tallas son dos líneas. */
+  key: string;
+};
+
+export type CartOptions = { size?: string; color?: string };
 
 type CartContextValue = {
   lines: CartLine[];
   count: number;
-  total: number;
   isOpen: boolean;
-  addItem: (id: number) => void;
-  removeItem: (id: number) => void;
-  setQty: (id: number, delta: number) => void;
+  addItem: (id: number, options?: CartOptions) => void;
+  removeItem: (key: string) => void;
+  setQty: (key: string, delta: number) => void;
   openCart: () => void;
   closeCart: () => void;
 };
+
+const lineKey = (item: Pick<CartItem, "id" | "size" | "color">) =>
+  `${item.id}__${item.size ?? ""}__${item.color ?? ""}`;
 
 const STORAGE_KEY = "vibefit_cart";
 
@@ -38,9 +53,22 @@ export default function CartProvider({ children }: { children: ReactNode }) {
     if (!raw) return;
     const timer = window.setTimeout(() => {
       try {
-        setCart(JSON.parse(raw) as CartItem[]);
+        // localStorage lo puede editar cualquiera: un JSON válido pero con otra
+        // forma rompería el render entero, así que se filtra entrada por entrada.
+        const parsed: unknown = JSON.parse(raw);
+        if (!Array.isArray(parsed)) return;
+        setCart(
+          parsed.filter(
+            (i): i is CartItem =>
+              !!i &&
+              typeof i === "object" &&
+              typeof (i as CartItem).id === "number" &&
+              typeof (i as CartItem).qty === "number" &&
+              (i as CartItem).qty > 0
+          )
+        );
       } catch {
-        /* noop */
+        /* almacenamiento no disponible o JSON inválido */
       }
     }, 0);
     return () => window.clearTimeout(timer);
@@ -54,22 +82,31 @@ export default function CartProvider({ children }: { children: ReactNode }) {
     }
   }, [cart]);
 
-  const addItem = (id: number) =>
+  const addItem = (id: number, options?: CartOptions) =>
     setCart((prev) => {
-      const found = prev.find((i) => i.id === id);
+      const next: CartItem = {
+        id,
+        qty: 1,
+        size: options?.size,
+        color: options?.color,
+      };
+      const key = lineKey(next);
+      const found = prev.find((i) => lineKey(i) === key);
       if (found) {
-        return prev.map((i) => (i.id === id ? { ...i, qty: i.qty + 1 } : i));
+        return prev.map((i) =>
+          lineKey(i) === key ? { ...i, qty: i.qty + 1 } : i
+        );
       }
-      return [...prev, { id, qty: 1 }];
+      return [...prev, next];
     });
 
-  const removeItem = (id: number) =>
-    setCart((prev) => prev.filter((i) => i.id !== id));
+  const removeItem = (key: string) =>
+    setCart((prev) => prev.filter((i) => lineKey(i) !== key));
 
-  const setQty = (id: number, delta: number) =>
+  const setQty = (key: string, delta: number) =>
     setCart((prev) =>
       prev.flatMap((i) => {
-        if (i.id !== id) return [i];
+        if (lineKey(i) !== key) return [i];
         const next = i.qty + delta;
         return next < 1 ? [] : [{ ...i, qty: next }];
       })
@@ -78,25 +115,27 @@ export default function CartProvider({ children }: { children: ReactNode }) {
   const lines = useMemo<CartLine[]>(
     () =>
       cart
-        .map((i) => {
+        .map((i): CartLine | null => {
           const product = PRODUCTS.find((p) => p.id === i.id);
-          return product ? { ...product, qty: i.qty } : null;
+          if (!product) return null;
+          return {
+            ...product,
+            qty: i.qty,
+            ...(i.size ? { size: i.size } : {}),
+            ...(i.color ? { color: i.color } : {}),
+            key: lineKey(i),
+          };
         })
         .filter((x): x is CartLine => x !== null),
     [cart]
   );
 
   const count = useMemo(() => cart.reduce((s, i) => s + i.qty, 0), [cart]);
-  const total = useMemo(
-    () => lines.reduce((s, i) => s + (i.oldPrice || i.price) * i.qty, 0),
-    [lines]
-  );
 
   const value = useMemo<CartContextValue>(
     () => ({
       lines,
       count,
-      total,
       isOpen,
       addItem,
       removeItem,
@@ -104,7 +143,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
       openCart: () => setIsOpen(true),
       closeCart: () => setIsOpen(false),
     }),
-    [lines, count, total, isOpen]
+    [lines, count, isOpen]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

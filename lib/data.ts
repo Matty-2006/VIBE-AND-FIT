@@ -19,19 +19,14 @@ export type HeroSlide = {
   subtitle: string;
 };
 
-export type ProductCategory =
-  | "Vestidos"
-  | "Blusas"
-  | "Conjuntos"
-  | "Abrigos"
-  | "Accesorios";
+export type ProductCategory = "Jeans" | "Pantalones" | "Faldas" | "Shorts";
 
 export type Product = {
   id: number;
   name: string;
   category: ProductCategory;
-  price: number;
-  oldPrice: number | null;
+  /** Texto para el alt: describe la foto, no repite el nombre comercial. */
+  alt: string;
   image: string;
   badge: "new" | "sale" | null;
   colors: string[];
@@ -130,28 +125,19 @@ export const CATEGORIES: Category[] = [
   { name: "Deportiva", image: siteAsset(4) },
 ];
 
-export const FEATURED_IDS = [1, 4, 8, 5];
-
 /** Cada producto está disponible en los cuatro colores de la colección. */
 export const COLORS = ["#8fb2c9", "#24405c", "#111111", "#f4efe9"];
 
 export const PRODUCTS: Product[] = [
-  { id: 1, name: "Vestido Seda Dune", category: "Vestidos", price: 389, oldPrice: null, image: siteAsset(1), badge: "new", colors: COLORS, tags: ["all", "new"] },
-  { id: 2, name: "Blusa Alba Ivory", category: "Blusas", price: 189, oldPrice: 250, image: siteAsset(2), badge: "sale", colors: COLORS, tags: ["all", "sale"] },
-  { id: 3, name: "Pantalón Structure Noir", category: "Vestidos", price: 225, oldPrice: null, image: siteAsset(3), badge: null, colors: COLORS, tags: ["all", "best"] },
-  { id: 4, name: "Vestido Noche Alhelí", category: "Vestidos", price: 465, oldPrice: 590, image: siteAsset(4), badge: "sale", colors: COLORS, tags: ["all", "sale", "best"] },
-  { id: 5, name: "Abrigo Camel Arena", category: "Abrigos", price: 520, oldPrice: 680, image: siteAsset(5), badge: "sale", colors: COLORS, tags: ["all", "sale"] },
-  { id: 6, name: "Bolso Estructura Ébano", category: "Accesorios", price: 445, oldPrice: null, image: siteAsset(6), badge: null, colors: COLORS, tags: ["all", "best"] },
-  { id: 7, name: "Bufanda Cashmere Norte", category: "Accesorios", price: 175, oldPrice: null, image: siteAsset(7), badge: "new", colors: COLORS, tags: ["all", "new"] },
-  { id: 8, name: "Sandalias Costa Arena", category: "Accesorios", price: 265, oldPrice: null, image: siteAsset(8), badge: "new", colors: COLORS, tags: ["all", "new", "best"] },
-  { id: 9, name: "Vestido Maxi Ceniza", category: "Vestidos", price: 520, oldPrice: null, image: siteAsset(9), badge: "new", colors: COLORS, tags: ["all", "new"] },
-  { id: 10, name: "Camisa Lino Costa", category: "Blusas", price: 165, oldPrice: null, image: siteAsset(10), badge: null, colors: COLORS, tags: ["all", "best"] },
-  { id: 11, name: "Trench Neptuno", category: "Abrigos", price: 695, oldPrice: null, image: siteAsset(11), badge: "new", colors: COLORS, tags: ["all", "new", "best"] },
-  { id: 12, name: "Chaleco Suave Bruma", category: "Abrigos", price: 345, oldPrice: null, image: siteAsset(12), badge: null, colors: COLORS, tags: ["all", "best"] },
-  { id: 13, name: "Collar Perla Clásica", category: "Accesorios", price: 285, oldPrice: null, image: siteAsset(13), badge: "new", colors: COLORS, tags: ["all", "new"] },
-  { id: 14, name: "Gafas de Sol Clásicas", category: "Accesorios", price: 195, oldPrice: 260, image: siteAsset(14), badge: "sale", colors: COLORS, tags: ["all", "sale"] },
-  { id: 15, name: "Botines Cuero Toscano", category: "Accesorios", price: 395, oldPrice: null, image: siteAsset(15), badge: null, colors: COLORS, tags: ["all", "best"] },
-  { id: 16, name: "Mocasines Piel Suave", category: "Accesorios", price: 310, oldPrice: 420, image: siteAsset(16), badge: "sale", colors: COLORS, tags: ["all", "sale"] },
+  { id: 1, name: "Jean Skinny Azul Medio", category: "Jeans", alt: "Modelo con jean skinny azul medio de tiro alto con cinturón y top blanco", image: "/images/1.jpg", badge: "new", colors: COLORS, tags: ["all", "new"] },
+  { id: 2, name: "Jean Oscuro Realce", category: "Jeans", alt: "Jean azul oscuro de tiro alto con botonadura frontal y bajo deshilachado", image: "/images/3.jpg", badge: null, colors: COLORS, tags: ["all", "best"] },
+  { id: 3, name: "Pantalón Recto Camel", category: "Pantalones", alt: "Pantalón camel de corte recto y tiro alto con blusa negra de encaje", image: "/images/5.jpg", badge: "new", colors: COLORS, tags: ["all", "new"] },
+  { id: 4, name: "Falda Denim Brillo", category: "Faldas", alt: "Minifalda vaquera azul con pedrería en el bajo", image: "/images/7.jpg", badge: "new", colors: COLORS, tags: ["all", "new"] },
+  { id: 5, name: "Pantalón Ancho Deshilachado", category: "Pantalones", alt: "Pantalón vaquero ancho de tiro alto con lazo en la cintura y franjas deshilachadas", image: "/images/9.jpg", badge: null, colors: COLORS, tags: ["all", "best"] },
+  { id: 6, name: "Pantalón Bota Campana Blanco", category: "Pantalones", alt: "Pantalón blanco acampanado de tiro alto con chaleco vaquero corto", image: "/images/2.jpg", badge: null, colors: COLORS, tags: ["all", "best"] },
+  { id: 7, name: "Short Denim Negro", category: "Shorts", alt: "Short vaquero negro de tiro alto con roturas y bajo doblado", image: "/images/4.jpg", badge: "new", colors: COLORS, tags: ["all", "new"] },
+  { id: 8, name: "Falda Cargo Denim", category: "Faldas", alt: "Falda vaquera corta tipo cargo con bolsillos laterales y cordones", image: "/images/6.jpg", badge: null, colors: COLORS, tags: ["all", "best"] },
+  { id: 9, name: "Falda Plisada Denim", category: "Faldas", alt: "Minifalda vaquera plisada con chaqueta vaquera", image: "/images/10.jpg", badge: "new", colors: COLORS, tags: ["all", "new"] },
 ];
 
 export const TESTIMONIALS: Testimonial[] = [
@@ -162,7 +148,7 @@ export const TESTIMONIALS: Testimonial[] = [
     stars: 5,
   },
   {
-    text: "Una marca con una estética limpia y elegante. El vestido que compré se ha convertido en mi pieza favorita del armario.",
+    text: "Una marca con una estética limpia y elegante. El jean que compré se ha convertido en mi pieza favorita del armario.",
     author: "Valentina R.",
     role: "Cliente Vibe & Fit",
     stars: 5,
@@ -212,29 +198,25 @@ export const COLOR_NAMES: Record<string, string> = {
 };
 
 export const PRODUCT_DESCRIPTIONS: Record<ProductCategory, string> = {
-  Vestidos:
-    "Un diseño pensado para acompañar tu silueta con fluidez. Líneas depuradas, tejidos nobles y una caída impecable para cualquier ocasión.",
-  Abrigos:
-    "Siluetas amplias y materiales cálidos que abrazan el frío sin renunciar a la elegancia. Prendas para vivir muchos inviernos.",
-  Blusas:
-    "Detalles sencillos y tejidos ligeros que se adaptan tanto al día como a la noche. La versatilidad de una pieza esencial.",
-  Conjuntos:
-    "Coordinados estudiados para vestir sin esfuerzo. La combinación perfecta entre comodidad y estilo.",
-  Accesorios:
-    "Los complementos que terminan de definir un look. Piezas discretas, atemporales y fáciles de combinar.",
+  Jeans:
+    'Denim de tiro alto que sujeta y estiliza sin apretar. Elasticidad justa para moverte todo el día y una costura que aguanta lavado tras lavado.',
+  Pantalones:
+    'Cortes amplios y rectos que estilizan la pierna. Caída limpia, cintura definida y un tejido con cuerpo que mantiene la forma.',
+  Faldas:
+    'Largo corto con estructura: mantienen la silueta en su sitio y se combinan igual de bien con zapatilla que con tacón.',
+  Shorts:
+    'Denim de verano con tiro alto y bajo trabajado. Cómodos de llevar y fáciles de combinar con cualquier top.',
 };
 
 export const PRODUCT_COMPOSITION: Record<ProductCategory, string> = {
-  Vestidos:
-    "Tejidos nobles seleccionados para una caída natural. Confección con acabados cuidados y forro interior suave al tacto.",
-  Abrigos:
-    "Lana y tejidos cálidos de origen responsable. Forro interior para una mayor protección y comodidad en invierno.",
-  Blusas:
-    "Lino y algodón de tacto suave y transpirable. Entallado ligeramente holgado para mayor confort.",
-  Conjuntos:
-    "Tejidos de punto e hilados seleccionados por su comodidad y durabilidad. Acabados limpios en cada costura.",
-  Accesorios:
-    "Cuero y materiales seleccionados por su textura y durabilidad. Herrajes resistentes y acabados cuidados.",
+  Jeans:
+    'Mezclilla de algodón con elastano para dar recuperación. Lava del revés en frío para conservar el tono.',
+  Pantalones:
+    'Tejido de algodón con cuerpo y poca elasticidad, pensado para que el corte no se deforme con el uso.',
+  Faldas:
+    'Mezclilla firme con forro en la cintura. Lava del revés y evita la secadora para mantener el color.',
+  Shorts:
+    'Mezclilla de algodón con acabado lavado. Los deshilachados del bajo son parte del diseño y se asientan con el uso.',
 };
 
 export const SIZES = ["XS", "S", "M", "L"];

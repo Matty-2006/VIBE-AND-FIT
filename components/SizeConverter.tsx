@@ -49,17 +49,18 @@ export default function SizeConverter() {
   return (
     <div className="flex flex-wrap gap-6">
       <div className="min-w-[200px] flex-1 border border-grey-light bg-white p-6">
-        <label className="mb-2 block text-[0.75rem] uppercase tracking-[0.1em] text-grey">
+        <label htmlFor="sc-region" className="mb-2 block text-[0.75rem] uppercase tracking-[0.1em] text-grey">
           Tu región
         </label>
         <select
+          id="sc-region"
           value={region}
           onChange={(e) => {
             const next = e.target.value as RegionKey;
             setRegion(next);
             setSize(REGIONS[next].sizes[Math.floor(REGIONS[next].sizes.length / 2)][0]);
           }}
-          className="w-full border border-grey-light bg-white p-3 text-sm outline-none"
+          className="w-full border border-grey-light bg-white p-3 text-sm outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze"
         >
           {Object.entries(REGIONS).map(([key, value]) => (
             <option key={key} value={key}>
@@ -70,13 +71,14 @@ export default function SizeConverter() {
       </div>
 
       <div className="min-w-[200px] flex-1 border border-grey-light bg-white p-6">
-        <label className="mb-2 block text-[0.75rem] uppercase tracking-[0.1em] text-grey">
+        <label htmlFor="sc-talla" className="mb-2 block text-[0.75rem] uppercase tracking-[0.1em] text-grey">
           Tu talla
         </label>
         <select
+          id="sc-talla"
           value={size}
           onChange={(e) => setSize(e.target.value)}
-          className="w-full border border-grey-light bg-white p-3 text-sm outline-none"
+          className="w-full border border-grey-light bg-white p-3 text-sm outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze"
         >
           {options.map(([value]) => (
             <option key={value} value={value}>
@@ -87,13 +89,14 @@ export default function SizeConverter() {
       </div>
 
       <div className="min-w-[200px] flex-1 border border-grey-light bg-white p-6">
-        <label className="mb-2 block text-[0.75rem] uppercase tracking-[0.1em] text-grey">
+        <label htmlFor="sc-vibe" className="mb-2 block text-[0.75rem] uppercase tracking-[0.1em] text-grey">
           Talla Vibe & Fit
         </label>
         <select
+          id="sc-vibe"
           value={vibeSize}
           disabled
-          className="w-full cursor-pointer border border-grey-light bg-white p-3 text-sm outline-none disabled:opacity-100"
+          className="w-full cursor-pointer border border-grey-light bg-white p-3 text-sm outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze disabled:opacity-100"
         >
           <option>{vibeSize}</option>
         </select>

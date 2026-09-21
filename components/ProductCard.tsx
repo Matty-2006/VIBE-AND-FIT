@@ -87,10 +87,13 @@ export default function ProductCard({ product }: { product: Product }) {
   };
 
   return (
-    <Link
-      href={`/producto/${product.id}`}
+    // Un enlace no puede contener botones: antes el <Link> envolvía el corazón
+    // y los dos botones, lo que daba HTML inválido y cuatro paradas de tabulación
+    // por tarjeta. Ahora el enlace vive en el título y se extiende sobre toda la
+    // tarjeta con un pseudo-elemento; los controles se sitúan por encima.
+    <div
       data-cursor-text="Ver producto"
-      className="group flex h-full flex-col bg-white"
+      className="group relative flex h-full flex-col bg-white"
     >
       <div
         ref={tiltRef}
@@ -101,7 +104,7 @@ export default function ProductCard({ product }: { product: Product }) {
       >
         <Image
           src={product.image}
-          alt={product.name}
+          alt={product.alt}
           fill
           sizes="(max-width:520px) 50vw, (max-width:1024px) 33vw, 20vw"
           className={`object-contain ${pad}`}
@@ -111,7 +114,7 @@ export default function ProductCard({ product }: { product: Product }) {
             Nuevo
           </span>
         )}
-        <span className="absolute right-3 top-3 z-[2]">
+        <span className="absolute right-3 top-3 z-[3]">
           <HeartButton product={product} />
         </span>
       </div>
@@ -122,10 +125,15 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
         <div className="my-2 h-px w-6 bg-bronze/50" aria-hidden="true" />
         <h3 className="line-clamp-2 min-h-[2.6em] font-serif text-[1.05rem] font-medium leading-[1.3] text-charcoal">
-          {product.name}
+          <Link
+            href={`/producto/${product.id}`}
+            className="after:absolute after:inset-0 after:z-[1] after:content-['']"
+          >
+            {product.name}
+          </Link>
         </h3>
 
-        <div className="mt-3 flex w-full gap-2">
+        <div className="relative z-[2] mt-3 flex w-full gap-2">
           <button
             onClick={(e) => handleAdd(e, false)}
             aria-label={`Añadir ${product.name} al carrito`}
@@ -146,6 +154,6 @@ export default function ProductCard({ product }: { product: Product }) {
           </button>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

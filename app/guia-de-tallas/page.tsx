@@ -6,6 +6,7 @@ import SizeConverter from "@/components/SizeConverter";
 import { siteAsset } from "@/lib/siteAssets";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/guia-de-tallas" },
   title: "Guía de Tallas",
   description:
     "Encuentra tu talla en Vibe & Fit: tabla de medidas en centímetros y consejos para acertar con la elección.",

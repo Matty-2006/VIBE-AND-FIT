@@ -5,6 +5,7 @@ import SectionHeader from "@/components/SectionHeader";
 import { siteAsset } from "@/lib/siteAssets";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/sostenibilidad" },
   title: "Sostenibilidad",
   description:
     "El enfoque responsable de Vibe & Fit: materiales cuidados, pequeñas producciones y un diseño pensado para durar.",
@@ -110,9 +111,9 @@ export default function SostenibilidadPage() {
                     <span className="mb-3 block text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-bronze">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <h3 className="mb-4 font-display text-3xl font-semibold">
+                    <h2 className="mb-4 font-display text-3xl font-semibold">
                       {p.title}
-                    </h3>
+                    </h2>
                     <p className="leading-[1.8] text-grey">{p.desc}</p>
                   </div>
                 </div>
@@ -140,7 +141,7 @@ export default function SostenibilidadPage() {
                     {c.number}
                   </span>
                   <div>
-                    <h4 className="mb-2 font-serif text-lg">{c.title}</h4>
+                    <h3 className="mb-2 font-serif text-lg">{c.title}</h3>
                     <p className="text-[0.9rem] leading-[1.7] text-grey">
                       {c.desc}
                     </p>
