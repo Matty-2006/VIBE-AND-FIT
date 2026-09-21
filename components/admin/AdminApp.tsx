@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import type { CatalogData, Collection, Product, ProductCategory } from "@/lib/types";
 import { COLLECTION_NAMES, PRODUCT_CATEGORIES } from "@/lib/types";
 import { processPhoto } from "@/lib/photo";
-import { colorLabel, detectColor } from "@/lib/colorNames";
+import { DEFAULT_COLOR_SWATCHES, detectColor, colorLabel } from "@/lib/colorNames";
 
 const DEFAULT_COLORS = ["#8fb2c9", "#24405c", "#111111", "#f4efe9"];
 const SIZE_SUGGESTIONS = ["XS", "S", "M", "L", "XL", "XXL"];
@@ -68,6 +68,7 @@ export default function AdminApp() {
   const [saving, setSaving] = useState(false);
   const [notice, setNotice] = useState<Notice>(null);
   const [customSize, setCustomSize] = useState("");
+  const [customColor, setCustomColor] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -193,6 +194,18 @@ export default function AdminApp() {
     if (!s) return;
     setEditing((d) => (d ? { ...d, sizes: d.sizes.includes(s) ? d.sizes : [...d.sizes, s] } : d));
     setCustomSize("");
+  }
+
+  function addCustomColor() {
+    const raw = customColor.trim();
+    if (!raw) return;
+    const detected = detectColor(raw);
+    if (!detected) {
+      setNotice({ kind: "err", text: `No reconozco «${raw}». Prueba con un nombre (azul marino, camel…) o un código como #a52d22.` });
+      return;
+    }
+    setEditing((d) => (d ? { ...d, colors: d.colors.includes(detected.hex) ? d.colors : [...d.colors, detected.hex] } : d));
+    setCustomColor("");
   }
 
   function confirmDelete(p: Product) {
@@ -332,12 +345,16 @@ export default function AdminApp() {
             draft={editing}
             isNew={isNew}
             catalogSizes={catalog.sizes}
+            catalogColors={DEFAULT_COLOR_SWATCHES}
             previewDataUrl={previewDataUrl}
             saving={saving}
             customSize={customSize}
             setCustomSize={setCustomSize}
+            customColor={customColor}
+            setCustomColor={setCustomColor}
             setDraft={(updater) => setEditing((d) => (d ? updater(d) : d))}
             onAddCustomSize={addCustomSize}
+            onAddCustomColor={addCustomColor}
             onPickPhoto={pickPhoto}
             onRemoveNewPhoto={removeNewPhoto}
             onCancel={cancelEdit}
@@ -431,7 +448,11 @@ function Editor({
   customSize,
   setCustomSize,
   setDraft,
+  customColor,
+  setCustomColor,
+  catalogColors,
   onAddCustomSize,
+  onAddCustomColor,
   onPickPhoto,
   onRemoveNewPhoto,
   onCancel,
@@ -445,7 +466,11 @@ function Editor({
   customSize: string;
   setCustomSize: (v: string) => void;
   setDraft: (updater: (d: Product) => Product) => void;
+  customColor: string;
+  setCustomColor: (v: string) => void;
+  catalogColors: string[];
   onAddCustomSize: () => void;
+  onAddCustomColor: () => void;
   onPickPhoto: (file: File | null) => void;
   onRemoveNewPhoto: () => void;
   onCancel: () => void;
@@ -454,6 +479,7 @@ function Editor({
   const inputCls =
     "w-full border border-grey-light bg-white px-4 py-3 text-charcoal outline-none transition-colors focus:border-bronze focus:ring-2 focus:ring-bronze/20";
   const missingSizes = SIZE_SUGGESTIONS.filter((s) => !draft.sizes.includes(s));
+  const missingColors = catalogColors.filter((c) => !draft.colors.includes(c));
 
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0] ?? null;
@@ -595,6 +621,68 @@ function Editor({
           </div>
 
           <div>
+            <FieldLabel>Colores del producto</FieldLabel>
+            <div className="flex flex-wrap gap-2">
+              {draft.colors.map((hex) => (
+                <button
+                  key={hex}
+                  type="button"
+                  onClick={() => setDraft((d) => ({ ...d, colors: d.colors.filter((c) => c !== hex) }))}
+                  className="flex items-center gap-2 border border-bronze bg-bronze px-4 py-2.5 text-[0.9rem] font-semibold text-white transition-colors hover:bg-bronze-dark"
+                  title="Quitar color"
+                >
+                  <span
+                    className="inline-block h-4 w-4 rounded-full border border-white/60"
+                    style={{ backgroundColor: hex }}
+                  />
+                  {colorLabel(hex)} �
+                </button>
+              ))}
+              {missingColors.map((hex) => (
+                <button
+                  key={hex}
+                  type="button"
+                  onClick={() => setDraft((d) => ({ ...d, colors: d.colors.includes(hex) ? d.colors : [...d.colors, hex] }))}
+                  className="flex items-center gap-2 border border-dashed border-grey-light bg-white px-4 py-2.5 text-[0.9rem] font-semibold text-charcoal transition-colors hover:border-bronze hover:text-bronze"
+                >
+                  <span
+                    className="inline-block h-4 w-4 rounded-full border border-grey-light"
+                    style={{ backgroundColor: hex }}
+                  />
+                  + {colorLabel(hex)}
+                </button>
+              ))}
+            </div>
+            <div className="mt-3 flex max-w-sm gap-2">
+              <input
+                type="text"
+                value={customColor}
+                onChange={(e) => setCustomColor(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    onAddCustomColor();
+                  }
+                }}
+                placeholder="Nombre o #hex (ej. arena, #d9c7a7)"
+                className={inputCls}
+              />
+              <button
+                type="button"
+                onClick={onAddCustomColor}
+                className="shrink-0 border border-charcoal px-5 text-[0.8rem] font-semibold uppercase tracking-[0.1em] text-charcoal transition-colors hover:bg-charcoal hover:text-white"
+              >
+                A�adir
+              </button>
+            </div>
+            <p className="mt-2 text-[0.8rem] text-grey">
+              {draft.colors.length === 0
+                ? "Sin colores marcados = se muestran todas las variantes del cat�logo."
+                : "Toca un color marcado para quitarlo; toca �+ color� para a�adirlo."}
+            </p>
+          </div>
+
+          <div>
             <FieldLabel>Etiqueta del producto</FieldLabel>
             <div className="flex flex-wrap gap-2">
               {([null, "new", "sale"] as const).map((b) => (
@@ -680,3 +768,4 @@ function Editor({
     </div>
   );
 }
+
