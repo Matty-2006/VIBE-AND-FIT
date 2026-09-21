@@ -1,24 +1,30 @@
 @import "tailwindcss";
 
 @theme {
-  /* ─── Paleta Vibe & Fit ─── */
-  --color-black: #111111;
+  /* ─── Paleta Vibe & Fit ───
+     Trío clásico de moda femenina premium: espresso (tinta) + marfil cálido
+     (papel) + vino bordó (único acento). Ningún azul. El acento se usa SIEMPRE
+     en dosis pequeñas (ética del acento): el color es apoyo, el negro vende. */
+  --color-black: #181512;
   --color-white: #ffffff;
-  --color-cream: #f4efe9;
-  --color-sand: #e5dccd;
-  --color-taupe: #b3a492;
-  --color-beige: #d6c8b4;
-  --color-bronze: #a98f6d;
-  --color-bronze-light: #cfbfa4;
-  --color-bronze-dark: #8a6d4e;
-  --color-charcoal: #2b2825;
-  --color-grey: #6d665c;
-  --color-grey-light: #e7e2d9;
-  --color-sale: #a53f2b;
+  --color-cream: #faf8f4;
+  --color-sand: #efe9e1;
+  --color-taupe: #b9afa2;
+  --color-beige: #e4dccf;
+  --color-bronze: #7e2738;
+  --color-bronze-light: #d8a3ab;
+  --color-bronze-dark: #5f1a2a;
+  --color-charcoal: #241e19;
+  --color-grey: #776d64;
+  --color-grey-light: #eae4dc;
+  --color-sale: #bd3b2f;
 
-  /* ─── Tipografía ─── */
-  --font-display: var(--font-playfair), "Times New Roman", serif;
-  --font-serif: var(--font-cormorant), Georgia, serif;
+  /* ─── Tipografía ───
+     Sans-display premium (Space Grotesk). El serif-italic foráneo como
+     énfasis estaba baneado: --font-serif se mapea a la MISMA familia para
+     que <em> sea italic de Space Grotesk, no Cormorant. */
+  --font-display: var(--font-space), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-space), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
 
   /* ─── Sombras ─── */
@@ -130,6 +136,7 @@
     color: var(--color-charcoal);
     background: var(--color-cream);
     line-height: 1.6;
+    font-optical-sizing: auto;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -179,6 +186,19 @@
     font-weight: 600;
     letter-spacing: 0.28em;
     text-transform: uppercase;
+  }
+
+  /* Divisor entre secciones: hairline que se funde en los extremos más un
+     rombo en el acento de la marca. currentColor + text-grey hace que se
+     adapte solo al modo oscuro. */
+  .divider-line {
+    background: linear-gradient(
+      to right,
+      transparent,
+      currentColor 45%,
+      currentColor 55%,
+      transparent
+    );
   }
 
   /* ─── Botón de volteo (data-front / data-back) ─── */
@@ -331,6 +351,28 @@
     height: 0;
   }
 
+  /* Esqueleto de carga de imágenes: destello que barre el contenedor mientras
+   la foto aún no llega. */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.45),
+      transparent
+    );
+    animation: skeleton-sweep 1.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+
   /* ─── Textura de grano sutil para secciones editoriales oscuras ─── */
   .grain-overlay {
     position: relative;
@@ -351,40 +393,60 @@
   }
 }
 
-/* ─── Modo oscuro ─── */
+/* ─── Modo oscuro (misma armonía, luminancias invertidas) ─── */
 .dark {
   color-scheme: dark;
-  background: #131110;
+  background: #13100e;
 }
 
 .dark body {
-  background: #131110;
-  color: #ece5d9;
+  background: #13100e;
+  color: #ece6df;
 }
 
-.dark .bg-cream { background-color: #171512; }
-.dark .bg-cream\/90 { background-color: rgba(23, 21, 18, 0.92); }
-.dark .bg-cream\/95 { background-color: rgba(23, 21, 18, 0.96); }
-.dark .bg-white { background-color: #1e1b17; }
-.dark .bg-white\/80 { background-color: rgba(30, 27, 23, 0.85); }
-.dark .bg-sand { background-color: #221e19; }
-.dark .text-charcoal { color: #ece5d9; }
-.dark .text-grey { color: #b3a797; }
-.dark .text-bronze-dark { color: #cfbfa4; }
-.dark .border-grey-light { border-color: #2f2a24; }
-.dark .bg-bronze-light { color: #2b2825; }
+.dark .bg-cream { background-color: #1a1613; }
+.dark .bg-cream\/90 { background-color: rgba(26, 22, 19, 0.92); }
+.dark .bg-cream\/95 { background-color: rgba(26, 22, 19, 0.96); }
+.dark .bg-white { background-color: #211c17; }
+.dark .bg-white\/80 { background-color: rgba(33, 28, 23, 0.85); }
+.dark .bg-sand { background-color: #262019; }
+.dark .text-charcoal { color: #ece6df; }
+.dark .text-grey { color: #b3aaa0; }
+.dark .text-bronze-dark { color: #e3a2ac; }
+.dark .border-grey-light { border-color: #332c25; }
+.dark .bg-bronze-light { background-color: #8a2b41; color: #fff; }
+.dark .bg-bronze { background-color: #963449; }
+.dark .text-sale { color: #e06d5e; }
+/* El destello del esqueleto va más tenue sobre superficies oscuras. */
+.dark .shimmer::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.07),
+    transparent
+  );
+}
 
-/* ─── Cursor personalizado: solo oculta el cursor nativo cuando el */
-/* ─── cursor a medida está realmente activo (ver CustomCursor.tsx) ─── */
-@media (hover: hover) and (pointer: fine) {
-  html.has-custom-cursor,
-  html.has-custom-cursor a,
-  html.has-custom-cursor button,
-  html.has-custom-cursor [data-cursor],
-  html.has-custom-cursor [data-cursor-text] {
-    cursor: none;
+/* Usuarios que piden menos transparencia: se elimina el blur; el fondo
+   translúcido del nav/sidebars se mantiene solvente por las utilidades. */
+@media (prefers-reduced-transparency: reduce) {
+  [class*="backdrop-blur"],
+  [class*="backdrop-brightness"],
+  [class*="backdrop-saturate"] {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
+
+/* Contraste alto: el foco se hace más grueso para no perderse. */
+@media (prefers-contrast: more) {
+  :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+    outline-width: 3px;
+  }
+}
+
+/* Cursor personalizado eliminado: la skill lo banea por estar obsoleto,
+   romper la accesibilidad y costar perf. El cursor nativo vuelve a mandar. */
 
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -398,9 +460,8 @@
 }
 /* Barrido del esqueleto de carga. Va fuera de @theme a proposito: Tailwind v4
    descarta los keyframes de @theme que ninguna variable --animate-* usa, y este
-   se referencia con valor arbitrario. */
+   se referencia con CSS plano (.shimmer). */
 @keyframes skeleton-sweep {
-  100% {
-    transform: translateX(100%);
-  }
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
 }

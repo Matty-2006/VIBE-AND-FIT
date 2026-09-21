@@ -6,6 +6,7 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import { siteAsset } from "@/lib/siteAssets";
 import BrandSeal from "@/components/BrandSeal";
+import SplitText from "@/components/SplitText";
 
 const PARAGRAPHS = [
   "Vibe & Fit nace de una idea sencilla: vestirse bien también es una actitud.",
@@ -81,7 +82,7 @@ export default function BrandStory() {
   return (
     <section
       ref={sectionRef}
-      className="grain-overlay relative bg-black py-32 text-white max-[1024px]:py-20"
+      className="grain-overlay relative bg-black py-20 text-white max-[1024px]:py-20"
     >
       <BrandSeal className="absolute right-10 top-10 text-bronze-light/70" />
       <div className="container grid grid-cols-12 items-center gap-14 max-[1024px]:grid-cols-1 max-[1024px]:gap-10">
@@ -103,11 +104,19 @@ export default function BrandStory() {
               01
             </span>
             <div>
-              <span className="eyebrow block text-white/60">
+              <span className="text-[0.7rem] font-semibold uppercase tracking-[0.24em] text-bronze-light">
                 Nuestra Historia
               </span>
-              <h2 className="font-display text-[clamp(1.8rem,3vw,2.6rem)] font-bold">
-                Estilo que se mueve contigo.
+              <h2 className="font-display text-[clamp(1.8rem,3vw,2.6rem)] font-bold leading-[1.05] tracking-tight">
+                <SplitText
+                  words={[
+                    { text: "Estilo" },
+                    { text: "que" },
+                    { text: "se" },
+                    { text: "mueve" },
+                    { text: "contigo." },
+                  ]}
+                />
               </h2>
             </div>
           </div>

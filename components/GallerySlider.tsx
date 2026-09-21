@@ -13,11 +13,10 @@ export default function GallerySlider() {
   }));
 
   return (
-    <section className="grain-overlay bg-black py-24">
+    <section className="grain-overlay bg-black py-16">
       <div className="container">
         <SectionHeader
           dark
-          eyebrow="Galería en movimiento"
           titleBefore="Piezas que"
           titleEm="fluyen"
           description="Desliza, arrastra o usa la rueda para mover la colección."

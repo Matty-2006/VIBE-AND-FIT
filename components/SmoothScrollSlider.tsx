@@ -360,7 +360,7 @@ export default function SmoothScrollSlider({
               alt={slide.alt}
               fill
               sizes={`${Math.round(slideWidth)}px`}
-              quality={85}
+              quality={90}
               draggable={false}
               style={{
                 objectFit: "cover",

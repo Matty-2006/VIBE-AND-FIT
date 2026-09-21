@@ -1,4 +1,4 @@
-const DOTS = ["#8fb2c9", "#24405c", "#111111", "#f4efe9"];
+const DOTS = ["#7e2738", "#d8a3ab", "#241e19", "#faf8f4"];
 
 export function OgCard({
   name,
@@ -34,7 +34,7 @@ export function OgCard({
           top: 0,
           bottom: 0,
           width: 6,
-          background: "linear-gradient(#8fb2c9, #24405c, #111111, #f4efe9)",
+          background: "linear-gradient(#7e2738, #d8a3ab, #241e19, #faf8f4)",
         }}
       />
       <div
@@ -56,7 +56,7 @@ export function OgCard({
           width: 400,
           height: 400,
           borderRadius: 999,
-          border: "1px solid rgba(198,169,120,0.35)",
+          border: "1px solid rgba(216,163,171,0.35)",
         }}
       />
 
@@ -95,7 +95,7 @@ export function OgCard({
 
       <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <div style={{ width: 64, height: 1, background: "rgba(198,169,120,0.7)" }} />
+          <div style={{ width: 64, height: 1, background: "rgba(216,163,171,0.7)" }} />
           <div
             style={{
               fontSize: 22,
@@ -122,7 +122,7 @@ export function OgCard({
             style={{
               fontFamily: "Jost",
               fontStyle: "italic",
-              color: "#c6a978",
+              color: "#d8a3ab",
               paddingLeft: 14,
             }}
           >

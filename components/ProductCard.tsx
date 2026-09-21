@@ -41,6 +41,7 @@ function HeartButton({ product }: { product: Product }) {
 export default function ProductCard({ product }: { product: Product }) {
   const { addItem, openCart } = useCart();
   const [added, setAdded] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const tiltRef = useRef<HTMLDivElement>(null);
 
   const onTiltMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -99,15 +100,22 @@ export default function ProductCard({ product }: { product: Product }) {
         ref={tiltRef}
         onMouseMove={onTiltMove}
         onMouseLeave={onTiltLeave}
-        className="relative aspect-[3/4] overflow-hidden bg-white transition-transform duration-300 ease-out will-change-transform"
+        className={`relative aspect-[3/4] overflow-hidden bg-white transition-transform duration-300 ease-out will-change-transform ${
+          loaded ? "" : "shimmer"
+        }`}
         style={{ backgroundImage: tint }}
       >
         <Image
           src={product.image}
           alt={product.alt}
           fill
+          quality={100}
+          onLoad={() => setLoaded(true)}
+          onError={() => setLoaded(true)}
           sizes="(max-width:520px) 50vw, (max-width:1024px) 33vw, 20vw"
-          className={`object-contain ${pad}`}
+          className={`object-contain ${pad} transition-opacity duration-500 ${
+            loaded ? "opacity-100" : "opacity-0"
+          }`}
         />
         {product.badge === "new" && (
           <span className="absolute left-3 top-3 z-[1] bg-charcoal px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-white">

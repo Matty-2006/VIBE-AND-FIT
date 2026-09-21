@@ -1,3 +1,5 @@
+import SplitText, { type SplitWord } from "@/components/SplitText";
+
 type SectionHeaderProps = {
   eyebrow?: string;
   titleBefore?: string;
@@ -5,6 +7,17 @@ type SectionHeaderProps = {
   description?: string;
   dark?: boolean;
 };
+
+function wordsFor(titleBefore?: string, titleEm?: string): SplitWord[] {
+  return [
+    ...(titleBefore
+      ? titleBefore.split(" ").filter(Boolean).map((text) => ({ text }))
+      : []),
+    ...(titleEm
+      ? titleEm.split(" ").filter(Boolean).map((text) => ({ text, accent: true }))
+      : []),
+  ];
+}
 
 export default function SectionHeader({
   eyebrow,
@@ -14,23 +27,32 @@ export default function SectionHeader({
   dark = false,
 }: SectionHeaderProps) {
   return (
-    <div className={`mb-16 text-center ${dark ? "text-white" : ""}`}>
+    <div className={`mb-12 max-w-[820px] ${dark ? "text-white" : ""}`}>
       {eyebrow && (
-        <span className="mb-4 block text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-bronze">
+        <p className="mb-4 text-[0.7rem] font-semibold uppercase tracking-[0.24em] text-bronze">
           {eyebrow}
-        </span>
+        </p>
       )}
       <h2
-        className={`font-display text-[clamp(1.8rem,3vw,2.6rem)] font-bold tracking-[0.04em] ${
+        className={`font-display text-[clamp(2rem,4.6vw,3.4rem)] font-bold leading-[1.05] tracking-tight text-balance ${
           dark ? "text-white" : ""
         }`}
       >
-        {titleBefore}{" "}
-        {titleEm && <em className="italic text-bronze">{titleEm}</em>}
+        <SplitText
+          words={wordsFor(titleBefore, titleEm)}
+          accentClassName={
+            dark ? "italic text-bronze-light" : "italic text-bronze"
+          }
+        />
       </h2>
-      <div className="section-line mx-auto mt-4" />
       {description && (
-        <p className="mt-4 font-serif italic text-grey">{description}</p>
+        <p
+          className={`mt-5 max-w-[62ch] text-base leading-relaxed ${
+            dark ? "text-white/70" : "text-grey"
+          }`}
+        >
+          {description}
+        </p>
       )}
     </div>
   );

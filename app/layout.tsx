@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Jost, Playfair_Display } from "next/font/google";
+import { Jost, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/data";
 import CartProvider from "@/context/CartContext";
@@ -10,22 +10,14 @@ import Footer from "@/components/Footer";
 import CartSidebar from "@/components/CartSidebar";
 import FavoritesSidebar from "@/components/FavoritesSidebar";
 import SmoothScroll from "@/components/SmoothScroll";
-import CustomCursor from "@/components/CustomCursor";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import BackToTop from "@/components/BackToTop";
 import LoadingScreen from "@/components/LoadingScreen";
 import PageTransitions from "@/components/PageTransitions";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space",
   subsets: ["latin"],
-  display: "swap",
-});
-
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -76,8 +68,8 @@ const themeInit = `(function(){try{var t=localStorage.getItem("vibefit-theme");i
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f4efe9" },
-    { media: "(prefers-color-scheme: dark)", color: "#131110" },
+    { media: "(prefers-color-scheme: light)", color: "#faf8f4" },
+    { media: "(prefers-color-scheme: dark)", color: "#13100e" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -105,7 +97,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${playfair.variable} ${cormorant.variable} ${jost.variable} h-full antialiased`}
+      className={`${spaceGrotesk.variable} ${jost.variable} h-full antialiased`}
     >
       <head>
         <script
@@ -133,7 +125,6 @@ export default function RootLayout({
             </FavoritesProvider>
           </CartProvider>
         </SmoothScroll>
-        <CustomCursor />
         <WhatsAppFloat />
         <BackToTop />
         <PageTransitions />

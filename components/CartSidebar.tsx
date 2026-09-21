@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { useScrollLock } from "@/lib/useScrollLock";
+import { useFocusTrap } from "@/lib/useFocusTrap";
 import { SITE } from "@/lib/data";
 import { whatsappLink, whatsappOrderMessage } from "@/lib/whatsapp";
 
@@ -15,8 +16,10 @@ export default function CartSidebar() {
   const [city, setCity] = useState("");
   const [notes, setNotes] = useState("");
   const [sent, setSent] = useState(false);
+  const panelRef = useRef<HTMLElement>(null);
 
   useScrollLock(isOpen);
+  useFocusTrap(panelRef, isOpen);
 
   const handleClose = useCallback(() => {
     setStep("cart");
@@ -61,6 +64,7 @@ export default function CartSidebar() {
         onClick={handleClose}
       />
       <aside
+        ref={panelRef}
         className={`fixed right-0 top-0 z-[10000] flex h-full w-[440px] max-w-full flex-col bg-white transition-transform duration-[400ms] ease-[cubic-bezier(0.32,0.72,0,1)] ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
@@ -78,9 +82,17 @@ export default function CartSidebar() {
           <button
             onClick={handleClose}
             aria-label="Cerrar carrito"
-            className="text-[1.3rem] text-charcoal"
+            className="flex h-10 w-10 items-center justify-center text-charcoal transition-transform duration-[400ms] hover:rotate-90"
           >
-            ✕
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              className="h-[22px] w-[22px]"
+            >
+              <path d="M6 6l12 12M18 6 6 18" />
+            </svg>
           </button>
         </div>
 

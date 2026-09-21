@@ -21,16 +21,17 @@ export default function Reveal({ children, className = "", delay = 0, y = 48 }: 
     const ctx = gsap.context(() => {
       const tween = gsap.fromTo(
         el,
-        { autoAlpha: 0, y },
+        { autoAlpha: 0, y, scale: 0.995 },
         {
           autoAlpha: 1,
           y: 0,
+          scale: 1,
           duration: 1,
           delay,
-          ease: "power3.out",
+          ease: "power4.out",
           scrollTrigger: {
             trigger: el,
-            start: "top 92%",
+            start: "top 90%",
             once: true,
             invalidateOnRefresh: true,
           },
@@ -38,7 +39,7 @@ export default function Reveal({ children, className = "", delay = 0, y = 48 }: 
       );
       const failSafe = window.setTimeout(() => {
         if (tween.progress() === 0 && !tween.isActive()) {
-          gsap.set(el, { autoAlpha: 1, y: 0 });
+          gsap.set(el, { autoAlpha: 1, y: 0, scale: 1 });
         }
       }, 2500);
       tween.eventCallback("onStart", () => window.clearTimeout(failSafe));

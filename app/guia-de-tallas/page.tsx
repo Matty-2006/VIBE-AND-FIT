@@ -57,7 +57,6 @@ export default function GuiaDeTallasPage() {
         <div className="container">
           <Reveal>
             <SectionHeader
-              eyebrow="Medidas"
               titleBefore="Tabla de"
               titleEm="medidas"
               description="Medidas en centímetros. Ayúdate de una cinta métrica para lograr la precisión perfecta."
@@ -132,7 +131,6 @@ export default function GuiaDeTallasPage() {
         <div className="container">
           <Reveal>
             <SectionHeader
-              eyebrow="Conversor"
               titleBefore="Conversor"
               titleEm="internacional"
               description="Convierte tu talla europea a otros mercados."
@@ -149,7 +147,7 @@ export default function GuiaDeTallasPage() {
       <section className="py-24">
         <div className="container">
           <Reveal>
-            <SectionHeader eyebrow="Consejos" titleBefore="Consejos" titleEm="prácticos" />
+            <SectionHeader titleBefore="Consejos" titleEm="prácticos" />
           </Reveal>
           <Reveal>
             <div className="mx-auto mt-10 max-w-[720px]">

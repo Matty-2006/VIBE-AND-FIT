@@ -2,7 +2,8 @@
 
 import { useState, type FormEvent } from "react";
 import Reveal from "@/components/Reveal";
-import { sendRegistration } from "@/app/actions/newsletter";
+import SplitText from "@/components/SplitText";
+import { SITE } from "@/lib/data";
 
 type FieldErrors = { telefono?: string; correo?: string; mensaje?: string };
 
@@ -12,11 +13,9 @@ export default function Newsletter() {
   const [correo, setCorreo] = useState("");
   const [mensaje, setMensaje] = useState("");
   const [errors, setErrors] = useState<FieldErrors>({});
-  const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
-  const [error, setError] = useState("");
 
-  const onSubmit = async (e: FormEvent) => {
+  const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     const errs: FieldErrors = {};
     if (!/^[+\d][\d\s\-()]{6,}$/.test(telefono.trim())) {
@@ -31,20 +30,18 @@ export default function Newsletter() {
     setErrors(errs);
     if (errs.telefono || errs.correo || errs.mensaje) return;
 
-    setSending(true);
-    setError("");
-    const res = await sendRegistration({
-      nombre: nombre.trim(),
-      telefono: telefono.trim(),
-      correo: correo.trim(),
-      mensaje: mensaje.trim() || undefined,
-    });
-    setSending(false);
-
-    if (!res.ok) {
-      setError(res.message ?? "No se pudo enviar. Inténtalo de nuevo.");
-      return;
-    }
+    const lines = [
+      "Hola Vibe & Fit, quiero más información:",
+      "",
+      ...(nombre.trim() ? [`Nombre: ${nombre.trim()}`] : []),
+      `Teléfono: ${telefono.trim()}`,
+      `Correo: ${correo.trim()}`,
+      ...(mensaje.trim() ? [`Mensaje: ${mensaje.trim()}`] : []),
+    ];
+    const url = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(
+      lines.join("\n")
+    )}`;
+    window.open(url, "_blank", "noopener,noreferrer");
     setDone(true);
     setNombre("");
     setTelefono("");
@@ -53,26 +50,36 @@ export default function Newsletter() {
   };
 
   const inputClass =
-    "w-full border border-grey-light bg-transparent px-4 py-3.5 font-serif text-[0.98rem] italic outline-none transition-colors duration-[300ms] focus:border-bronze"; 
+    "w-full border border-grey-light bg-transparent px-4 py-3.5 text-[0.98rem] outline-none transition-colors duration-[300ms] focus:border-bronze"; 
 
   return (
-    <section id="contacto" className="border-t border-grey-light py-28 text-center">
+    <section id="contacto" className="border-t border-grey-light py-20 text-center">
       <div className="container px-5">
         <Reveal>
-          <span className="eyebrow mb-6 block text-bronze">Contacto &amp; Newsletter</span>
-          <h2 className="font-display text-[clamp(2rem,4vw,3.2rem)] font-bold">
-            Hablemos, o sé parte de Vibe &amp; Fit
+          <h2 className="font-display text-[clamp(2rem,4vw,3.2rem)] font-bold leading-[1.05] tracking-tight">
+            <SplitText
+              words={[
+                { text: "Hablemos," },
+                { text: "o" },
+                { text: "sé" },
+                { text: "parte" },
+                { text: "de" },
+                { text: "Vibe" },
+                { text: "&" },
+                { text: "Fit" },
+              ]}
+            />
           </h2>
-          <p className="mx-auto mt-4 mb-10 max-w-[440px] font-serif italic text-grey">
+          <p className="mx-auto mt-5 mb-10 max-w-[440px] leading-relaxed text-grey">
             Escríbenos tus dudas o déjanos tus datos para recibir nuevas
             colecciones y contenido exclusivo. Sin ruido, como a nosotros nos
             gusta.
           </p>
 
           {done ? (
-            <div className="mx-auto max-w-[520px] border border-bronze py-6 px-6 font-serif italic text-charcoal">
-              ¡Gracias! Hemos recibido tu mensaje y te escribiremos por
-              WhatsApp muy pronto.
+            <div className="mx-auto max-w-[520px] border border-bronze bg-bronze/[0.04] py-6 px-6 text-charcoal">
+              ¡Listo! Tu mensaje se abrió en WhatsApp. Solo queda enviarlo
+              desde allí y te responderemos en breve.
             </div>
           ) : (
             <form
@@ -169,17 +176,10 @@ export default function Newsletter() {
 
               <button
                 type="submit"
-                disabled={sending}
-                className="btn-sweep sm:col-span-2 bg-charcoal px-8 py-4 text-[0.76rem] font-semibold uppercase tracking-[0.18em] text-white disabled:cursor-wait disabled:opacity-70"
+                className="btn-sweep sm:col-span-2 bg-charcoal px-8 py-4 text-[0.76rem] font-semibold uppercase tracking-[0.18em] text-white"
               >
-                {sending ? "Enviando…" : "Enviar"}
+                Enviar por WhatsApp
               </button>
-
-              {error && (
-                <p role="alert" className="sm:col-span-2 text-[0.8rem] text-sale">
-                  {error}
-                </p>
-              )}
             </form>
           )}
 

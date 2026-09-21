@@ -88,7 +88,7 @@ export default function Navigation() {
       <header
         className={`sticky top-0 z-[1000] transition-all duration-[400ms] ease-out ${
           solid
-            ? "border-b border-grey-light/70 bg-cream/90 shadow-sm backdrop-blur-md"
+            ? "border-b border-grey-light/70 bg-cream/95 shadow-sm backdrop-blur-md"
             : "border-b border-transparent bg-transparent"
         }`}
       >

@@ -1,11 +1,12 @@
+import BestSellers from "@/components/BestSellers";
 import BrandStory from "@/components/BrandStory";
 import Catalog from "@/components/Catalog";
 import CTASection from "@/components/CTASection";
+import Divider from "@/components/Divider";
 import EditorialSplit from "@/components/EditorialSplit";
 import GallerySlider from "@/components/GallerySlider";
 import HeroSlideshow from "@/components/HeroSlideshow";
 import InstagramGallery from "@/components/InstagramGallery";
-import Lookbook from "@/components/Lookbook";
 import Newsletter from "@/components/Newsletter";
 import Testimonials from "@/components/Testimonials";
 import TrustBar from "@/components/TrustBar";
@@ -28,12 +29,15 @@ export default function HomePage() {
     <>
       <HeroSlideshow slides={slides} />
       <TrustBar />
+      <Divider />
       <Catalog />
       <GallerySlider />
+      <Divider />
       <EditorialSplit />
       <CTASection />
-      <Lookbook />
+      <BestSellers />
       <BrandStory />
+      <Divider />
       <Testimonials />
       <Newsletter />
       <InstagramGallery />

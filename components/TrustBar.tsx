@@ -41,25 +41,33 @@ const ITEMS = [
   },
 ];
 
+// Ticker infinito: dos copias idénticas viajan -50% y se encadenan sin costura.
+// Pausa al pasar el ratón; el CSS global de prefers-reduced-motion lo congela.
 export default function TrustBar() {
   return (
-    <section className="border-b border-grey-light bg-white py-8" aria-label="Beneficios de comprar en Vibe & Fit">
-      <div className="container">
-        <div className="grid grid-cols-2 gap-y-7 gap-x-4 sm:grid-cols-4">
-          {ITEMS.map((item) => (
-            <div
-              key={item.label}
-              className="flex flex-col items-center gap-2.5 text-center sm:flex-row sm:gap-3 sm:text-left"
-            >
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-bronze/40 text-bronze">
-                {item.icon}
-              </span>
-              <span className="text-[0.72rem] font-semibold uppercase leading-tight tracking-[0.08em] text-charcoal">
-                {item.label}
-              </span>
-            </div>
-          ))}
-        </div>
+    <section
+      aria-label="Beneficios de comprar en Vibe & Fit"
+      className="overflow-hidden border-b border-grey-light bg-white py-7"
+    >
+      <div className="animate-marquee flex w-max items-center will-change-transform hover:[animation-play-state:paused]">
+        {[0, 1].map((copy) => (
+          <div
+            key={copy}
+            aria-hidden={copy === 1}
+            className="flex shrink-0 items-center gap-12 pr-12"
+          >
+            {ITEMS.map((item) => (
+              <div key={item.label} className="flex items-center gap-3">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-bronze/40 text-bronze">
+                  {item.icon}
+                </span>
+                <span className="text-[0.72rem] font-semibold uppercase leading-tight tracking-[0.16em] text-charcoal">
+                  {item.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
     </section>
   );

@@ -58,11 +58,10 @@ export default function Testimonials() {
     <section
       ref={rootRef}
       id="testimonios"
-      className="border-y border-grey-light bg-white py-24"
+      className="border-y border-grey-light bg-white py-16"
     >
       <div className="container">
         <SectionHeader
-          eyebrow="Testimonios"
           titleBefore="Lo que"
           titleEm="dicen"
           description="Historias reales de quienes ya visten Vibe & Fit."

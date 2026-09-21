@@ -93,7 +93,6 @@ export default function Lookbook() {
       <div className="container">
         <Reveal>
           <SectionHeader
-            eyebrow="Lookbook"
             titleBefore="Una Narrativa"
             titleEm="Visual"
             description="La colección contada en imágenes. Una mirada editorial a cada propuesta."

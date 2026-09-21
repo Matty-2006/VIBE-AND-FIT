@@ -8,7 +8,7 @@ const csp = [
   "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
   "style-src 'self' 'unsafe-inline'",
   "font-src 'self' data:",
-  "img-src 'self' data: blob:",
+  "img-src 'self' data: blob: https://images.unsplash.com https://thumb.wikimedia.org https://upload.wikimedia.org",
   "connect-src 'self'",
   "form-action 'self'",
   "base-uri 'self'",
@@ -19,15 +19,28 @@ const csp = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
-  images: {
-    formats: ["image/avif", "image/webp"],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 2560],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 2678400,
+images: {
+      formats: ["image/avif", "image/webp"],
+      deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 2560],
+      imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+      qualities: [75, 80, 85, 90, 100],
+      minimumCacheTTL: 2678400,
     remotePatterns: [
       {
         protocol: "https",
         hostname: "images.unsplash.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "thumb.wikimedia.org",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "upload.wikimedia.org",
         port: "",
         pathname: "/**",
       },

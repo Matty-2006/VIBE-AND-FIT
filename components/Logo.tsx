@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Logo({
   className = "",
@@ -11,14 +11,26 @@ export default function Logo({
   imageClass?: string;
 }) {
   const [failed, setFailed] = useState(false);
+  const [dark, setDark] = useState(false);
 
-  if (failed) {
+  useEffect(() => {
+    const el = document.documentElement;
+    const upd = () => setDark(el.classList.contains("dark"));
+    upd();
+    const mo = new MutationObserver(upd);
+    mo.observe(el, { attributes: true, attributeFilter: ["class"] });
+    return () => mo.disconnect();
+  }, []);
+
+  if (failed || dark) {
     return (
       <span
         className={`font-display text-[1.35rem] font-semibold leading-none tracking-[0.18em] ${className}`}
       >
-        Vibe{" "}
-        <span className="font-serif text-[1.15rem] italic">&#38;</span> Fit
+        <span className="text-white">
+          Vibe{" "}
+          <span className="font-serif text-[1.15rem] italic">&#38;</span> Fit
+        </span>
       </span>
     );
   }

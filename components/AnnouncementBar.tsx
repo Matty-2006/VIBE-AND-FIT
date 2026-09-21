@@ -27,9 +27,17 @@ export default function AnnouncementBar() {
       <button
         onClick={() => setHidden(true)}
         aria-label="Cerrar aviso"
-        className="absolute right-4 z-[2] text-sm text-white/50 transition-colors hover:text-bronze-light"
+        className="absolute right-4 z-[2] p-1 text-white/50 transition-colors hover:text-bronze-light"
       >
-        ✕
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          className="h-[14px] w-[14px]"
+        >
+          <path d="M6 6l12 12M18 6 6 18" />
+        </svg>
       </button>
     </div>
   );

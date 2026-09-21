@@ -1,18 +1,53 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useLayoutEffect, useRef } from "react";
+import { gsap } from "@/lib/gsap";
 import Reveal from "@/components/Reveal";
 import Magnetic from "@/components/Magnetic";
 import { siteAsset } from "@/lib/siteAssets";
 
 export default function CTASection() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useLayoutEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ".cta-img",
+        { yPercent: -8 },
+        {
+          yPercent: 8,
+          ease: "none",
+          scrollTrigger: {
+            trigger: el,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        }
+      );
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="grain-overlay relative flex h-[62vh] min-h-[420px] items-center justify-center overflow-hidden bg-black">
+    <section
+      ref={sectionRef}
+      className="grain-overlay relative flex h-[62vh] min-h-[420px] items-center justify-center overflow-hidden bg-black"
+    >
       <Image
         src={siteAsset(9)}
         alt="Nueva colección Vibe & Fit"
         fill
+        quality={90}
         sizes="100vw"
-        className="object-cover opacity-70"
+        className="cta-img scale-[1.16] object-cover opacity-70 will-change-transform"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/60" />
 

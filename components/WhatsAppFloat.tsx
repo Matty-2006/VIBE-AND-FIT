@@ -17,7 +17,7 @@ export default function WhatsAppFloat() {
         {SITE.whatsappDisplay}
       </span>
 
-      <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[#2fd26d] to-[#1fbd5a] text-white shadow-[0_12px_28px_-8px_rgba(37,211,102,0.65)] transition-transform duration-[400ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-110 active:scale-95 max-[600px]:h-[52px] max-[600px]:w-[52px]">
+      <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[#2fd26d] to-[#1fbd5a] text-white shadow-[0_12px_28px_-8px_rgba(37,211,102,0.65)] transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-110 active:scale-95 max-[600px]:h-[52px] max-[600px]:w-[52px]">
         <span
           aria-hidden="true"
           className="absolute inset-0 animate-wa-ring rounded-full border-2 border-[#25D366]"

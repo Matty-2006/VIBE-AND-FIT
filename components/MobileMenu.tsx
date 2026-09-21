@@ -5,6 +5,7 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import { NAV_LINKS, SITE } from "@/lib/data";
 import ThemeToggle from "@/components/ThemeToggle";
+import { useFocusTrap } from "@/lib/useFocusTrap";
 
 export default function MobileMenu({
   open,
@@ -14,6 +15,7 @@ export default function MobileMenu({
   onClose: () => void;
 }) {
   const panelRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(panelRef, open);
 
   useLayoutEffect(() => {
     const panel = panelRef.current;

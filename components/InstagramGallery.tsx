@@ -15,11 +15,10 @@ function InstagramIcon() {
 
 export default function InstagramGallery() {
   return (
-    <section className="border-t border-grey-light pb-28 pt-4">
+    <section className="border-t border-grey-light pb-20 pt-4">
       <div className="container">
         <Reveal>
           <SectionHeader
-            eyebrow="Instagram"
             titleBefore={SITE.instagram}
             titleEm=""
             description="Síguenos en Instagram"
