@@ -59,9 +59,16 @@ export function saveImageToDisk(fileName: string, base64Data: string): void {
   if (buffer.byteLength <= 0 || buffer.byteLength > 8 * 1024 * 1024) {
     throw new Error("La foto está vacía o pesa más de 8 MB. Elige una foto más ligera.");
   }
-  const dir = path.join(process.cwd(), "public", "images");
-  fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(path.join(dir, safe), buffer);
+  // Best-effort: en Vercel el disco es de solo lectura (EROFS/EROFS) y aquí
+  // no hace falta guardar nada — lo que publica de verdad es GitHub. Esto solo
+  // deja la web local al día. Si no se puede, no es un error.
+  try {
+    const dir = path.join(process.cwd(), "public", "images");
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, safe), buffer);
+  } catch {
+    // EROFS en Vercel: se ignora, GitHub se encarga.
+  }
 }
 
 export function deleteImageFromDisk(fileName: string): void {
