@@ -45,11 +45,18 @@ async function errorText(res: Response): Promise<string> {
 }
 
 async function putFile(filePath: string, contentBase64: string, message: string): Promise<PublishResult> {
-  const res = await ghRequest(`/repos/${REPO}/contents/${filePath}?branch=${BRANCH}`, "PUT", {
-    message,
-    content: contentBase64,
-    branch: BRANCH,
-  });
+  // GitHub exige el `sha` del archivo actual para poder actualizarlo
+  // (es el mecanismo que evita pisar cambios de otra persona). Si el
+  // archivo todavía no existe, se crea sin sha.
+  let sha: string | undefined;
+  const existing = await ghRequest(`/repos/${REPO}/contents/${filePath}?branch=${BRANCH}`, "GET");
+  if (existing.ok) {
+    const data = (await existing.json()) as { sha?: string };
+    sha = data.sha;
+  }
+  const payload: Record<string, unknown> = { message, content: contentBase64, branch: BRANCH };
+  if (sha) payload.sha = sha;
+  const res = await ghRequest(`/repos/${REPO}/contents/${filePath}?branch=${BRANCH}`, "PUT", payload);
   if (!res.ok) return { ok: false, error: `GitHub: no se pudo guardar ${filePath}: ${await errorText(res)}` };
   const data = (await res.json()) as { commit?: { html_url?: string } };
   return data.commit?.html_url ? { ok: true, commitUrl: data.commit.html_url } : { ok: true };
