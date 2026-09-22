@@ -61,6 +61,21 @@ function sanitizeProduct(raw: unknown, index: number): Product | null {
 }
 
 export async function POST(request: Request) {
+  return saveFromRequest(request);
+}
+
+async function saveFromRequest(request: Request): Promise<Response> {
+  try {
+    return await saveFromRequestInner(request);
+  } catch (err) {
+    return Response.json(
+      { ok: false, error: `Error interno al guardar: ${err instanceof Error ? err.message : String(err)}` },
+      { status: 500 }
+    );
+  }
+}
+
+async function saveFromRequestInner(request: Request): Promise<Response> {
   const sessionOk = await verifySession();
   if (!sessionOk) return UNAUTHORIZED;
 
@@ -149,10 +164,25 @@ export async function POST(request: Request) {
   }
 
   // 3) Catálogo → disco (mantiene la web en local al día al momento).
-  writeCatalogToDisk(catalog);
+  try {
+    writeCatalogToDisk(catalog);
+  } catch (err) {
+    return Response.json(
+      { ok: false, error: `No se pudo guardar el catálogo: ${err instanceof Error ? err.message : String(err)}` },
+      { status: 500 }
+    );
+  }
 
   // 4) Publicar en GitHub (requiere GITHUB_TOKEN). Vercel redespliega solo.
-  const pushed = await publishCatalogToRepo({ catalog, images, deleteImages });
+  let pushed: PublishResult;
+  try {
+    pushed = await publishCatalogToRepo({ catalog, images, deleteImages });
+  } catch (err) {
+    return Response.json(
+      { ok: false, error: `No se pudo publicar en GitHub: ${err instanceof Error ? err.message : String(err)}` },
+      { status: 500 }
+    );
+  }
 
   const message = pushed.ok
     ? "Cambios guardados. Vercel está redesplegando; en 1–2 minutos la página quedará actualizada (sin recargar nada). Esto se hace automáticamente."
