@@ -7,7 +7,7 @@ import {
   saveImageToDisk,
   writeCatalogToDisk,
 } from "@/lib/catalog";
-import { publishCatalogToRepo } from "@/lib/github";
+import { publishCatalogToRepo, type PublishResult } from "@/lib/github";
 import { COLLECTION_NAMES, PRODUCT_CATEGORIES } from "@/lib/types";
 import type { CatalogData, Product } from "@/lib/types";
 
