@@ -56,8 +56,8 @@ export function saveImageToDisk(fileName: string, base64Data: string): void {
   const safe = path.basename(fileName);
   if (!UPLOAD_RE.test(safe)) throw new Error("Nombre de imagen no válido");
   const buffer = Buffer.from(base64Data, "base64");
-  if (buffer.byteLength <= 0 || buffer.byteLength > 4 * 1024 * 1024) {
-    throw new Error("La imagen está vacía o pesa demasiado");
+  if (buffer.byteLength <= 0 || buffer.byteLength > 8 * 1024 * 1024) {
+    throw new Error("La foto está vacía o pesa más de 8 MB. Elige una foto más ligera.");
   }
   const dir = path.join(process.cwd(), "public", "images");
   fs.mkdirSync(dir, { recursive: true });

@@ -127,9 +127,12 @@ export async function POST(request: Request) {
       saveImageToDisk(name, data);
       uploadedNames.add(name);
       images.push({ name, data });
-    } catch {
+    } catch (err) {
       return Response.json(
-        { ok: false, error: `No se pudo guardar la foto ${name}.` },
+        {
+          ok: false,
+          error: err instanceof Error ? err.message : `No se pudo guardar la foto ${name}.`,
+        },
         { status: 400 }
       );
     }
