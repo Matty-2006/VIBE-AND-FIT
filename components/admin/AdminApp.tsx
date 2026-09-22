@@ -410,7 +410,7 @@ export default function AdminApp() {
                       <img src={p.image} alt={p.alt || p.name} className="h-full w-full object-cover" />
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block truncate font-serif text-[1.05rem] text-charcoal">
+                      <span className="block break-words font-serif text-[1.05rem] leading-snug text-charcoal">
                         {p.name}
                       </span>
                       <span className="mt-1 block text-[0.74rem] uppercase tracking-[0.1em] text-grey">
@@ -419,7 +419,7 @@ export default function AdminApp() {
                         {BADGE_LABELS[String(p.badge)]}
                       </span>
                     </span>
-                    <span className="flex gap-2">
+                    <span className="flex shrink-0 flex-col gap-2">
                       <button
                         onClick={() => startEdit(p)}
                         className="border border-bronze bg-bronze px-5 py-2.5 text-[0.76rem] font-semibold uppercase tracking-[0.1em] text-white transition-colors hover:bg-bronze-dark"
