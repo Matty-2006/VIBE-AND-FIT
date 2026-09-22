@@ -154,23 +154,26 @@ async function saveFromRequestInner(request: Request): Promise<Response> {
   }
 
   // 2) Fotos que ya nadie usa (reemplazadas o de productos borrados) → disco.
+  //    Best-effort: en Vercel el disco es solo lectura (EROFS) y no importa;
+  //    lo que publica de verdad es GitHub. Esto solo mantiene la web local viva.
   const previousImages = new Set(
     getCatalog().products.map((p) => p.image).filter(isUploadImage)
   );
   const nextImages = new Set(finalProducts.map((p) => p.image).filter(isUploadImage));
   const deleteImages = [...previousImages].filter((image) => !nextImages.has(image));
   for (const imagePath of deleteImages) {
-    deleteImageFromDisk(imagePath.replace(/^\/images\//, ""));
+    try {
+      deleteImageFromDisk(imagePath.replace(/^\/images\//, ""));
+    } catch {
+      // EROFS en Vercel: irrelevante, GitHub se encarga.
+    }
   }
 
-  // 3) Catálogo → disco (mantiene la web en local al día al momento).
+  // 3) Catálogo → disco (solo sirve en local para dejar la web al día al momento).
   try {
     writeCatalogToDisk(catalog);
-  } catch (err) {
-    return Response.json(
-      { ok: false, error: `No se pudo guardar el catálogo: ${err instanceof Error ? err.message : String(err)}` },
-      { status: 500 }
-    );
+  } catch {
+    // EROFS en Vercel: aquí no hay disco de escritura; no es un error real.
   }
 
   // 4) Publicar en GitHub (requiere GITHUB_TOKEN). Vercel redespliega solo.
