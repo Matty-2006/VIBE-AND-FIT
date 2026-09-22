@@ -168,8 +168,13 @@ export default function AdminApp() {
 
   async function pickPhoto(file: File | null) {
     if (!file || !editing) return;
-    if (!file.type.startsWith("image/")) {
-      setNotice({ kind: "err", text: "Ese archivo no es una foto. Elige una imagen (JPG, PNG, WebP…)." });
+    const ALLOWED_TYPES = ["image/webp", "image/jpeg", "image/png", "image/gif", "image/avif", "image/bmp"];
+    if (!ALLOWED_TYPES.includes(file.type.toLowerCase())) {
+      setNotice({ kind: "err", text: "Formato no compatible. Usa WebP, JPG, PNG, GIF, AVIF o BMP (los más usados)." });
+      return;
+    }
+    if (file.size > 8 * 1024 * 1024) {
+      setNotice({ kind: "err", text: "La foto pesa más de 8 MB y haría la página lenta. Elige una foto más ligera." });
       return;
     }
     setSaving(true);
@@ -591,7 +596,7 @@ function Editor({
                 </button>
               ))}
             </div>
-            <div className="mt-3 flex max-w-sm gap-2">
+            <div className="mt-3 flex max-w-sm flex-wrap gap-2">
               <input
                 type="text"
                 value={customSize}
@@ -635,7 +640,7 @@ function Editor({
                     className="inline-block h-4 w-4 rounded-full border border-white/60"
                     style={{ backgroundColor: hex }}
                   />
-                  {colorLabel(hex)} �
+                  {colorLabel(hex)} ✕
                 </button>
               ))}
               {missingColors.map((hex) => (
@@ -653,7 +658,7 @@ function Editor({
                 </button>
               ))}
             </div>
-            <div className="mt-3 flex max-w-sm gap-2">
+            <div className="mt-3 flex max-w-sm flex-wrap gap-2">
               <input
                 type="text"
                 value={customColor}
@@ -672,13 +677,13 @@ function Editor({
                 onClick={onAddCustomColor}
                 className="shrink-0 border border-charcoal px-5 text-[0.8rem] font-semibold uppercase tracking-[0.1em] text-charcoal transition-colors hover:bg-charcoal hover:text-white"
               >
-                A�adir
+                AÑadir
               </button>
             </div>
             <p className="mt-2 text-[0.8rem] text-grey">
               {draft.colors.length === 0
-                ? "Sin colores marcados = se muestran todas las variantes del cat�logo."
-                : "Toca un color marcado para quitarlo; toca �+ color� para a�adirlo."}
+                ? "Sin colores marcados = se muestran todas las variantes del catálogo."
+                : "Toca un color marcado para quitarlo; toca «+ color» para añadirlo."}
             </p>
           </div>
 
