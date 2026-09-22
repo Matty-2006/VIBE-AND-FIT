@@ -239,6 +239,31 @@
         "L"
       ],
       "description": ""
+    },
+    {
+      "id": 10,
+      "name": "Pantalón",
+      "category": "Pantalones",
+      "collection": "mujer",
+      "alt": "",
+      "image": "/images/upload-1790083428684.webp",
+      "badge": null,
+      "colors": [
+        "#8fb2c9",
+        "#24405c",
+        "#111111",
+        "#f4efe9"
+      ],
+      "tags": [
+        "all"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "description": "Lindo"
     }
   ]
 }
