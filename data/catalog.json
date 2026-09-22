@@ -264,6 +264,32 @@
         "L"
       ],
       "description": "Lindo"
+    },
+    {
+      "id": 11,
+      "name": "Short",
+      "category": "Deportiva",
+      "collection": "deportiva",
+      "alt": "",
+      "image": "/images/upload-1790083462942.webp",
+      "badge": "new",
+      "colors": [
+        "#8fb2c9",
+        "#24405c",
+        "#111111",
+        "#f4efe9",
+        "#d9c7a7"
+      ],
+      "tags": [
+        "all"
+      ],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "description": "Cómodo"
     }
   ]
 }
