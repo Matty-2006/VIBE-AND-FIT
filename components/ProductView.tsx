@@ -6,8 +6,8 @@ import { useRef, useState } from "react";
 import ProductCard from "@/components/ProductCard";
 import { useCart } from "@/context/CartContext";
 import { useFavorites } from "@/context/FavoritesContext";
+import { colorLabel } from "@/lib/colorNames";
 import {
-  COLOR_NAMES,
   PRODUCT_COMPOSITION,
   SIZES,
   productDescription,
@@ -125,7 +125,9 @@ export default function ProductView({
               <div className="mb-2 text-[0.75rem] uppercase tracking-[0.1em]">
                 Color:{" "}
                 <strong>
-                  {COLOR_NAMES[product.colors[colorIdx]] || "Seleccionar"}
+                  {product.colors.length > 0
+                    ? colorLabel(product.colors[colorIdx])
+                    : "Seleccionar"}
                 </strong>
               </div>
               <div className="flex gap-2">
@@ -133,7 +135,7 @@ export default function ProductView({
                   <button
                     key={c}
                     onClick={() => setColorIdx(i)}
-                    aria-label={`Color ${COLOR_NAMES[c] ?? i + 1}`}
+                    aria-label={`Color ${colorLabel(c)}`}
                     aria-pressed={i === colorIdx}
                     className={`h-7 w-7 cursor-pointer rounded-full border-2 transition-all ${
                       i === colorIdx
@@ -179,7 +181,7 @@ export default function ProductView({
               onClick={(e) => {
                 addItem(product.id, {
                   size,
-                  color: COLOR_NAMES[product.colors[colorIdx]],
+                  color: colorLabel(product.colors[colorIdx]),
                 });
                 flyToCart(e.currentTarget, product.image, openCart);
               }}
